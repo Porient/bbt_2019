@@ -1,13 +1,5 @@
 module.exports = {
-    //...
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:9090',
-                pathRewrite: {'^/api' : ''},
-                "secure": true
-            }
-        }
-    }
+  devServer: {
+    open: true, // 自动打开浏览器
+  },
 };
-//跨域处理
