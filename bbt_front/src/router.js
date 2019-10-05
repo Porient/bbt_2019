@@ -5,6 +5,7 @@ import LoginRegister from "./components/LoginRegister/LoginRegister.vue";
 import Login from "./components/Login/Login.vue";
 import Register from "./components/Register/Register.vue";
 import Forget from "./components/Forget/Forget.vue";
+// import BackManagement from "@/views/BackManagement.vue";
 
 Vue.use(Router);
 
@@ -27,19 +28,24 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/About.vue"),
     },
     {
-      path:"/logreg",
-      name:"loginregister",
-      component:LoginRegister,
-      redirect:"/logreg/login",
-      children:[
-        {path:"login",name:"login",component:Login},
-        {path:"register",name:"register",component:Register}
-      ]
+      path: "/logreg",
+      name: "loginregister",
+      component: LoginRegister,
+      redirect: "/logreg/login",
+      children: [
+        { path: "login", name: "login", component: Login },
+        { path: "register", name: "register", component: Register },
+      ],
     },
     {
-      path:"/forget",
-      name:"forget",
-      component:Forget 
-    }
+      path: "/forget",
+      name: "forget",
+      component: Forget,
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: () => import("@/views/BackManagement/BackManagement.vue"),
+    },
   ],
 });
