@@ -1,6 +1,6 @@
 package com.bbt.back.utils;
 
-import com.bbt.back.entities.ResultEntity;
+import com.bbt.back.model.ResultEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

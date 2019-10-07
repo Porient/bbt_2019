@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.CommentDao">
+    <resultMap id="commentMap" type="com.bbt.back.entities.Comment">
+        <id column="comment_id" property="commentId" />
+        <result column="user_id" property="userId" />
+        <result column="product_id" property="productId" />
+        <result column="product_name" property="productName" />
+        <result column="content" property="content" />
+        <result column="like_num" property="likeNum" />
+        <result column="date" property="date" />
+    </resultMap>
+
+    <delete id="deleteComment" parameterType="java.lang.Integer">
+      delete from `comment`
+      where comment_id = #{commentId}
+    </delete>
+
+    <insert id="insertComment" parameterType="com.bbt.back.entities.Comment">
+    insert into `comment` (user_id, product_id, product_name, content, like_num, date)
+    values (#{userId}, #{productId}, #{productName}, #{content}, #{likeNum}, #{date})
+  </insert>
+
+    <update id="updateComment" parameterType="com.bbt.back.entities.Comment">
+        update `comment`
+        <set>
+            <if test="userId != null and userId != ''"> user_id = #{userId},</if>
+            <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productName != null and productName != ''"> product_name = #{productName},</if>
+            <if test="content != null and content != ''"> content = #{content},</if>
+            <if test="likeNum != null and likeNum != ''"> like_num = #{likeNum},</if>
+            <if test="date != null and date != ''"> date = #{date}</if>
+        </set>
+        where comment_id = #{commentId}
+    </update>
+
+    <select id="findCommentById" parameterType="java.lang.Integer" resultMap="commentMap">
+      select c.*
+      from `comment` c
+      where c.comment_id = #{commentId}
+  </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="commentMap">
+      select c.*
+      from `comment` c
+    </select>
+
+</mapper>

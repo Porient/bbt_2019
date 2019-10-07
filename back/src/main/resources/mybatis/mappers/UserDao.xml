@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.UserDao">
+    <resultMap id="userMap" type="com.bbt.back.entities.User">
+        <id column="user_id" property="userId" />
+        <result column="nick_name" property="nickname" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="user_email" property="userEmail" />
+        <result column="age" property="age" />
+        <result column="profession" property="profession" />
+        <result column="tag1" property="tag1" />
+        <result column="tag2" property="tag2" />
+        <result column="tag3" property="tag3" />
+        <result column="used" property="used" />
+        <result column="is_ban" property="isBan" />
+    </resultMap>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+      delete from `user`
+      where user_id = #{userId}
+    </delete>
+
+    <insert id="insertUser" parameterType="com.scutj2ee.bookstore.entity.User">
+    insert into `user` (nick_name, `password`, phone,
+      user_email, age, profession, tag1, tag2, tag3, used, is_ban)
+    values (#{nickname}, #{password}, #{phone}, #{userEmail}, #{age}, #{profession}, #{tag1}, #{tag2},
+            #{tag3}, #{used}, #{isBan})
+  </insert>
+
+    <update id="updateUser" parameterType="com.scutj2ee.bookstore.entity.User">
+        update `user`
+        <set>
+            <if test="nickname != null and nickname != ''"> nick_name = #{nickname},</if>
+            <if test="password != null and password != ''"> `password` = #{password},</if>
+            <if test="phone != null and phone != ''"> phone = #{phone},</if>
+            <if test="userEmail != null and userEmail != ''"> user_email = #{userEmail},</if>
+            <if test="age != null and age != ''"> age = #{age},</if>
+            <if test="profession != null and profession != ''"> profession = #{profession},</if>
+            <if test="tag1 != null and tag1 != ''"> tag1 = #{tag1},</if>
+            <if test="tag2 != null and tag2 != ''"> tag2 = #{tag2},</if>
+            <if test="tag3 != null and tag3 != ''"> tag3 = #{tag3},</if>
+            <if test="used != null and used != ''"> used = #{used},</if>
+            <if test="isBan != null and isBan != ''"> is_ban = #{isBan}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <select id="findUserById" parameterType="java.lang.Integer" resultMap="userMap">
+      select u.*
+      from `user` u
+      where u.user_id = #{userId}
+  </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="userMap">
+      select u.*
+      from `user` u
+    </select>
+
+    <select id="findByUserEmail" resultMap="userMap">
+      select u.*
+      from `user` u
+      where u.user_email=#{userEmail}
+    </select>
+
+    <select id="findByUserEmailAndPassword" resultMap="userMap">
+      select u.*
+      from `user`
+      where u.user_email=#{userEmail}
+      and u.password=#{password}
+    </select>
+
+    <select id="getUserListByParams" resultMap="userMap">
+        select u.*
+        from `user` u
+        where
+        <if test="userEmail != null and userEmail != ''">
+            u.user_email like concat('%',concat(#{userEmail},'%'))
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.PhoneDao">
+    <resultMap id="phoneMap" type="com.bbt.back.entities.Phone">
+        <id column="product_id" property="productId" />
+        <result column="phone_name" property="phoneName" />
+        <result column="vendor" property="vendor" />
+        <result column="after_sales_ability" property="afterSalesAbility" />
+        <result column="premium_ability" property="premiumAbility" />
+        <result column="front_camera" property="frontCamera" />
+        <result column="rear_camera" property="rearCamera" />
+        <result column="camera_capability" property="cameraCapability" />
+        <result column="screen_surface" property="screenSurface" />
+        <result column="fingerprint_module" property="fingerprintModule" />
+        <result column="body_color" property="bodyColor" />
+        <result column="picture1" property="picture1" />
+        <result column="picture2" property="picture2" />
+        <result column="picture3" property="picture3" />
+        <result column="body_weight" property="bodyWeight" />
+        <result column="body_material" property="bodyMaterial" />
+        <result column="resolution" property="resolution" />
+        <result column="screen_manufacturer" property="screenManufacturer" />
+        <result column="battery_capacity" property="batteryCapacity" />
+        <result column="charging_speed" property="chargingSpeed" />
+        <result column="actual_performance" property="actualPerformance" />
+        <result column="headphone_plug" property="headphonePlug" />
+        <result column="waterproof_level" property="waterproofLevel" />
+        <result column="sales_volume" property="salesVolume" />
+        <result column="chip" property="chip" />
+        <result column="speaker" property="speaker" />
+        <result column="product_category" property="productCategory" />
+        <result column="library" property="library" />
+        <result column="product_analysis" property="productAnalysis" />
+    </resultMap>
+
+    <delete id="deletePhone" parameterType="java.lang.Integer">
+      delete from `phone`
+      where product_id = #{productId}
+    </delete>
+
+    <insert id="insertPhone" parameterType="com.bbt.back.entities.Phone">
+    insert into `phone` (phone_name, vendor, after_sales_ability,
+      premium_ability, front_camera, rear_camera, camera_capability, screen_surface, fingerprint_module,
+      body_color, picture1, picture2, picture3, body_weight, body_material, resolution,
+      screen_manufacturer, battery_capacity, charging_speed, actual_performance, headphone_plug, waterproof_level,
+      sales_volume, chip, speaker, product_category, library, product_analysis)
+    values (#{phoneName}, #{vendor}, #{afterSalesAbility}, #{premiumAbility}, #{frontCamera}, #{rearCamera}, #{cameraCapability}, #{screenSurface},
+            #{fingerprintModule}, #{bodyColor}, #{picture1}, #{picture2}, #{picture3}, #{bodyWeight}, #{bodyMaterial}, #{resolution},
+            #{screenManufacturer}, #{batteryCapacity}, #{chargingSpeed}, #{actualPerformance}, #{headphonePlug}, #{waterproofLevel},
+            #{salesVolume}, #{chip}, #{speaker}, #{productCategory}, #{library}, #{productAnalysis})
+  </insert>
+
+    <update id="updatePhone" parameterType="com.bbt.back.entities.Phone">
+        update `phone`
+        <set>
+            <if test="phoneName != null and phoneName != ''"> phone_name = #{phoneName},</if>
+            <if test="vendor != null and vendor != ''"> vendor = #{vendor},</if>
+            <if test="afterSalesAbility != null and afterSalesAbility != ''"> after_sales_ability = #{afterSalesAbility},</if>
+            <if test="premiumAbility != null and premiumAbility != ''"> premium_ability = #{premiumAbility},</if>
+            <if test="frontCamera != null and frontCamera != ''"> front_camera = #{frontCamera},</if>
+            <if test="rearCamera != null and rearCamera != ''"> rear_camera = #{rearCamera},</if>
+            <if test="cameraCapability != null and cameraCapability != ''"> camera_capability = #{cameraCapability},</if>
+            <if test="screenSurface != null and screenSurface != ''"> screen_surface = #{screenSurface},</if>
+            <if test="fingerprintModule != null and fingerprintModule != ''"> fingerprint_module = #{fingerprintModule},</if>
+            <if test="bodyColor != null and bodyColor != ''"> body_color = #{bodyColor},</if>
+            <if test="picture1 != null and picture1 != ''"> picture1 = #{picture1},</if>
+            <if test="picture1 != null and picture1 != ''"> picture1 = #{picture2},</if>
+            <if test="picture3 != null and picture3 != ''"> picture3 = #{picture3},</if>
+            <if test="bodyWeight != null and bodyWeight != ''"> body_weight = #{bodyWeight},</if>
+            <if test="bodyMaterial != null and bodyMaterial != ''"> body_material = #{bodyMaterial},</if>
+            <if test="resolution != null and resolution != ''"> resolution = #{resolution},</if>
+            <if test="screenManufacturer != null and screenManufacturer != ''"> screen_manufacturer = #{screenManufacturer},</if>
+            <if test="batteryCapacity != null and batteryCapacity != ''"> battery_capacity = #{batteryCapacity},</if>
+            <if test="chargingSpeed != null and chargingSpeed != ''"> charging_speed = #{chargingSpeed},</if>
+            <if test="actualPerformance != null and actualPerformance != ''"> actual_performance = #{actualPerformance},</if>
+            <if test="headphonePlug != null and headphonePlug != ''"> headphone_plug = #{headphonePlug},</if>
+            <if test="waterproofLevel != null and waterproofLevel != ''"> waterproof_level = #{waterproofLevel},</if>
+            <if test="salesVolume != null and salesVolume != ''"> sales_volume = #{salesVolume},</if>
+            <if test="chip != null and chip != ''"> chip = #{chip},</if>
+            <if test="speaker != null and speaker != ''"> speaker = #{speaker},</if>
+            <if test="productCategory != null and productCategory != ''"> product_category = #{productCategory},</if>
+            <if test="library != null and library != ''"> library = #{library},</if>
+            <if test="productAnalysis != null and productAnalysis != ''"> product_analysis = #{productAnalysis}</if>
+        </set>
+        where product_id = #{productId}
+    </update>
+
+    <select id="findPhoneById" parameterType="java.lang.Integer" resultMap="phoneMap">
+      select p.*
+      from `phone` p
+      where p.product_id = #{productId}
+    </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="phoneMap">
+      select p.*
+      from `phone` p
+    </select>
+    
+</mapper>
