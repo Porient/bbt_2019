@@ -21,6 +21,5 @@
     </settings>
     <typeAliases>
         <package name="com.bbt.back.entities" />
-        <package name="com.bbt.back.dao"/>
     </typeAliases>
 </configuration>

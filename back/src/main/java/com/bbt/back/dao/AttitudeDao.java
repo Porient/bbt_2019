@@ -2,6 +2,7 @@ package com.bbt.back.dao;
 
 import com.bbt.back.entities.Attitude;
 import com.bbt.back.entities.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @Author: Liu Bin
  * @Date: 2019/10/6 0006 16:34
  */
+@Component
 public interface AttitudeDao {
     int deleteAttitude(Integer id);
 

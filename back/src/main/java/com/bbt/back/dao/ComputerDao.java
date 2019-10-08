@@ -1,6 +1,7 @@
 package com.bbt.back.dao;
 
 import com.bbt.back.entities.Computer;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @Author: Liu Bin
  * @Date: 2019/10/6 15:57
  */
+@Component
 public interface ComputerDao {
     int deleteComputer(Integer id);
 

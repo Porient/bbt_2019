@@ -21,14 +21,14 @@
       where user_id = #{userId}
     </delete>
 
-    <insert id="insertUser" parameterType="com.scutj2ee.bookstore.entity.User">
+    <insert id="insertUser" parameterType="com.bbt.back.entities.User">
     insert into `user` (nick_name, `password`, phone,
       user_email, age, profession, tag1, tag2, tag3, used, is_ban)
     values (#{nickname}, #{password}, #{phone}, #{userEmail}, #{age}, #{profession}, #{tag1}, #{tag2},
             #{tag3}, #{used}, #{isBan})
   </insert>
 
-    <update id="updateUser" parameterType="com.scutj2ee.bookstore.entity.User">
+    <update id="updateUser" parameterType="com.bbt.back.entities.User">
         update `user`
         <set>
             <if test="nickname != null and nickname != ''"> nick_name = #{nickname},</if>

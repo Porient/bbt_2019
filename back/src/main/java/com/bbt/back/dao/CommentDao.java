@@ -20,13 +20,11 @@ public interface CommentDao {
 
     Comment findCommentById(Integer commentId);
 
-    List<Comment> selectAll(Integer bookId);
+    List<Comment> selectAll();
 
     int updateComment(Comment comment);
 
-    List<Comment> getCommentListByBookId(Integer bookId);
+    List<Comment> getCommentListByProductId(Integer productId);
 
     List<Comment> getCommentListByUserId(Integer userId);
-
-    String getUserComment(@Param("fromUid")Integer fromUid, @Param("bookId") Integer bookId);
 }

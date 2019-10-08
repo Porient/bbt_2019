@@ -17,9 +17,9 @@
     </delete>
 
     <insert id="insertComment" parameterType="com.bbt.back.entities.Comment">
-    insert into `comment` (user_id, product_id, product_name, content, like_num, date)
-    values (#{userId}, #{productId}, #{productName}, #{content}, #{likeNum}, #{date})
-  </insert>
+      insert into `comment` (user_id, product_id, product_name, content, like_num, `date`)
+      values (#{userId}, #{productId}, #{productName}, #{content}, #{likeNum}, #{date})
+    </insert>
 
     <update id="updateComment" parameterType="com.bbt.back.entities.Comment">
         update `comment`
@@ -29,7 +29,7 @@
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
             <if test="content != null and content != ''"> content = #{content},</if>
             <if test="likeNum != null and likeNum != ''"> like_num = #{likeNum},</if>
-            <if test="date != null and date != ''"> date = #{date}</if>
+            <if test="date != null and date != ''"> `date` = #{date}</if>
         </set>
         where comment_id = #{commentId}
     </update>
@@ -45,4 +45,15 @@
       from `comment` c
     </select>
 
+    <select id="getCommentListByProductId" resultMap="commentMap">
+        select c.*
+        from  comment c
+        where c.product_id = #{productId}
+    </select>
+
+    <select id="getCommentListByUserId" resultMap="commentMap">
+        select c.*
+        from  comment c
+        where c.user_id = #{userId}
+    </select>
 </mapper>

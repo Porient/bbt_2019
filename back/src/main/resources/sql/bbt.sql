@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 06/10/2019 16:25:16
+ Date: 08/10/2019 10:47:49
 */
 
 SET NAMES utf8mb4;
@@ -41,14 +41,14 @@ CREATE TABLE `attitude`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for collection
+-- Table structure for collect
 -- ----------------------------
-DROP TABLE IF EXISTS `collection`;
-CREATE TABLE `collection`  (
-  `collection_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户收藏id',
+DROP TABLE IF EXISTS `collect`;
+CREATE TABLE `collect`  (
+  `collect_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户收藏id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
-  PRIMARY KEY (`collection_id`) USING BTREE
+  PRIMARY KEY (`collect_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `comment`  (
   `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
   `content` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论',
   `like_num` int(11) NOT NULL COMMENT '点赞数',
-  `date` datetime NOT NULL COMMENT '评论时间',
+  `date` datetime(0) NOT NULL COMMENT '评论时间',
   PRIMARY KEY (`comment_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

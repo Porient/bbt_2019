@@ -7,19 +7,23 @@ import java.io.Serializable;
  * @Author: Liu Bin
  * @Date: 2019/10/6 14:56
  */
-public class Collection implements Serializable {
+public class Collect implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer collectionId;
+    private Integer collectId;
     private Integer userId;
     private Integer productId;
 
-    public Integer getCollectionId() {
-        return collectionId;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setCollectionId(Integer collectionId) {
-        this.collectionId = collectionId;
+    public Integer getCollectId() {
+        return collectId;
+    }
+
+    public void setCollectId(Integer collectId) {
+        this.collectId = collectId;
     }
 
     public Integer getUserId() {
@@ -40,8 +44,8 @@ public class Collection implements Serializable {
 
     @Override
     public String toString() {
-        return "Collection{" +
-                "collectionId=" + collectionId +
+        return "Collect{" +
+                "collectId=" + collectId +
                 ", userId=" + userId +
                 ", productId=" + productId +
                 '}';

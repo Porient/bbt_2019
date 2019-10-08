@@ -14,7 +14,7 @@
     </delete>
 
     <insert id="insertAttitude" parameterType="com.bbt.back.entities.Attitude">
-      insert into `attitude` (user_id, product_id, phone, attitude)
+      insert into `attitude` (user_id, product_id, attitude)
       values (#{userId}, #{productId}, #{attitude})
     </insert>
 

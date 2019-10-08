@@ -13,9 +13,9 @@
     </delete>
 
     <insert id="insertAdmin" parameterType="com.bbt.back.entities.Admin">
-    insert into `admin` (admin_email, `password`)
-    values (#{adminEmail}, #{password})
-  </insert>
+      insert into `admin` (admin_email, `password`)
+      values (#{adminEmail}, #{password})
+    </insert>
 
     <update id="updateAdmin" parameterType="com.bbt.back.entities.Admin">
         update `admin`
