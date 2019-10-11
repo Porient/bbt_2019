@@ -77,4 +77,19 @@ public class CommentServiceImpl implements CommentService {
         return pageInfo;*/
         return null;
     }
+
+    @Override
+    public Comment getMostLikeComment(Integer userId) {
+        return commentDao.getMostLikeComment(userId);
+    }
+
+    @Override
+    public List<Comment> selectByUserId(Integer userId) {
+        return commentDao.selectByUserId(userId);
+    }
+
+    @Override
+    public int getLikeCount(Integer userId) {
+        return commentDao.getLikeCount(userId);
+    }
 }

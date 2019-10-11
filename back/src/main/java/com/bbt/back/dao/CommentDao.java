@@ -27,4 +27,10 @@ public interface CommentDao {
     List<Comment> getCommentListByProductId(Integer productId);
 
     List<Comment> getCommentListByUserId(Integer userId);
+
+    Comment getMostLikeComment(Integer userId);
+
+    List<Comment> selectByUserId(Integer userId);
+
+    int getLikeCount(Integer userId);
 }

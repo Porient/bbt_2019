@@ -5,6 +5,7 @@ import com.bbt.back.entities.User;
 import com.bbt.back.enums.SystemErrorEnum;
 import com.bbt.back.enums.UserResultEnum;
 import com.bbt.back.exception.UserException;
+import com.bbt.back.model.CommentAbbr;
 import com.bbt.back.model.Common.Constant;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.CommentService;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:
@@ -119,6 +121,24 @@ public class UserController {
         PageInfo<Comment> pageInfo = commentService.selectAllByUserId(userId, pageNo, pageSize);
         resultEntity.setMsg("获取成功");
         resultEntity.setData(pageInfo);
+        return resultEntity;
+    }
+
+    @RequestMapping("/getCommentAbbr")
+    private Object getCommentAbbr(HttpServletRequest request) throws Exception{
+        ResultEntity resultEntity = new ResultEntity();
+        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
+        List<Comment> comments = commentService.selectByUserId(userId);
+        resultEntity.setMsg("获取成功");
+        if (comments.size() == 0){
+            resultEntity.setData("你是一个新用户哦");
+        } else {
+            int commentCount = comments.size();
+            int likeCount = commentService.getLikeCount(userId);
+            Comment comment = commentService.getMostLikeComment(userId);
+            CommentAbbr commentAbbr = new CommentAbbr(commentCount,likeCount,comment);
+            resultEntity.setData(commentAbbr);
+        }
         return resultEntity;
     }
 }

@@ -3,6 +3,8 @@ package com.bbt.back.service;
 import com.bbt.back.entities.Comment;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author: Liu Bin
@@ -68,4 +70,10 @@ public interface CommentService {
      * @return
      */
     PageInfo<Comment> selectAllByUserId(Integer userId, Integer pageNo, Integer pageSize);
+
+    Comment getMostLikeComment(Integer userId);
+
+    List<Comment> selectByUserId(Integer userId);
+
+    int getLikeCount(Integer userId);
 }
