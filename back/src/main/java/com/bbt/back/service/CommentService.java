@@ -2,6 +2,7 @@ package com.bbt.back.service;
 
 import com.bbt.back.entities.Comment;
 import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @Author: Liu Bin
  * @Date: 2019/10/7 0007 10:18
  */
+@Component
 public interface CommentService {
     /**
      * create by: Kobe

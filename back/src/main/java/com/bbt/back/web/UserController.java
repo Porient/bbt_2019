@@ -1,5 +1,6 @@
 package com.bbt.back.web;
 
+import com.bbt.back.entities.Collect;
 import com.bbt.back.entities.Comment;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.SystemErrorEnum;
@@ -8,6 +9,7 @@ import com.bbt.back.exception.UserException;
 import com.bbt.back.model.CommentAbbr;
 import com.bbt.back.model.Common.Constant;
 import com.bbt.back.model.ResultEntity;
+import com.bbt.back.service.CollectService;
 import com.bbt.back.service.CommentService;
 import com.bbt.back.service.UserService;
 import com.bbt.back.utils.DateUtil;
@@ -37,6 +39,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private CollectService collectService;
 
     @PostMapping("/changePassword")
     private Object changePassword(HttpServletRequest request) {
@@ -74,7 +78,7 @@ public class UserController {
         //2.调用userService更新用户密码信息
         try {
             ResultEntity result = userService.updateUser(user);
-            if (result.getErrCode() == UserResultEnum.SUCCESS.getCode()) {
+            if (result.getErrCode().equals(UserResultEnum.SUCCESS.getCode())) {
                 resultEntity.setData(result.getData());
             }
             resultEntity.setErrCode(result.getErrCode());
@@ -106,24 +110,6 @@ public class UserController {
         }
     }
 
-    /**
-     * @Author Bin Liu
-     * @Description 获取用户的所有评论
-     * @Date 2019/6/6 22:56
-     * @param
-     * @return
-     */
-    @RequestMapping("/comments")
-    private Object comments(HttpServletRequest request, Integer pageNo, Integer pageSize) throws Exception{
-        ResultEntity resultEntity=new ResultEntity();
-        //1.获取前端传递的userId参数
-        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
-        PageInfo<Comment> pageInfo = commentService.selectAllByUserId(userId, pageNo, pageSize);
-        resultEntity.setMsg("获取成功");
-        resultEntity.setData(pageInfo);
-        return resultEntity;
-    }
-
     @RequestMapping("/getCommentAbbr")
     private Object getCommentAbbr(HttpServletRequest request) throws Exception{
         ResultEntity resultEntity = new ResultEntity();
@@ -141,4 +127,15 @@ public class UserController {
         }
         return resultEntity;
     }
+
+    @RequestMapping("/collectCount")
+    private Object getCollectCount(HttpServletRequest request) throws Exception{
+        ResultEntity resultEntity = new ResultEntity();
+        int userId = HttpServletRequestUtil.getInt(request,"userId");
+        int collectCount = collectService.countByUserId(userId);
+        resultEntity.setMsg("获取成功");
+        resultEntity.setData(collectCount);
+        return resultEntity;
+    }
+
 }

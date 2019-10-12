@@ -21,4 +21,8 @@ public interface CollectDao {
     int updateCollect(Collect collect);
 
     List<Collect> selectAll();
+
+    List<Collect> selectByUserId(int userId);
+
+    int countByUserId(int userId);
 }
