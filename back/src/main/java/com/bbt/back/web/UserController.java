@@ -133,7 +133,7 @@ public class UserController {
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request,"userId");
         int collectCount = collectService.countByUserId(userId);
-        resultEntity.setMsg("获取成功");
+        resultEntity.setMsg("获取收藏数目成功");
         resultEntity.setData(collectCount);
         return resultEntity;
     }

@@ -8,9 +8,9 @@ import com.bbt.back.entities.Comment;
  * @Date: 2019/10/11 16:46
  */
 public class CommentAbbr {
-    int commentCount;
-    int likeCount;
-    Comment comment;
+    private int commentCount;
+    private int likeCount;
+    private Comment comment;
 
     public CommentAbbr() {
     }

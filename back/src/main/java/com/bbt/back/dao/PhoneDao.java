@@ -21,4 +21,15 @@ public interface PhoneDao {
     int updatePhone(Phone phone);
 
     List<Phone> selectAll();
+
+    //新增`
+    int selectByProductId(int productId);
+
+    List<Phone> selectAllPre();
+
+    List<Phone> selectAllFormal();
+
+    List<Phone> selectByType(int type);
+
+    int changeState(int productIId, int i);
 }

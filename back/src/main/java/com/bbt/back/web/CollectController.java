@@ -6,6 +6,7 @@ import com.bbt.back.service.CollectService;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,13 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/12 16:43
  */
+@Controller
+@RequestMapping("/collect")
 public class CollectController {
     @Autowired
     private CollectService collectService;
 
-    @RequestMapping("/collects")
+    @RequestMapping("/list")
     private Object getCollects(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request,"userId");
@@ -31,7 +34,7 @@ public class CollectController {
         return resultEntity;
     }
 
-    @RequestMapping("/addCollect")
+    @RequestMapping("/add")
     private Object addCollect(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String collectStr = HttpServletRequestUtil.getString(request,"collectStr");

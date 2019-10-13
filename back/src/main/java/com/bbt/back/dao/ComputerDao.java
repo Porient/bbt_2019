@@ -21,4 +21,15 @@ public interface ComputerDao {
     int updateComputer(Computer computer);
 
     List<Computer> selectAll();
+
+    //新增
+    int selectByProductId(int productId);
+
+    List<Computer> selectAllPre();
+
+    List<Computer> selectAllFormal();
+
+    List<Computer> selectByType(int type);
+
+    int changeState(int productIId, int i);
 }

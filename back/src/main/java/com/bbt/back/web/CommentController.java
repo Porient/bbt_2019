@@ -7,6 +7,7 @@ import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,13 @@ import java.io.IOException;
  * @Author: Kobe
  * @Date: 2019/10/12 10:35
  */
+@Controller
+@RequestMapping("/comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping("/comments")
+    @RequestMapping("/list")
     private Object comments(HttpServletRequest request, Integer pageNo, Integer pageSize) throws Exception{
         ResultEntity resultEntity=new ResultEntity();
         //1.获取前端传递的userId参数
@@ -49,12 +52,26 @@ public class CommentController {
     private Object updateComment(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String commentStr = HttpServletRequestUtil.getString(request,"comment");
-        ObjectMapper mapper =new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
         if (commentService.updateComment(comment) == 0){
             resultEntity.setMsg("更新评论成功");
         } else{
             resultEntity.setMsg("更新评论失败");
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/add")
+    private  Object addComment(HttpServletRequest request) throws IOException{
+        ResultEntity resultEntity = new ResultEntity();
+        String commentStr = HttpServletRequestUtil.getString(request,"comment");
+        ObjectMapper mapper = new ObjectMapper();
+        Comment comment = mapper.readValue(commentStr,Comment.class);
+        if (commentService.addComment(comment) == 0){
+            resultEntity.setMsg("添加评论成功");
+        } else {
+            resultEntity.setMsg("添加评论失败");
         }
         return resultEntity;
     }
