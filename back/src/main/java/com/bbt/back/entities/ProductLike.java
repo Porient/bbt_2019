@@ -12,6 +12,7 @@ public class ProductLike implements Serializable {
 
     private int productLikeId;
     private int productId;
+    private int productType;
     private int likeCount;
 
     public static long getSerialVersionUID() {
@@ -21,9 +22,18 @@ public class ProductLike implements Serializable {
     public ProductLike() {
     }
 
-    public ProductLike(int productLikeId, int productId, int likeCount) {
+    public int getProductType() {
+        return productType;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
+    }
+
+    public ProductLike(int productLikeId, int productId, int productType, int likeCount) {
         this.productLikeId = productLikeId;
         this.productId = productId;
+        this.productType = productType;
         this.likeCount = likeCount;
     }
 
@@ -32,6 +42,7 @@ public class ProductLike implements Serializable {
         return "ProductLike{" +
                 "productLikeId=" + productLikeId +
                 ", productId=" + productId +
+                ", productType=" + productType +
                 ", likeCount=" + likeCount +
                 '}';
     }

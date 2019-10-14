@@ -1,10 +1,9 @@
 package com.bbt.back.web;
 
 import com.bbt.back.entities.Phone;
-import com.bbt.back.model.ProductList;
-import com.bbt.back.model.ProductObject;
-import com.bbt.back.model.ResultEntity;
+import com.bbt.back.model.*;
 import com.bbt.back.service.ProductService;
+import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +83,37 @@ public class ProductController {
         return resultEntity;
     }
 
+    @RequestMapping("/hotProduct")
+    private Object getHotProduct(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        List<Object> products = productService.getHotProduct();
+        if (products.isEmpty()){
+            resultEntity.setMsg("获取热门产品失败");
+        } else {
+            resultEntity.setMsg("获取热门产品成功");
+            resultEntity.setData(products);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/searchProduct")
+    private Object searchProduct(HttpServletRequest request) throws IOException {
+        ResultEntity resultEntity = new ResultEntity();
+        String searchObjectStr = HttpServletRequestUtil.getString(request,"searchObjectStr");
+        ObjectMapper mapper = new ObjectMapper();
+        SearchObject searchObject = mapper.readValue(searchObjectStr,SearchObject.class);
+        String searchStr = searchObject.getSearchStr();
+        List<String> searchTokens = CutWord.cutWord(searchStr);
+        StringBuilder searchToken = new StringBuilder();
+        searchToken.append("%");
+        for (String token : searchTokens){
+            searchToken.append(token).append("%");
+        }
+        List<Object> products = productService.selectByToken(searchObject.getType(),searchToken.toString());
+        SearchResult searchResult = new SearchResult(searchTokens,products);
+        resultEntity.setMsg("搜索成功");
+        resultEntity.setData(searchResult);
+        return  resultEntity;
+    }
 
 }

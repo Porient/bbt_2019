@@ -33,6 +33,7 @@ public class Computer implements Serializable {
     private String screen;
     private Integer numOfInterfaces;
     private String productCategory;
+    private int productType;
     private Integer library;
     private String productAnalysis;
 
@@ -228,18 +229,6 @@ public class Computer implements Serializable {
         return library;
     }
 
-    public void setLibrary(Integer library) {
-        this.library = library;
-    }
-
-    public String getProductAnalysis() {
-        return productAnalysis;
-    }
-
-    public void setProductAnalysis(String productAnalysis) {
-        this.productAnalysis = productAnalysis;
-    }
-
     @Override
     public String toString() {
         return "Computer{" +
@@ -266,8 +255,30 @@ public class Computer implements Serializable {
                 ", screen='" + screen + '\'' +
                 ", numOfInterfaces=" + numOfInterfaces +
                 ", productCategory='" + productCategory + '\'' +
+                ", productType=" + productType +
                 ", library=" + library +
                 ", productAnalysis='" + productAnalysis + '\'' +
                 '}';
     }
+
+    public int getProductType() {
+        return productType;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
+    }
+
+    public void setLibrary(Integer library) {
+        this.library = library;
+    }
+
+    public String getProductAnalysis() {
+        return productAnalysis;
+    }
+
+    public void setProductAnalysis(String productAnalysis) {
+        this.productAnalysis = productAnalysis;
+    }
+
 }

@@ -32,4 +32,6 @@ public interface PhoneDao {
     List<Phone> selectByType(int type);
 
     int changeState(int productIId, int i);
+
+    List<Object> selectByToken(String searchToken);
 }

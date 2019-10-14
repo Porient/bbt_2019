@@ -37,6 +37,7 @@ public class Phone implements Serializable {
     private String chip;
     private String speaker;
     private String productCategory;
+    private int productType;
     private Integer library;
     private String productAnalysis;
 
@@ -260,6 +261,14 @@ public class Phone implements Serializable {
         this.productCategory = productCategory;
     }
 
+    public int getProductType() {
+        return productType;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
+    }
+
     public Integer getLibrary() {
         return library;
     }
@@ -306,6 +315,7 @@ public class Phone implements Serializable {
                 ", chip='" + chip + '\'' +
                 ", speaker='" + speaker + '\'' +
                 ", productCategory='" + productCategory + '\'' +
+                ", productType=" + productType +
                 ", library=" + library +
                 ", productAnalysis='" + productAnalysis + '\'' +
                 '}';

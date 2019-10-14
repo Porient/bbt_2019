@@ -4,6 +4,8 @@ import com.bbt.back.model.ProductList;
 import com.bbt.back.model.ProductObject;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface ProductService {
     int deleteProduct(int productId);
@@ -15,4 +17,8 @@ public interface ProductService {
     ProductList selectByType(int type);
 
     int changeState(ProductObject productObject);
+
+    List<Object> getHotProduct();
+
+    List<Object> selectByToken(int type, String searchToken);
 }
