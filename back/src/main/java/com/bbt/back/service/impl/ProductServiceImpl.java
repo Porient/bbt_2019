@@ -3,7 +3,6 @@ package com.bbt.back.service.impl;
 import com.bbt.back.dao.ComputerDao;
 import com.bbt.back.dao.PhoneDao;
 import com.bbt.back.dao.ProductLikeDao;
-import com.bbt.back.entities.Comment;
 import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.Phone;
 import com.bbt.back.entities.ProductLike;
@@ -29,12 +28,13 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductLikeDao productLikeDao;
     @Override
-    public int deleteProduct(int productId) {
-        if (phoneDao.selectByProductId(productId) == 0 || computerDao.selectByProductId(productId) == 0) {
-            return 0;
+    public int deleteProduct(LikeObject likeObject) {
+        if (likeObject.getType() == 0){
+            phoneDao.deletePhone(likeObject.getProductId());
         } else {
-            return -1;
+            computerDao.deleteComputer(likeObject.getProductId());
         }
+        return 0;
     }
 
     @Override

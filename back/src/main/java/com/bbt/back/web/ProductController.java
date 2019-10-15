@@ -26,34 +26,19 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/delete")
-    private Object deleteProduct(HttpServletRequest request){
+    private Object deleteProduct(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
-        int productId = HttpServletRequestUtil.getInt(request,"productId");
-        if (productService.deleteProduct(productId) == 0){
-            resultEntity.setMsg("删除成功");
-        } else {
-            resultEntity.setMsg("删除失败");
+        String deleteObjectStr = HttpServletRequestUtil.getString(request,"deleteObject");
+        ObjectMapper mapper = new ObjectMapper();
+        DeleteObject deleteObject = mapper.readValue(deleteObjectStr,DeleteObject.class);
+        List<LikeObject> likeObjects = deleteObject.getLikeObjects();
+        for (LikeObject likeObject : likeObjects){
+            productService.deleteProduct(likeObject);
         }
         return resultEntity;
     }
 
-//    @RequestMapping("/preList")
-//    private Object getPreList(HttpServletRequest request){
-//        ResultEntity resultEntity = new ResultEntity();
-//        ProductList productList = productService.selectAllPre();
-//        resultEntity.setMsg("获取成功");
-//        resultEntity.setData(productList);
-//        return resultEntity;
-//    }
-//
-//    @RequestMapping("formalList")
-//    private Object getFormalList(HttpServletRequest request){
-//        ResultEntity resultEntity = new ResultEntity();
-//        ProductList productList = productService.selectAllFormal();
-//        resultEntity.setMsg("获取成功");
-//        resultEntity.setData(productList);
-//        return resultEntity;
-//    }
+
 
     @RequestMapping("List")
     private Object getList(HttpServletRequest request){

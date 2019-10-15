@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 public interface ProductService {
-    int deleteProduct(int productId);
+    int deleteProduct(LikeObject likeObject);
 
     ProductList selectAllPre();
 
