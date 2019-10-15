@@ -34,4 +34,6 @@ public interface ComputerDao {
     int changeState(int productIId, int i);
 
     List<Object> selectByToken(String searchToken);
+
+    void likeComputer(int productId);
 }

@@ -99,7 +99,7 @@ public class ProductController {
     @RequestMapping("/searchProduct")
     private Object searchProduct(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
-        String searchObjectStr = HttpServletRequestUtil.getString(request,"searchObjectStr");
+        String searchObjectStr = HttpServletRequestUtil.getString(request,"searchObject");
         ObjectMapper mapper = new ObjectMapper();
         SearchObject searchObject = mapper.readValue(searchObjectStr,SearchObject.class);
         String searchStr = searchObject.getSearchStr();
@@ -114,6 +114,28 @@ public class ProductController {
         resultEntity.setMsg("搜索成功");
         resultEntity.setData(searchResult);
         return  resultEntity;
+    }
+
+    @RequestMapping("/likeProduct")
+    private Object likeProduct(HttpServletRequest request) throws IOException{
+        ResultEntity resultEntity = new ResultEntity();
+        String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
+        ObjectMapper mapper = new ObjectMapper();
+        LikeObject likeObject = mapper.readValue(likeObjectStr,LikeObject.class);
+        productService.likeProduct(likeObject);
+        return resultEntity;
+    }
+
+    @RequestMapping("/detail")
+    private Object getDetail(HttpServletRequest request) throws IOException {
+        ResultEntity resultEntity = new ResultEntity();
+        String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
+        ObjectMapper mapper = new ObjectMapper();
+        LikeObject likeObject = mapper.readValue(likeObjectStr,LikeObject.class);
+        Object object = productService.selectByProductId(likeObject);
+        resultEntity.setMsg("获取成功");
+        resultEntity.setData(object);
+        return resultEntity;
     }
 
 }

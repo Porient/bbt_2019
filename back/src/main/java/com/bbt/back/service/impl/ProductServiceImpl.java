@@ -7,6 +7,7 @@ import com.bbt.back.entities.Comment;
 import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.Phone;
 import com.bbt.back.entities.ProductLike;
+import com.bbt.back.model.LikeObject;
 import com.bbt.back.model.ProductList;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.service.ProductService;
@@ -86,6 +87,24 @@ public class ProductServiceImpl implements ProductService {
             return phoneDao.selectByToken(searchToken);
         } else {
             return computerDao.selectByToken(searchToken);
+        }
+    }
+
+    @Override
+    public void likeProduct(LikeObject likeObject) {
+        if (likeObject.getType() == 0){
+            phoneDao.likePhone(likeObject.getProductId());
+        } else {
+            computerDao.likeComputer(likeObject.getProductId());
+        }
+    }
+
+    @Override
+    public Object selectByProductId(LikeObject likeObject) {
+        if (likeObject.getType() == 0){
+            return phoneDao.selectByProductId(likeObject.getProductId());
+        } else {
+            return computerDao.selectByProductId(likeObject.getProductId());
         }
     }
 }

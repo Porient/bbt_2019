@@ -21,4 +21,7 @@ public interface RecordDao {
     int updateRecord(Record record);
 
     List<Record> selectAll();
+
+    //新增
+    List<Record> selectByUserId(int userId);
 }

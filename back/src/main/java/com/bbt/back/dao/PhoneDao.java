@@ -34,4 +34,6 @@ public interface PhoneDao {
     int changeState(int productIId, int i);
 
     List<Object> selectByToken(String searchToken);
+
+    void likePhone(int productId);
 }
