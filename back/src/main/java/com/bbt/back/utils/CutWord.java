@@ -16,7 +16,7 @@ public class CutWord {
         words = words.replaceAll("[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？]","");
         String result = "";
         try {
-            Process process = Runtime.getRuntime().exec("python D:/IDEACode/Word/src/main/python/my_jieba.py " + words);
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"/src/main/python/my_jieba.py " + words);
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
             LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
             result = lineNumberReader.readLine();
