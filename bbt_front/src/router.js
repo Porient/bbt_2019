@@ -1,11 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 import LoginRegister from "./components/LoginRegister/LoginRegister.vue";
 import Login from "./components/Login/Login.vue";
 import Register from "./components/Register/Register.vue";
 import Forget from "./components/Forget/Forget.vue";
-// import BackManagement from "@/views/BackManagement.vue";
 
 Vue.use(Router);
 
@@ -15,8 +13,12 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home,
+      redirect: "/index",
+    },
+    {
+      path: "/index",
+      name: "Search",
+      component: () => import("@/views/Search/Search.vue"),
     },
     {
       path: "/about",
