@@ -6,24 +6,29 @@
         v-model="collapsed"
       >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-        <a-menu-item key='1'>
-          <a-icon type="products" />
+      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']" 
+      @click="(res)=>{whichShow = res.key}"
+      style="text-align:left">
+        <a-menu-item key='Library'>
+          <a-icon type="profile" />
           <span>产品库管理</span>
         </a-menu-item>
-        <a-menu-item key='2'>
+        <a-menu-item key='ScriptSetting'>
           <a-icon type="setting" />
           <span>爬取管理</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
+      <a-layout-header style="background: #fff; padding: 0; text-align: left">
         <a-icon
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
         />
+        <a-popconfirm placement="bottom" title="确定注销吗" okText="确认" cancelText="取消">
+          <a style="float:right;margin-right:50px;"><a-icon type="user" />{{userName}}</a>
+        </a-popconfirm>
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
         <!--根据绑定的组件名称改变-->

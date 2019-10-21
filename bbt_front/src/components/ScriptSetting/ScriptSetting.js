@@ -1,10 +1,7 @@
 import Vue from "vue";
-import { Upload } from "ant-design-vue";
-import { Table } from "ant-design-vue";
-import { Button } from "ant-design-vue";
-import { Popconfirm } from "ant-design-vue";
-import { Select } from "ant-design-vue";
-import { EditableCell } from "ant-design-vue";
+import { Upload, Table, Button, Popconfirm, Select, Switch } from "ant-design-vue";
+import EditableCell from './EditableCell'
+
 /*
  * EditableCell Code https://github.com/vueComponent/ant-design-vue/blob/master/components/table/demo/EditableCell.vue
  */
@@ -14,6 +11,7 @@ Vue.use(Table);
 Vue.use(Button);
 Vue.use(Popconfirm);
 Vue.use(Select);
+Vue.use(Switch);
 
 const columns = [
   {
@@ -29,7 +27,7 @@ const columns = [
     scopedSlots: { customRender: "start" },
   },
   {
-    title: "抓取间隔",
+    title: "抓取间隔（天）",
     dataIndex: "timeMargin",
     key: "timeMargin",
     scopedSlots: { customRender: "timeMargin" },
@@ -38,7 +36,7 @@ const columns = [
     title: "脚本",
     dataIndex: "script",
     key: "script",
-    scopedSlots: { customRender: "timeMargin" },
+    scopedSlots: { customRender: "script" },
   },
   {
     title: "状态",

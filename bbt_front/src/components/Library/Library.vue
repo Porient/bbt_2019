@@ -1,18 +1,18 @@
 <template>
   <div>
     <!--表格操作：重载、删除-->
-    <div style="margin-bottom: 16px">
+    <div style="margin-bottom: 16px; text-align:left">
       <a-button
         type="primary"
         @click="handleReload"
-        :disabled="!hasSelected"
         :loading="loading"
+        class="button"
       >重新加载</a-button>
       <a-popconfirm placement="top" okText="确认" cancelText="取消" @confirm="handleDelete">
         <template slot="title">
           <p>确认要删除所选项吗</p>
         </template>
-        <a-button type="primary" :disable="hasSelected">删除</a-button>
+        <a-button type="primary" :disabled="!hasSelected" class="button" >删除</a-button>
       </a-popconfirm>
       <span style="margin-left:8px">
         <template v-if="hasSelected">{{`Selected ${selectedRowKeys.length} items`}}</template>
@@ -74,12 +74,14 @@
       <span slot="tags" slot-scope="tags">
         <a-tag v-for="tag in tags" color="#2db7f5" :key="tag">{{tag}}</a-tag>
       </span>
-      <span slot="action" slot-scope="text,record">
-        <a-button v-if="record.status == 0" href="javascript:;">
+      <span slot="action" slot-scope="text,record" style="">
+        <a-button class="button" v-if="record.status == 0" href="javascript:;"
+        style="background-color:#3498DB; color:white">
           <a-icon type="loading" />生成报告
         </a-button>
-        <a-button v-if="record.status == 1" href="javascript:;">查看报告</a-button>
-        <a-button href="javascript:;">删除</a-button>
+        <a-button v-if="record.status == 1" href="javascript:;" class="button" 
+        style="background-color:#1ABC9C; color:white">查看报告</a-button>
+        <a-button class="button" href="javascript:;" style="background-color:#E74C3C;color:white">删除</a-button>
       </span>
       <span slot="status" slot-scope="text,record">
         <span v-if="record.status== 1">已通过</span>
