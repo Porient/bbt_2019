@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 08/10/2019 10:47:49
+ Date: 22/10/2019 15:17:21
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `admin`  (
   `admin_email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '邮件',
   `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`admin_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for attitude
@@ -38,7 +38,7 @@ CREATE TABLE `attitude`  (
   `product_id` int(11) NOT NULL COMMENT '产品id',
   `attitude` int(11) NOT NULL COMMENT '机会id',
   PRIMARY KEY (`attitude_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for collect
@@ -49,7 +49,7 @@ CREATE TABLE `collect`  (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
   PRIMARY KEY (`collect_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for comment
@@ -64,7 +64,19 @@ CREATE TABLE `comment`  (
   `like_num` int(11) NOT NULL COMMENT '点赞数',
   `date` datetime(0) NOT NULL COMMENT '评论时间',
   PRIMARY KEY (`comment_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for comment_like
+-- ----------------------------
+DROP TABLE IF EXISTS `comment_like`;
+CREATE TABLE `comment_like`  (
+  `comment_like_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论点赞id',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `comment_id` int(11) NOT NULL COMMENT '评论id',
+  `like_time` datetime(0) NOT NULL COMMENT '点赞时间',
+  PRIMARY KEY (`comment_like_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for computer
@@ -97,7 +109,7 @@ CREATE TABLE `computer`  (
   `library` int(11) NOT NULL COMMENT '所属库',
   `product_analysis` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for crawler
@@ -110,7 +122,7 @@ CREATE TABLE `crawler`  (
   `script_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '爬虫名称',
   `remarks` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '备注参数',
   PRIMARY KEY (`parameter_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for phone
@@ -147,7 +159,19 @@ CREATE TABLE `phone`  (
   `library` int(11) NOT NULL COMMENT '所属库',
   `product_analysis` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for product_like
+-- ----------------------------
+DROP TABLE IF EXISTS `product_like`;
+CREATE TABLE `product_like`  (
+  `product_like_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '产品点赞id',
+  `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
+  `like_num` int(11) NOT NULL COMMENT '浏览次数',
+  PRIMARY KEY (`product_like_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for record
@@ -155,12 +179,14 @@ CREATE TABLE `phone`  (
 DROP TABLE IF EXISTS `record`;
 CREATE TABLE `record`  (
   `record_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
   `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
+  `product_picture` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品缩略图',
   `browse_time` datetime(0) NOT NULL COMMENT '浏览时间',
   `browse_num` int(11) NOT NULL COMMENT '浏览次数',
   PRIMARY KEY (`record_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -180,6 +206,19 @@ CREATE TABLE `user`  (
   `used` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '使用过的产品',
   `is_ban` int(11) NOT NULL COMMENT '是否封禁',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user_like
+-- ----------------------------
+DROP TABLE IF EXISTS `user_like`;
+CREATE TABLE `user_like`  (
+  `user_like_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户点赞id',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
+  `like_time` datetime(0) NOT NULL COMMENT '点赞时间',
+  PRIMARY KEY (`user_like_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

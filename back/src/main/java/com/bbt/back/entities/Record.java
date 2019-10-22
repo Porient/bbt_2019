@@ -11,6 +11,7 @@ import java.util.Date;
 public class Record implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private Integer recordId;
     private Integer userId;
     private Integer productId;
     private String productName;

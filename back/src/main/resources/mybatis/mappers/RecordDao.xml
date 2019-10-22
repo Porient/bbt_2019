@@ -3,8 +3,10 @@
 <mapper namespace="com.bbt.back.dao.RecordDao">
     <resultMap id="recordMap" type="com.bbt.back.entities.Record">
         <id column="record_id" property="recordId" />
+        <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
         <result column="product_name" property="productName" />
+        <result column="product_picture" property="productPicture" />
         <result column="browse_time" property="browseTime" />
         <result column="browse_num" property="browseNum" />
     </resultMap>
@@ -15,15 +17,17 @@
     </delete>
 
     <insert id="insertRecord" parameterType="com.bbt.back.entities.Record">
-    insert into `record` (product_id, product_name, browse_time, browse_num)
-    values (#{productId}, #{productName}, #{browseTime}, #{browseNum})
-  </insert>
+      insert into `record` (user_id, product_id, product_name, product_picture, browse_time, browse_num)
+      values (#{userId}, #{productId}, #{productName}, #{productPicture}, #{browseTime}, #{browseNum})
+    </insert>
 
     <update id="updateRecord" parameterType="com.bbt.back.entities.Record">
         update `record`
         <set>
+            <if test="productId != null and productId != ''"> user_id = #{userId},</if>
             <if test="productId != null and productId != ''"> product_id = #{productId},</if>
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
+            <if test="productPicture != null and productPicture != ''"> product_picture = #{productPicture},</if>
             <if test="browseTime != null and browseTime != ''"> browse_time = #{browseTime},</if>
             <if test="browseNum != null and browseNum != ''"> browse_num = #{browseNum}</if>
         </set>
