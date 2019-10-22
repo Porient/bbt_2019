@@ -3,28 +3,29 @@ package com.bbt.back.entities;
 import java.io.Serializable;
 
 /**
- * @Description: 用户收藏实体类
+ * @Description:
  * @Author: Liu Bin
- * @Date: 2019/10/6 14:56
+ * @Date: 2019/10/22 0022 16:26
  */
-public class Collect implements Serializable {
+public class Attitude implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer collectId;
+    private Integer attitude_id;
     private Integer userId;
     private Integer productId;
     private Integer productType;
+    private Integer attitude;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public Integer getCollectId() {
-        return collectId;
+    public Integer getAttitude_id() {
+        return attitude_id;
     }
 
-    public void setCollectId(Integer collectId) {
-        this.collectId = collectId;
+    public void setAttitude_id(Integer attitude_id) {
+        this.attitude_id = attitude_id;
     }
 
     public Integer getUserId() {
@@ -51,13 +52,22 @@ public class Collect implements Serializable {
         this.productType = productType;
     }
 
+    public Integer getAttitude() {
+        return attitude;
+    }
+
+    public void setAttitude(Integer attitude) {
+        this.attitude = attitude;
+    }
+
     @Override
     public String toString() {
-        return "Collect{" +
-                "collectId=" + collectId +
+        return "Attitude{" +
+                "attitude_id=" + attitude_id +
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", productType=" + productType +
+                ", attitude=" + attitude +
                 '}';
     }
 }

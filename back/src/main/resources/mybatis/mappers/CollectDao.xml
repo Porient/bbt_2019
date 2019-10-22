@@ -5,6 +5,7 @@
         <id column="collect_id" property="collectId" />
         <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
     </resultMap>
 
     <delete id="deleteCollect" parameterType="java.lang.Integer">
@@ -13,15 +14,16 @@
     </delete>
 
     <insert id="insertCollect" parameterType="com.bbt.back.entities.Collect">
-      insert into `collect` (user_id, product_id)
-      values (#{userId}, #{productId})
+      insert into `collect` (user_id, product_id, product_type)
+      values (#{userId}, #{productId}, #{productType})
     </insert>
 
     <update id="updateCollect" parameterType="com.bbt.back.entities.Collect">
         update `collect`
         <set>
             <if test="userId != null and userId != ''"> user_id = #{userId},</if>
-            <if test="productId != null and productId != ''"> product_id = #{productId}</if>
+            <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType}</if>
         </set>
         where collect_id = #{collectId}
     </update>

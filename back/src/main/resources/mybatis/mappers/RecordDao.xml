@@ -5,6 +5,7 @@
         <id column="record_id" property="recordId" />
         <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
         <result column="product_name" property="productName" />
         <result column="product_picture" property="productPicture" />
         <result column="browse_time" property="browseTime" />
@@ -17,15 +18,16 @@
     </delete>
 
     <insert id="insertRecord" parameterType="com.bbt.back.entities.Record">
-      insert into `record` (user_id, product_id, product_name, product_picture, browse_time, browse_num)
-      values (#{userId}, #{productId}, #{productName}, #{productPicture}, #{browseTime}, #{browseNum})
+      insert into `record` (user_id, product_id,  product_Type, product_name, product_picture, browse_time, browse_num)
+      values (#{userId}, #{productId}, #{productType}, #{productName}, #{productPicture}, #{browseTime}, #{browseNum})
     </insert>
 
     <update id="updateRecord" parameterType="com.bbt.back.entities.Record">
         update `record`
         <set>
-            <if test="productId != null and productId != ''"> user_id = #{userId},</if>
+            <if test="userId != null and userId != ''"> user_id = #{userId},</if>
             <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType},</if>
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
             <if test="productPicture != null and productPicture != ''"> product_picture = #{productPicture},</if>
             <if test="browseTime != null and browseTime != ''"> browse_time = #{browseTime},</if>

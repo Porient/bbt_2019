@@ -14,6 +14,7 @@ public class Record implements Serializable {
     private Integer recordId;
     private Integer userId;
     private Integer productId;
+    private Integer productType;
     private String productName;
     private String productPicture;
     private Date browseTime;
@@ -21,6 +22,14 @@ public class Record implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public Integer getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
     }
 
     public Integer getUserId() {
@@ -71,11 +80,21 @@ public class Record implements Serializable {
         this.browseNum = browseNum;
     }
 
+    public Integer getProductType() {
+        return productType;
+    }
+
+    public void setProductType(Integer productType) {
+        this.productType = productType;
+    }
+
     @Override
     public String toString() {
         return "Record{" +
-                "userId=" + userId +
+                "recordId=" + recordId +
+                ", userId=" + userId +
                 ", productId=" + productId +
+                ", productType=" + productType +
                 ", productName='" + productName + '\'' +
                 ", productPicture='" + productPicture + '\'' +
                 ", browseTime=" + browseTime +

@@ -5,6 +5,7 @@
         <id column="comment_id" property="commentId" />
         <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
+        <result column="product_type " property="productType" />
         <result column="product_name" property="productName" />
         <result column="content" property="content" />
         <result column="like_num" property="likeNum" />
@@ -17,8 +18,8 @@
     </delete>
 
     <insert id="insertComment" parameterType="com.bbt.back.entities.Comment">
-      insert into `comment` (user_id, product_id, product_name, content, like_num, `date`)
-      values (#{userId}, #{productId}, #{productName}, #{content}, #{likeNum}, #{date})
+      insert into `comment` (user_id, product_id, product_type, product_name, content, like_num, `date`)
+      values (#{userId}, #{productId}, #{productType}, #{productName}, #{content}, #{likeNum}, #{date})
     </insert>
 
     <update id="updateComment" parameterType="com.bbt.back.entities.Comment">
@@ -26,6 +27,7 @@
         <set>
             <if test="userId != null and userId != ''"> user_id = #{userId},</if>
             <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType},</if>
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
             <if test="content != null and content != ''"> content = #{content},</if>
             <if test="likeNum != null and likeNum != ''"> like_num = #{likeNum},</if>

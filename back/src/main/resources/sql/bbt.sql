@@ -36,6 +36,7 @@ CREATE TABLE `attitude`  (
   `attitude_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户态度id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
   `attitude` int(11) NOT NULL COMMENT '机会id',
   PRIMARY KEY (`attitude_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -48,6 +49,7 @@ CREATE TABLE `collect`  (
   `collect_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户收藏id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
   PRIMARY KEY (`collect_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -59,6 +61,7 @@ CREATE TABLE `comment`  (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
   `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
   `content` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论',
   `like_num` int(11) NOT NULL COMMENT '点赞数',
@@ -181,6 +184,7 @@ CREATE TABLE `record`  (
   `record_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
+  `product_type` int(11) NOT NULL COMMENT '产品类型',
   `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
   `product_picture` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品缩略图',
   `browse_time` datetime(0) NOT NULL COMMENT '浏览时间',

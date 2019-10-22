@@ -5,6 +5,7 @@
         <id column="attitude_id" property="attitudeId" />
         <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
         <result column="attitude" property="attitude" />
     </resultMap>
 
@@ -14,8 +15,8 @@
     </delete>
 
     <insert id="insertAttitude" parameterType="com.bbt.back.entities.Attitude">
-      insert into `attitude` (user_id, product_id, attitude)
-      values (#{userId}, #{productId}, #{attitude})
+      insert into `attitude` (user_id, product_id, product_type, attitude)
+      values (#{userId}, #{productId}, #{productType}, #{attitude})
     </insert>
 
     <update id="updateAttitude" parameterType="com.bbt.back.entities.Attitude">
@@ -23,6 +24,7 @@
         <set>
             <if test="userId != null and userId != ''"> user_id = #{userId},</if>
             <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType},</if>
             <if test="attitude != null and attitude != ''"> attitude = #{attitude}</if>
         </set>
         where attitude_id = #{attitudeId}

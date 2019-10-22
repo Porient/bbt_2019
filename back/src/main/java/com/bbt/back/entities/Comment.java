@@ -14,6 +14,7 @@ public class Comment implements Serializable {
     private Integer commentId;
     private Integer userId;
     private Integer productId;
+    private Integer productType;
     private String productName;
     private String content;
     private Integer likeNum;
@@ -79,12 +80,21 @@ public class Comment implements Serializable {
         this.date = date;
     }
 
+    public Integer getProductType() {
+        return productType;
+    }
+
+    public void setProductType(Integer productType) {
+        this.productType = productType;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
                 "commentId=" + commentId +
                 ", userId=" + userId +
                 ", productId=" + productId +
+                ", productType=" + productType +
                 ", productName='" + productName + '\'' +
                 ", content='" + content + '\'' +
                 ", likeNum=" + likeNum +
