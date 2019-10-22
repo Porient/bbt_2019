@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.CollectDao">
+    <resultMap id="CommentLikeMap" type="com.bbt.back.entities.CommentLike">
+        <id column="comment_like_id" property="commentLikeId" />
+        <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
+        <result column="like_num" property="likeNum" />
+    </resultMap>
+
+    <delete id="deleteCommentLike" parameterType="java.lang.Integer">
+      delete from `comment_like`
+      where comment_like_id = #{commentLikeId}
+    </delete>
+
+    <insert id="insertCommentLike" parameterType="com.bbt.back.entities.CommentLike">
+      insert into `comment_like` (user_id, comment_id, like_time)
+      values (#{userId}, #{commentId}, #{likeTime})
+    </insert>
+
+    <update id="updateCommentLike" parameterType="com.bbt.back.entities.CommentLike">
+        update `comment_like`
+        <set>
+            <if test="userId != null and userId != ''"> user_id = #{userId},</if>
+            <if test="commentId != null and commentId != ''"> comment_id = #{commentId},</if>
+            <if test="likeTime != null and likeTime != ''"> like_time = #{likeTime}</if>
+        </set>
+        where comment_like_id = #{commentLikeId}
+    </update>
+
+    <select id="findCommentLikeById" parameterType="java.lang.Integer" resultMap="CommentLikeMap">
+      select c.*
+      from `comment_like` c
+      where c.comment_like_id = #{commentLikeId}
+    </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="CommentLikeMap">
+      select c.*
+      from `comment_like` c
+    </select>
+</mapper>

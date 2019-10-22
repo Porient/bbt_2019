@@ -1,6 +1,7 @@
 package com.bbt.back.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Description:
@@ -10,25 +11,28 @@ import java.io.Serializable;
 public class CommentLike implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int CommentLikeId;
+    private int commentLikeId;
     private int userId;
     private int commentId;
+    private Date likeTime;
 
     public CommentLike() {
     }
 
-    public CommentLike(int commentLikeId, int userId, int commentId) {
-        CommentLikeId = commentLikeId;
+    public CommentLike(int commentLikeId, int userId, int commentId, Date likeTime) {
+        this.commentLikeId = commentLikeId;
         this.userId = userId;
         this.commentId = commentId;
+        this.likeTime = likeTime;
     }
 
     @Override
     public String toString() {
         return "CommentLike{" +
-                "CommentLikeId=" + CommentLikeId +
+                "commentLikeId=" + commentLikeId +
                 ", userId=" + userId +
                 ", commentId=" + commentId +
+                ", likeTime=" + likeTime +
                 '}';
     }
 
@@ -37,11 +41,11 @@ public class CommentLike implements Serializable {
     }
 
     public int getCommentLikeId() {
-        return CommentLikeId;
+        return commentLikeId;
     }
 
     public void setCommentLikeId(int commentLikeId) {
-        CommentLikeId = commentLikeId;
+        this.commentLikeId = commentLikeId;
     }
 
     public int getUserId() {
@@ -58,5 +62,13 @@ public class CommentLike implements Serializable {
 
     public void setCommentId(int commentId) {
         this.commentId = commentId;
+    }
+
+    public Date getLikeTime() {
+        return likeTime;
+    }
+
+    public void setLikeTime(Date likeTime) {
+        this.likeTime = likeTime;
     }
 }

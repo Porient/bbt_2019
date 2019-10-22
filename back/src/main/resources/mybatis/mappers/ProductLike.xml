@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.ProductLikeDao">
+    <resultMap id="productLikeMap" type="com.bbt.back.entities.ProductLike">
+        <id column="product_like_id" property="productLikeId" />
+        <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
+        <result column="like_num" property="likeNum" />
+    </resultMap>
+
+    <delete id="deleteProductLike" parameterType="java.lang.Integer">
+      delete from `product_like`
+      where product_like_id = #{productLikeId}
+    </delete>
+
+    <insert id="insertProductLike" parameterType="com.bbt.back.entities.ProductLike">
+      insert into `product_like` (product_id, product_type, like_num)
+      values (#{productId}, #{productType}, #{likeNum})
+    </insert>
+
+    <update id="updateProductLike" parameterType="com.bbt.back.entities.ProductLike">
+        update `product_like`
+        <set>
+            <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType},</if>
+            <if test="likeNum != null and likeNum != ''"> like_num = #{likeNum}</if>
+        </set>
+        where product_like_id = #{productLikeId}
+    </update>
+
+    <select id="findProductLikeById" parameterType="java.lang.Integer" resultMap="productLikeMap">
+      select p.*
+      from `product_like` p
+      where p.product_like_id = #{productLikeId}
+    </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="productLikeMap">
+      select p.*
+      from `product_like` p
+    </select>
+</mapper>

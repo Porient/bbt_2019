@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbt.back.dao.CollectDao">
+    <resultMap id="UserLikeMap" type="com.bbt.back.entities.UserLike">
+        <id column="user_like_id" property="userLikeId" />
+        <result column="user_id" property="userId" />
+        <result column="product_id" property="productId" />
+        <result column="product_type" property="productType" />
+        <result column="like_time" property="likeTime" />
+    </resultMap>
+
+    <delete id="deleteUserLike" parameterType="java.lang.Integer">
+      delete from `user_like`
+      where user_like_id = #{userLikeId}
+    </delete>
+
+    <insert id="insertUserLike" parameterType="com.bbt.back.entities.UserLike">
+      insert into `user_like` (user_id, product_id, product_type, like_time)
+      values (#{userId}, #{productId}, #{productType}, #{likeTime})
+    </insert>
+
+    <update id="updateUserLike" parameterType="com.bbt.back.entities.UserLike">
+        update `user_like`
+        <set>
+            <if test="userId != null and userId != ''"> user_id = #{userId},</if>
+            <if test="productId != null and productId != ''"> product_id = #{productId},</if>
+            <if test="productType != null and productType != ''"> product_type = #{productType},</if>
+            <if test="likeTime != null and likeTime != ''"> like_time = #{likeTime}</if>
+        </set>
+        where user_like_id = #{UserLikeId}
+    </update>
+
+    <select id="findUserLikeById" parameterType="java.lang.Integer" resultMap="UserLikeMap">
+      select u.*
+      from `user_like` u
+      where u.user_like_id = #{UserLikeId}
+    </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="UserLikeMap">
+      select u.*
+      from `user_like` u
+    </select>
+</mapper>
