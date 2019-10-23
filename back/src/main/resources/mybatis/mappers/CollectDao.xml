@@ -38,4 +38,17 @@
       select c.*
       from `collect` c
     </select>
+
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="collectMap">
+      select c.*
+      from `collect` c
+      where c.user_id = #{userId}
+    </select>
+
+    <select id="selectByUserId" parameterType="java.lang.Integer">
+      select count(1)
+      from `collect` c
+      where c.user_id = #{userId}
+      GROUP BY user_id
+    </select>
 </mapper>

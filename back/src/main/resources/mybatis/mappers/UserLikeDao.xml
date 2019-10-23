@@ -33,11 +33,19 @@
     <select id="findUserLikeById" parameterType="java.lang.Integer" resultMap="UserLikeMap">
       select u.*
       from `user_like` u
-      where u.user_like_id = #{UserLikeId}
+      where u.user_like_id = #{userLikeId}
     </select>
 
     <select id="selectAll" parameterType="java.lang.Integer" resultMap="UserLikeMap">
       select u.*
       from `user_like` u
+    </select>
+
+    <select id="findByProductIdAndType" parameterType="java.lang.Integer" resultMap="UserLikeMap">
+      select u.*
+      from `user_like` u
+      where u.user_id = #{userId} AND
+      u.product_id = #{productId} AND
+      u.product_type = #{productType}
     </select>
 </mapper>

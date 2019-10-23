@@ -47,5 +47,9 @@
       from `record` r
     </select>
 
-    
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="recordMap">
+      select r.*
+      from `record` r
+      where r.user_id = #{userId}
+    </select>
 </mapper>

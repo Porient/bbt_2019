@@ -1,6 +1,7 @@
 package com.bbt.back.dao;
 
 import com.bbt.back.entities.CommentLike;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.stereotype.Component;
 public interface CommentLikeDao {
     int insertCommentLike(CommentLike commentLike);
 
-    CommentLike findByUserIdAndCommentId(int userId, int commentId);
+    CommentLike findByUserIdAndCommentId(@Param("userId")int userId,@Param("commentId") int commentId);
 }

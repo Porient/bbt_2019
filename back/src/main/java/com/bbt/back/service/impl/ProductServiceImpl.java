@@ -101,12 +101,14 @@ public class ProductServiceImpl implements ProductService {
         UserLike userLike=userLikeDao.findByProductIdAndType(userId,likeObject.getProductId(),likeObject.getType());
         if (userLike==null){
             userLike=new UserLike(userId,likeObject.getProductId(),likeObject.getType(),new Date());
+            userLikeDao.insertUserLike(userLike);
         }else {
             return -1;
         }
         ProductLike productLike=productLikeDao.findByProductIdAndType(likeObject.getProductId(),likeObject.getType());
         if (productLike==null){
             productLike=new ProductLike(likeObject.getProductId(),likeObject.getType(),1);
+            productLikeDao.insertProductLike(productLike);
         }else {
             int oldNum=productLike.getLikeNum();
             productLike.setLikeNum(oldNum+1);

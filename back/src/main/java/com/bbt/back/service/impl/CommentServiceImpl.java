@@ -77,6 +77,7 @@ public class CommentServiceImpl implements CommentService {
         CommentLike commentLike=commentLikeDao.findByUserIdAndCommentId(userId,commentId);
         if (commentLike==null){
             commentLike=new CommentLike(userId,commentId,new Date());
+            commentLikeDao.insertCommentLike(commentLike);
         }else {
             return -1;
         }

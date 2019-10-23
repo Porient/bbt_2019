@@ -38,4 +38,17 @@
       select p.*
       from `product_like` p
     </select>
+
+    <select id="getHotProduct" parameterType="java.lang.Integer" resultMap="productLikeMap">
+      select p.*
+      from `product_like` p
+      limit 6 order by like_num desc
+    </select>
+
+    <select id="findByProductIdAndType" parameterType="java.lang.Integer" resultMap="productLikeMap">
+      select p.*
+      from `product_like` p
+      where p.product_id = #{productId} AND
+      p.product_type = #{productType}
+    </select>
 </mapper>

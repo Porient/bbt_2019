@@ -1,6 +1,5 @@
 package com.bbt.back.dao;
 
-import com.bbt.back.entities.CommentLike;
 import com.bbt.back.entities.UserLike;
 import org.springframework.stereotype.Component;
 
