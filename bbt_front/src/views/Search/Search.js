@@ -1,10 +1,8 @@
 import Vue from "vue";
-import { Layout, Avatar, Input, Select, Card } from "ant-design-vue";
+import { Input, Select, Card } from "ant-design-vue";
 import ProductPreview from "@/components/ProductPreview/ProductPreview.vue";
 import { mapGetters } from "vuex";
 
-Vue.use(Layout);
-Vue.use(Avatar);
 Vue.use(Input);
 Vue.use(Select);
 Vue.use(Card);
