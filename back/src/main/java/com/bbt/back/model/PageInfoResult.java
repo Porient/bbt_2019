@@ -1,5 +1,6 @@
 package com.bbt.back.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @Author: Liu Bin
  * @Date: 2019/10/23 0023 15:57
  */
-public class PageInfoResult {
+public class PageInfoResult implements Serializable {
     private Object object;
     private Long total;
     private Integer pageNum;

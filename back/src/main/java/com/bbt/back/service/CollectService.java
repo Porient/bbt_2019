@@ -1,6 +1,7 @@
 package com.bbt.back.service;
 
 import com.bbt.back.entities.Collect;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public interface CollectService {
     int countByUserId(int userId);
 
-    List<Collect> selectAllByUserId(int userId);
+    PageInfo<Collect> selectAllByUserId(int userId, Integer pageNum, Integer pageSize);
 
     int addCollect(Collect collect);
 

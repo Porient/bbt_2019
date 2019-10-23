@@ -172,7 +172,7 @@ CREATE TABLE `product_like`  (
   `product_like_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '产品点赞id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
   `product_type` int(11) NOT NULL COMMENT '产品类型',
-  `like_num` int(11) NOT NULL COMMENT '浏览次数',
+  `like_num` int(11) NOT NULL COMMENT '点赞次数',
   PRIMARY KEY (`product_like_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

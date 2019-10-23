@@ -22,12 +22,19 @@ public class ProductLike implements Serializable {
     public ProductLike() {
     }
 
+
     public int getProductType() {
         return productType;
     }
 
     public void setProductType(int productType) {
         this.productType = productType;
+    }
+
+    public ProductLike(int productId, int productType, int likeNum) {
+        this.productId = productId;
+        this.productType = productType;
+        this.likeNum = likeNum;
     }
 
     public ProductLike(int productLikeId, int productId, int productType, int likeNum) {

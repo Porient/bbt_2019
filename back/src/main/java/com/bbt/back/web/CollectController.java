@@ -1,10 +1,12 @@
 package com.bbt.back.web;
 
 import com.bbt.back.entities.Collect;
+import com.bbt.back.model.PageInfoResult;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.CollectService;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +27,13 @@ public class CollectController {
     private CollectService collectService;
 
     @RequestMapping("/list")
-    private Object getCollects(HttpServletRequest request){
+    private Object getCollects(HttpServletRequest request, Integer pageNum, Integer pageSize){
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request,"userId");
-        List<Collect> collects = collectService.selectAllByUserId(userId);
+        PageInfo<Collect> pageInfo = collectService.selectAllByUserId(userId,pageNum,pageSize);
+        PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         resultEntity.setMsg("获取收藏列表成功");
-        resultEntity.setData(collects);
+        resultEntity.setData(pageInfoResult);
         return resultEntity;
     }
 

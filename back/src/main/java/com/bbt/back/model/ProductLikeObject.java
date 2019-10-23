@@ -5,11 +5,11 @@ package com.bbt.back.model;
  * @Author: Kobe
  * @Date: 2019/10/14 21:07
  */
-public class LikeObject {
+public class ProductLikeObject {
     private int type;
     private int productId;
 
-    public LikeObject(int type, int productId) {
+    public ProductLikeObject(int type, int productId) {
         this.type = type;
         this.productId = productId;
     }

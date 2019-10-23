@@ -1,8 +1,5 @@
 package com.bbt.back.web;
 
-import com.bbt.back.entities.Computer;
-import com.bbt.back.entities.Phone;
-import com.bbt.back.entities.ProductLike;
 import com.bbt.back.model.*;
 import com.bbt.back.service.ProductService;
 import com.bbt.back.utils.CutWord;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,8 +31,8 @@ public class ProductController {
         String deleteObjectStr = HttpServletRequestUtil.getString(request,"deleteObject");
         ObjectMapper mapper = new ObjectMapper();
         DeleteObject deleteObject = mapper.readValue(deleteObjectStr,DeleteObject.class);
-        List<LikeObject> likeObjects = deleteObject.getLikeObjects();
-        for (LikeObject likeObject : likeObjects){
+        List<ProductLikeObject> likeObjects = deleteObject.getLikeObjects();
+        for (ProductLikeObject likeObject : likeObjects){
             productService.deleteProduct(likeObject);
         }
         return resultEntity;
@@ -112,10 +108,12 @@ public class ProductController {
     @RequestMapping("/likeProduct")
     private Object likeProduct(HttpServletRequest request) throws IOException{
         ResultEntity resultEntity = new ResultEntity();
+        int userId = HttpServletRequestUtil.getInt(request, "userId");
         String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
         ObjectMapper mapper = new ObjectMapper();
-        LikeObject likeObject = mapper.readValue(likeObjectStr,LikeObject.class);
-        productService.likeProduct(likeObject);
+        ProductLikeObject likeObject = mapper.readValue(likeObjectStr,ProductLikeObject.class);
+        productService.likeProduct(likeObject,userId);
+        resultEntity.setMsg("点赞成功");
         return resultEntity;
     }
 
@@ -124,7 +122,7 @@ public class ProductController {
         ResultEntity resultEntity = new ResultEntity();
         String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
         ObjectMapper mapper = new ObjectMapper();
-        LikeObject likeObject = mapper.readValue(likeObjectStr,LikeObject.class);
+        ProductLikeObject likeObject = mapper.readValue(likeObjectStr,ProductLikeObject.class);
         Object object = productService.selectByProductId(likeObject);
         resultEntity.setMsg("获取成功");
         resultEntity.setData(object);

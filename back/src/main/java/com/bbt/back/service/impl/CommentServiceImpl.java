@@ -1,8 +1,9 @@
 package com.bbt.back.service.impl;
 
-import com.bbt.back.dao.CommentDao;
-import com.bbt.back.dao.UserDao;
+import com.bbt.back.dao.*;
 import com.bbt.back.entities.Comment;
+import com.bbt.back.entities.CommentLike;
+import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.User;
 import com.bbt.back.service.CommentService;
 import com.github.pagehelper.PageHelper;
@@ -23,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentDao commentDao;
     @Autowired
-    private UserDao userDao;
+    private CommentLikeDao commentLikeDao;
 
     @Override
     public int addComment(Comment comment) {
@@ -42,40 +43,18 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public PageInfo<Comment> selectAll(Integer productId, Integer pageNo, Integer pageSize) {
-        /*pageNo = pageNo == -1 ? 1 : pageNo;
-        pageSize = pageSize == -1 ? 10 : pageSize;
-        List<Comment> list = commentDao.getCommentListByBookId(productId);
-        for(Comment comment:list){
-            comment.setUser(userDao.findUserById(comment.getFromUid()));
-            comment.setBookInfo(bookInfoDao.findBookInfoById(comment.getBookId()));
-        }
-        PageHelper.startPage(pageNo,pageSize);
-        PageInfo<Comment> pageInfo = new PageInfo<>(list);
-        return pageInfo;*/
-        return null;
-    }
-
-    @Override
     public Comment findCommentById(int commentId) {
         return commentDao.findCommentById(commentId);
     }
 
     @Override
     public PageInfo<Comment> selectAllByUserId(Integer userId, Integer pageNo, Integer pageSize) {
-        /*pageNo = pageNo == -1 ? 1 : pageNo;
+        pageNo = pageNo == -1 ? 1 : pageNo;
         pageSize = pageSize == -1 ? 10 : pageSize;
         List<Comment> list = commentDao.getCommentListByUserId(userId);
-        for(Comment comment:list){
-            User user=userDao.findUserById(comment.getUserId());
-            comment.setUser(user);
-            BookInfo bookInfo=bookInfoDao.findBookInfoById(comment.getBookId());
-            comment.setBookInfo(bookInfo);
-        }
         PageHelper.startPage(pageNo,pageSize);
         PageInfo<Comment> pageInfo = new PageInfo<>(list);
-        return pageInfo;*/
-        return null;
+        return pageInfo;
     }
 
     @Override
@@ -91,5 +70,20 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int getLikeCount(Integer userId) {
         return commentDao.getLikeCount(userId);
+    }
+
+    @Override
+    public int likeComment(int userId, int commentId) {
+        CommentLike commentLike=commentLikeDao.findByUserIdAndCommentId(userId,commentId);
+        if (commentLike==null){
+            commentLike=new CommentLike(userId,commentId,new Date());
+        }else {
+            return -1;
+        }
+        Comment comment=commentDao.findCommentById(commentId);
+        int oldNum=comment.getLikeNum();
+        comment.setLikeNum(oldNum+1);
+        commentDao.updateComment(comment);
+        return 1;
     }
 }

@@ -19,6 +19,12 @@ public class CommentLike implements Serializable {
     public CommentLike() {
     }
 
+    public CommentLike(int userId, int commentId, Date likeTime) {
+        this.userId = userId;
+        this.commentId = commentId;
+        this.likeTime = likeTime;
+    }
+
     public CommentLike(int commentLikeId, int userId, int commentId, Date likeTime) {
         this.commentLikeId = commentLikeId;
         this.userId = userId;

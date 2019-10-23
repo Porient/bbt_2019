@@ -17,6 +17,17 @@ public class UserLike implements Serializable {
     private int productType;
     private Date likeTime;
 
+    public UserLike(){
+
+    }
+
+    public UserLike(int userId, int productId, int productType, Date likeTime) {
+        this.userId = userId;
+        this.productId = productId;
+        this.productType = productType;
+        this.likeTime = likeTime;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

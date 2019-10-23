@@ -3,6 +3,8 @@ package com.bbt.back.service.impl;
 import com.bbt.back.dao.CollectDao;
 import com.bbt.back.entities.Collect;
 import com.bbt.back.service.CollectService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -22,8 +24,13 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public List<Collect> selectAllByUserId(int userId) {
-        return collectDao.selectByUserId(userId);
+    public PageInfo<Collect> selectAllByUserId(int userId, Integer pageNum, Integer pageSize) {
+        pageNum = pageNum == -1 ? 1 : pageNum;
+        pageSize = pageSize == -1 ? 10 : pageSize;
+        List<Collect> list=collectDao.selectByUserId(userId);
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Collect> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override

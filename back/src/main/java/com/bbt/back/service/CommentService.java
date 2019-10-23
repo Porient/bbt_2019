@@ -42,18 +42,6 @@ public interface CommentService {
 
     /**
      * create by: Kobe
-     * description:获取评论列表
-     * create time: 12:14 2019/5/22
-     * @param
-     * @param productId
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    PageInfo<Comment> selectAll(Integer productId, Integer pageNo, Integer pageSize);
-
-    /**
-     * create by: Kobe
      * description:根据id找评论接口
      * create time: 14:59 2019/5/22
      * @param commentId
@@ -78,4 +66,6 @@ public interface CommentService {
     List<Comment> selectByUserId(Integer userId);
 
     int getLikeCount(Integer userId);
+
+    int likeComment(int userId, int commentId);
 }

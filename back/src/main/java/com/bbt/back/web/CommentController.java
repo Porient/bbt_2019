@@ -1,6 +1,7 @@
 package com.bbt.back.web;
 
 import com.bbt.back.entities.Comment;
+import com.bbt.back.model.PageInfoResult;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.CommentService;
 import com.bbt.back.utils.HttpServletRequestUtil;
@@ -30,8 +31,9 @@ public class CommentController {
         //1.获取前端传递的userId参数
         int userId = HttpServletRequestUtil.getInt(request, "userId");
         PageInfo<Comment> pageInfo = commentService.selectAllByUserId(userId, pageNo, pageSize);
+        PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         resultEntity.setMsg("获取成功");
-        resultEntity.setData(pageInfo);
+        resultEntity.setData(pageInfoResult);
         return resultEntity;
     }
 
@@ -73,6 +75,16 @@ public class CommentController {
         } else {
             resultEntity.setMsg("添加评论失败");
         }
+        return resultEntity;
+    }
+
+    @RequestMapping("/likeComment")
+    private Object likeComment(HttpServletRequest request) throws IOException{
+        ResultEntity resultEntity = new ResultEntity();
+        int userId = HttpServletRequestUtil.getInt(request, "userId");
+        int commentId = HttpServletRequestUtil.getInt(request, "commentId");
+        commentService.likeComment(userId,commentId);
+        resultEntity.setMsg("点赞评论成功");
         return resultEntity;
     }
 }

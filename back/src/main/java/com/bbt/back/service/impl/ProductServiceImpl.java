@@ -3,10 +3,10 @@ package com.bbt.back.service.impl;
 import com.bbt.back.dao.ComputerDao;
 import com.bbt.back.dao.PhoneDao;
 import com.bbt.back.dao.ProductLikeDao;
-import com.bbt.back.entities.Computer;
-import com.bbt.back.entities.Phone;
+import com.bbt.back.dao.UserLikeDao;
 import com.bbt.back.entities.ProductLike;
-import com.bbt.back.model.LikeObject;
+import com.bbt.back.entities.UserLike;
+import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.service.ProductService;
 import com.github.pagehelper.PageHelper;
@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +29,11 @@ public class ProductServiceImpl implements ProductService {
     private ComputerDao computerDao;
     @Autowired
     private ProductLikeDao productLikeDao;
+    @Autowired
+    private UserLikeDao userLikeDao;
+
     @Override
-    public int deleteProduct(LikeObject likeObject) {
+    public int deleteProduct(ProductLikeObject likeObject) {
         if (likeObject.getType() == 0){
             phoneDao.deletePhone(likeObject.getProductId());
         } else {
@@ -93,16 +97,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void likeProduct(LikeObject likeObject) {
-        if (likeObject.getType() == 0){
-            phoneDao.likePhone(likeObject.getProductId());
-        } else {
-            computerDao.likeComputer(likeObject.getProductId());
+    public int likeProduct(ProductLikeObject likeObject,Integer userId) {
+        UserLike userLike=userLikeDao.findByProductIdAndType(userId,likeObject.getProductId(),likeObject.getType());
+        if (userLike==null){
+            userLike=new UserLike(userId,likeObject.getProductId(),likeObject.getType(),new Date());
+        }else {
+            return -1;
         }
+        ProductLike productLike=productLikeDao.findByProductIdAndType(likeObject.getProductId(),likeObject.getType());
+        if (productLike==null){
+            productLike=new ProductLike(likeObject.getProductId(),likeObject.getType(),1);
+        }else {
+            int oldNum=productLike.getLikeNum();
+            productLike.setLikeNum(oldNum+1);
+            productLikeDao.updateProductLike(productLike);
+        }
+        return 1;
     }
 
     @Override
-    public Object selectByProductId(LikeObject likeObject) {
+    public Object selectByProductId(ProductLikeObject likeObject) {
         if (likeObject.getType() == 0){
             return phoneDao.selectByProductId(likeObject.getProductId());
         } else {
