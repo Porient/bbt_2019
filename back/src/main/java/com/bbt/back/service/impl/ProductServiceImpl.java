@@ -7,9 +7,10 @@ import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.Phone;
 import com.bbt.back.entities.ProductLike;
 import com.bbt.back.model.LikeObject;
-import com.bbt.back.model.ProductList;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.service.ProductService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -38,25 +39,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductList selectAllPre() {
-        List<Phone> phones = phoneDao.selectAllPre();
-        List<Computer> computers = computerDao.selectAllPre();
-        return new ProductList(phones,computers);
+    public PageInfo<Object> selectByTypeAndLibrary(int type, int library, Integer pageNum, Integer pageSize) {
+        pageNum = pageNum == -1 ? 1 : pageNum;
+        pageSize = pageSize == -1 ? 10 : pageSize;
+        List<Object> list;
+        if (type == 0){
+            list=phoneDao.selectByLibrary(library);
+        } else {
+            list=computerDao.selectByLibrary(library);
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Object> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
-    @Override
-    public ProductList selectAllFormal() {
-        List<Phone> phones = phoneDao.selectAllFormal();
-        List<Computer> computers = computerDao.selectAllFormal();
-        return new ProductList(phones,computers);
-    }
-
-    @Override
-    public ProductList selectByType(int type) {
-        List<Phone> phones = phoneDao.selectByType(type);
-        List<Computer> computers = computerDao.selectByType(type);
-        return new ProductList(phones,computers);
-    }
 
     @Override
     public int changeState(ProductObject productObject) {
@@ -82,12 +78,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Object> selectByToken(int type, String searchToken) {
+    public PageInfo<Object> selectByToken(int type, String searchToken, Integer pageNum, Integer pageSize) {
+        pageNum = pageNum == -1 ? 1 : pageNum;
+        pageSize = pageSize == -1 ? 10 : pageSize;
+        List<Object> list;
         if (type == 0){
-            return phoneDao.selectByToken(searchToken);
+            list=phoneDao.selectByToken(searchToken);
         } else {
-            return computerDao.selectByToken(searchToken);
+            list=computerDao.selectByToken(searchToken);
         }
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Object> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override

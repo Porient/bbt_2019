@@ -25,15 +25,11 @@ public interface ComputerDao {
     //新增
     int selectByProductId(int productId);
 
-    List<Computer> selectAllPre();
-
-    List<Computer> selectAllFormal();
-
-    List<Computer> selectByType(int type);
-
     int changeState(int productIId, int i);
 
     List<Object> selectByToken(String searchToken);
 
     void likeComputer(int productId);
+
+    List<Object> selectByLibrary(int library);
 }

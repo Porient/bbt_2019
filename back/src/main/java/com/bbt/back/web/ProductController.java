@@ -1,17 +1,21 @@
 package com.bbt.back.web;
 
+import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.Phone;
+import com.bbt.back.entities.ProductLike;
 import com.bbt.back.model.*;
 import com.bbt.back.service.ProductService;
 import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,19 +42,19 @@ public class ProductController {
         return resultEntity;
     }
 
-
-
-    @RequestMapping("List")
-    private Object getList(HttpServletRequest request){
+    @RequestMapping("/List")
+    private Object getList(HttpServletRequest request, Integer pageNum, Integer pageSize){
         ResultEntity resultEntity = new ResultEntity();
         int type = HttpServletRequestUtil.getInt(request,"productType");
-        if (productService.selectByType(type)!=null){
+        int library = HttpServletRequestUtil.getInt(request,"library");
+        PageInfo<Object> pageInfo=productService.selectByTypeAndLibrary(type,library,pageNum,pageSize);
+        PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
+        if (pageInfo!=null){
             resultEntity.setMsg("获取成功");
-            resultEntity.setData(productService.selectByType(type));
+            resultEntity.setData(pageInfoResult);
         } else{
             resultEntity.setMsg("获取失败");
         }
-
         return resultEntity;
     }
 
@@ -82,7 +86,7 @@ public class ProductController {
     }
 
     @RequestMapping("/searchProduct")
-    private Object searchProduct(HttpServletRequest request) throws IOException {
+    private Object searchProduct(HttpServletRequest request, Integer pageNum, Integer pageSize) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String searchObjectStr = HttpServletRequestUtil.getString(request,"searchObject");
         ObjectMapper mapper = new ObjectMapper();
@@ -94,8 +98,12 @@ public class ProductController {
         for (String token : searchTokens){
             searchToken.append(token).append("%");
         }
-        List<Object> products = productService.selectByToken(searchObject.getType(),searchToken.toString());
-        SearchResult searchResult = new SearchResult(searchTokens,products);
+        PageInfo<Object> pageInfo = productService.selectByToken(searchObject.getType(),searchToken.toString(),pageNum,pageSize);
+        List<Object> products=pageInfo.getList();
+        Long total=pageInfo.getTotal();
+        Integer pageNum1=pageInfo.getPageNum();
+        Integer pageSize1=pageInfo.getPageSize();
+        SearchResult searchResult = new SearchResult(searchTokens,products,total,pageNum1,pageSize1);
         resultEntity.setMsg("搜索成功");
         resultEntity.setData(searchResult);
         return  resultEntity;
@@ -122,5 +130,4 @@ public class ProductController {
         resultEntity.setData(object);
         return resultEntity;
     }
-
 }

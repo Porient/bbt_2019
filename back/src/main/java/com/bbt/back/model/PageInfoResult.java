@@ -1,46 +1,35 @@
 package com.bbt.back.model;
 
-import com.github.pagehelper.PageInfo;
-
 import java.util.List;
 
 /**
  * @Description:
- * @Author: Kobe
- * @Date: 2019/10/14 20:08
+ * @Author: Liu Bin
+ * @Date: 2019/10/23 0023 15:57
  */
-public class SearchResult {
-    private List<String> words;
-    private List<Object> products;
+public class PageInfoResult {
+    private Object object;
     private Long total;
     private Integer pageNum;
     private Integer pageSize;
 
-    public SearchResult() {
+    public PageInfoResult(){
+
     }
 
-    public SearchResult(List<String> words, List<Object> products, Long total, Integer pageNum, Integer pageSize) {
-        this.words = words;
-        this.products = products;
+    public PageInfoResult(Object object, Long total, Integer pageNum, Integer pageSize) {
+        this.object = object;
         this.total = total;
         this.pageNum = pageNum;
         this.pageSize = pageSize;
     }
 
-    public List<String> getWords() {
-        return words;
+    public Object getObject() {
+        return object;
     }
 
-    public void setWords(List<String> words) {
-        this.words = words;
-    }
-
-    public List<Object> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Object> products) {
-        this.products = products;
+    public void setObject(Object object) {
+        this.object = object;
     }
 
     public Long getTotal() {
@@ -67,4 +56,3 @@ public class SearchResult {
         this.pageSize = pageSize;
     }
 }
-

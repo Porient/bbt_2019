@@ -36,4 +36,6 @@ public interface PhoneDao {
     List<Object> selectByToken(String searchToken);
 
     void likePhone(int productId);
+
+    List<Object> selectByLibrary(int library);
 }
