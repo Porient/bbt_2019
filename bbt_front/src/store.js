@@ -5,9 +5,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLogin: false, // 判断是否登录，只作为判断cookie的中介
     tagsColor: ["pink", "red", "orange", "green", "cyan", "blue", "purple"],
   },
-  mutations: {},
+  getters: {
+    // 返回当前登录的状态
+    getLoginState: state => {
+      return state.isLogin;
+    },
+  },
+  mutations: {
+    // 从cookie检查当前登录的状态
+    checkLoginState: state => {
+      state.isLogin = false;
+    },
+  },
   actions: {},
   modules: {
     // 搜索页面的State
@@ -137,6 +149,7 @@ export default new Vuex.Store({
           return state.relatedTags;
         },
       },
+      mutations: {},
     },
   },
 });
