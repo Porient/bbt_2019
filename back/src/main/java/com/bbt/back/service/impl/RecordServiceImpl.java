@@ -6,6 +6,7 @@ import com.bbt.back.service.RecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/15 11:21
  */
+@Service
 public class RecordServiceImpl implements RecordService {
     @Autowired
     private RecordDao recordDao;

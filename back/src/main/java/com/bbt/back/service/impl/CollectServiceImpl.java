@@ -6,6 +6,7 @@ import com.bbt.back.service.CollectService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/11 18:06
  */
+@Service
 public class CollectServiceImpl implements CollectService {
     @Autowired
     private CollectDao collectDao;

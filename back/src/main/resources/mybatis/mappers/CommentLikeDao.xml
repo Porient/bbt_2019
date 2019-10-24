@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bbt.back.dao.CollectDao">
-    <resultMap id="CommentLikeMap" type="com.bbt.back.entities.CommentLike">
+<mapper namespace="com.bbt.back.dao.CommentLikeDao">
+    <resultMap id="commentLikeMap" type="com.bbt.back.entities.CommentLike">
         <id column="comment_like_id" property="commentLikeId" />
         <result column="product_id" property="productId" />
         <result column="product_type" property="productType" />
@@ -29,18 +29,18 @@
         where comment_like_id = #{commentLikeId}
     </update>
 
-    <select id="findCommentLikeById" parameterType="java.lang.Integer" resultMap="CommentLikeMap">
+    <select id="findCommentLikeById" parameterType="java.lang.Integer" resultMap="commentLikeMap">
       select c.*
       from `comment_like` c
       where c.comment_like_id = #{commentLikeId}
     </select>
 
-    <select id="selectAll" parameterType="java.lang.Integer" resultMap="CommentLikeMap">
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="commentLikeMap">
       select c.*
       from `comment_like` c
     </select>
 
-    <select id="findByUserIdAndCommentId" parameterType="java.lang.Integer" resultMap="CommentLikeMap">
+    <select id="findByUserIdAndCommentId" parameterType="java.lang.Integer" resultMap="commentLikeMap">
       select c.*
       from `comment_like` c
       where c.user_id = #{userId} and

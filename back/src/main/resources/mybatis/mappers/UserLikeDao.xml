@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bbt.back.dao.CollectDao">
+<mapper namespace="com.bbt.back.dao.UserLikeDao">
     <resultMap id="UserLikeMap" type="com.bbt.back.entities.UserLike">
         <id column="user_like_id" property="userLikeId" />
         <result column="user_id" property="userId" />

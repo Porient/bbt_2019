@@ -12,6 +12,7 @@ import com.bbt.back.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/13 19:35
  */
+@Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private PhoneDao phoneDao;
