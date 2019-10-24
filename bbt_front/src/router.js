@@ -22,9 +22,14 @@ export default new Router({
       component: () => import("@/views/BackManagement/BackManagement.vue"),
     },
     {
-      path: '/login',
-      name: 'login',
-      component: ()=> import("@/views/Login/Login.vue"),
-    }
+      path: "/login",
+      name: "login",
+      component: () => import("@/views/Login/Login.vue"),
+    },
+    {
+      path: "/forget",
+      name: "forget",
+      component: () => import("@/views/Forget/Forget.vue"),
+    },
   ],
 });
