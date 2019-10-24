@@ -11,28 +11,24 @@ public class Computer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer productId;
-    private String computerName;
-    private String vendor;
-    private Integer afterSalesAbility;
-    private Integer premiumAbility;
-    private String CPU;
-    private String GPU;
-    private Integer runningMemory;
-    private Integer storageMemoryType;
-    private Integer storageMemorySize;
-    private Integer bodyWeight;
-    private Integer lifeTime;
-    private Integer keyBoardType;
-    private Integer unlockMode;
+    private String brand;
+    private String conPerformance;
+    private String gamePerformance;
+    private String interfaces;
+    private String storage;
+    private String sound;
     private String camera;
-    private String soundSystem;
-    private String heatDissipation;
+    private String specification;
+    private String peripheral;
+    private String internet;
+    private String screen;
+    private String endurance;
+    private String other;
+    private Double price;
+    private String url;
     private String appearance1;
     private String appearance2;
     private String appearance3;
-    private String screen;
-    private Integer numOfInterfaces;
-    private String productCategory;
     private int productType;
     private Integer library;
     private String productAnalysis;
@@ -49,108 +45,52 @@ public class Computer implements Serializable {
         this.productId = productId;
     }
 
-    public String getComputerName() {
-        return computerName;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setComputerName(String computerName) {
-        this.computerName = computerName;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getVendor() {
-        return vendor;
+    public String getConPerformance() {
+        return conPerformance;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
+    public void setConPerformance(String conPerformance) {
+        this.conPerformance = conPerformance;
     }
 
-    public Integer getAfterSalesAbility() {
-        return afterSalesAbility;
+    public String getGamePerformance() {
+        return gamePerformance;
     }
 
-    public void setAfterSalesAbility(Integer afterSalesAbility) {
-        this.afterSalesAbility = afterSalesAbility;
+    public void setGamePerformance(String gamePerformance) {
+        this.gamePerformance = gamePerformance;
     }
 
-    public Integer getPremiumAbility() {
-        return premiumAbility;
+    public String getInterfaces() {
+        return interfaces;
     }
 
-    public void setPremiumAbility(Integer premiumAbility) {
-        this.premiumAbility = premiumAbility;
+    public void setInterfaces(String interfaces) {
+        this.interfaces = interfaces;
     }
 
-    public String getCPU() {
-        return CPU;
+    public String getStorage() {
+        return storage;
     }
 
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
+    public void setStorage(String storage) {
+        this.storage = storage;
     }
 
-    public String getGPU() {
-        return GPU;
+    public String getSound() {
+        return sound;
     }
 
-    public void setGPU(String GPU) {
-        this.GPU = GPU;
-    }
-
-    public Integer getRunningMemory() {
-        return runningMemory;
-    }
-
-    public void setRunningMemory(Integer runningMemory) {
-        this.runningMemory = runningMemory;
-    }
-
-    public Integer getStorageMemoryType() {
-        return storageMemoryType;
-    }
-
-    public void setStorageMemoryType(Integer storageMemoryType) {
-        this.storageMemoryType = storageMemoryType;
-    }
-
-    public Integer getStorageMemorySize() {
-        return storageMemorySize;
-    }
-
-    public void setStorageMemorySize(Integer storageMemorySize) {
-        this.storageMemorySize = storageMemorySize;
-    }
-
-    public Integer getBodyWeight() {
-        return bodyWeight;
-    }
-
-    public void setBodyWeight(Integer bodyWeight) {
-        this.bodyWeight = bodyWeight;
-    }
-
-    public Integer getLifeTime() {
-        return lifeTime;
-    }
-
-    public void setLifeTime(Integer lifeTime) {
-        this.lifeTime = lifeTime;
-    }
-
-    public Integer getKeyBoardType() {
-        return keyBoardType;
-    }
-
-    public void setKeyBoardType(Integer keyBoardType) {
-        this.keyBoardType = keyBoardType;
-    }
-
-    public Integer getUnlockMode() {
-        return unlockMode;
-    }
-
-    public void setUnlockMode(Integer unlockMode) {
-        this.unlockMode = unlockMode;
+    public void setSound(String sound) {
+        this.sound = sound;
     }
 
     public String getCamera() {
@@ -161,20 +101,68 @@ public class Computer implements Serializable {
         this.camera = camera;
     }
 
-    public String getSoundSystem() {
-        return soundSystem;
+    public String getSpecification() {
+        return specification;
     }
 
-    public void setSoundSystem(String soundSystem) {
-        this.soundSystem = soundSystem;
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
-    public String getHeatDissipation() {
-        return heatDissipation;
+    public String getPeripheral() {
+        return peripheral;
     }
 
-    public void setHeatDissipation(String heatDissipation) {
-        this.heatDissipation = heatDissipation;
+    public void setPeripheral(String peripheral) {
+        this.peripheral = peripheral;
+    }
+
+    public String getInternet() {
+        return internet;
+    }
+
+    public void setInternet(String internet) {
+        this.internet = internet;
+    }
+
+    public String getScreen() {
+        return screen;
+    }
+
+    public void setScreen(String screen) {
+        this.screen = screen;
+    }
+
+    public String getEndurance() {
+        return endurance;
+    }
+
+    public void setEndurance(String endurance) {
+        this.endurance = endurance;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getAppearance1() {
@@ -201,72 +189,16 @@ public class Computer implements Serializable {
         this.appearance3 = appearance3;
     }
 
-    public String getScreen() {
-        return screen;
-    }
-
-    public void setScreen(String screen) {
-        this.screen = screen;
-    }
-
-    public Integer getNumOfInterfaces() {
-        return numOfInterfaces;
-    }
-
-    public void setNumOfInterfaces(Integer numOfInterfaces) {
-        this.numOfInterfaces = numOfInterfaces;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public Integer getLibrary() {
-        return library;
-    }
-
-    @Override
-    public String toString() {
-        return "Computer{" +
-                "productId=" + productId +
-                ", computerName='" + computerName + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", afterSalesAbility=" + afterSalesAbility +
-                ", premiumAbility=" + premiumAbility +
-                ", CPU='" + CPU + '\'' +
-                ", GPU='" + GPU + '\'' +
-                ", runningMemory=" + runningMemory +
-                ", storageMemoryType=" + storageMemoryType +
-                ", storageMemorySize=" + storageMemorySize +
-                ", bodyWeight=" + bodyWeight +
-                ", lifeTime=" + lifeTime +
-                ", keyBoardType=" + keyBoardType +
-                ", unlockMode=" + unlockMode +
-                ", camera='" + camera + '\'' +
-                ", soundSystem='" + soundSystem + '\'' +
-                ", heatDissipation='" + heatDissipation + '\'' +
-                ", appearance1='" + appearance1 + '\'' +
-                ", appearance2='" + appearance2 + '\'' +
-                ", appearance3='" + appearance3 + '\'' +
-                ", screen='" + screen + '\'' +
-                ", numOfInterfaces=" + numOfInterfaces +
-                ", productCategory='" + productCategory + '\'' +
-                ", productType=" + productType +
-                ", library=" + library +
-                ", productAnalysis='" + productAnalysis + '\'' +
-                '}';
-    }
-
     public int getProductType() {
         return productType;
     }
 
     public void setProductType(int productType) {
         this.productType = productType;
+    }
+
+    public Integer getLibrary() {
+        return library;
     }
 
     public void setLibrary(Integer library) {
@@ -281,4 +213,31 @@ public class Computer implements Serializable {
         this.productAnalysis = productAnalysis;
     }
 
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "productId=" + productId +
+                ", brand='" + brand + '\'' +
+                ", conPerformance='" + conPerformance + '\'' +
+                ", gamePerformance='" + gamePerformance + '\'' +
+                ", interfaces='" + interfaces + '\'' +
+                ", storage='" + storage + '\'' +
+                ", sound='" + sound + '\'' +
+                ", camera='" + camera + '\'' +
+                ", specification='" + specification + '\'' +
+                ", peripheral='" + peripheral + '\'' +
+                ", internet='" + internet + '\'' +
+                ", screen='" + screen + '\'' +
+                ", endurance='" + endurance + '\'' +
+                ", other='" + other + '\'' +
+                ", price=" + price +
+                ", url='" + url + '\'' +
+                ", appearance1='" + appearance1 + '\'' +
+                ", appearance2='" + appearance2 + '\'' +
+                ", appearance3='" + appearance3 + '\'' +
+                ", productType=" + productType +
+                ", library=" + library +
+                ", productAnalysis='" + productAnalysis + '\'' +
+                '}';
+    }
 }
