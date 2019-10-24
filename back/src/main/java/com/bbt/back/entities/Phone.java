@@ -11,32 +11,23 @@ public class Phone implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer productId;
-    private String phoneName;
-    private String vendor;
-    private Integer afterSalesAbility;
-    private Integer premiumAbility;
+    private String brand;
+    private String productName;
+    private String performance;
+    private String interfaces;
     private String frontCamera;
     private String rearCamera;
-    private Integer cameraCapability;
-    private String screenSurface;
-    private String fingerprintModule;
-    private String bodyColor;
-    private String picture1;
-    private String picture2;
-    private String picture3;
-    private Integer bodyWeight;
-    private Integer bodyMaterial;
-    private Integer resolution;
-    private String screenManufacturer;
-    private Integer batteryCapacity;
-    private String chargingSpeed;
-    private String actualPerformance;
-    private String headphonePlug;
-    private String waterproofLevel;
-    private Integer salesVolume;
-    private String chip;
-    private String speaker;
-    private String productCategory;
+    private String photoFeatures;
+    private String body;
+    private String communication;
+    private String endurance;
+    private String screen;
+    private String other;
+    private Double price;
+    private String url;
+    private String appearance1;
+    private String appearance2;
+    private String appearance3;
     private int productType;
     private Integer library;
     private String productAnalysis;
@@ -53,36 +44,36 @@ public class Phone implements Serializable {
         this.productId = productId;
     }
 
-    public String getPhoneName() {
-        return phoneName;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setPhoneName(String phoneName) {
-        this.phoneName = phoneName;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getVendor() {
-        return vendor;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public Integer getAfterSalesAbility() {
-        return afterSalesAbility;
+    public String getPerformance() {
+        return performance;
     }
 
-    public void setAfterSalesAbility(Integer afterSalesAbility) {
-        this.afterSalesAbility = afterSalesAbility;
+    public void setPerformance(String performance) {
+        this.performance = performance;
     }
 
-    public Integer getPremiumAbility() {
-        return premiumAbility;
+    public String getInterfaces() {
+        return interfaces;
     }
 
-    public void setPremiumAbility(Integer premiumAbility) {
-        this.premiumAbility = premiumAbility;
+    public void setInterfaces(String interfaces) {
+        this.interfaces = interfaces;
     }
 
     public String getFrontCamera() {
@@ -101,164 +92,92 @@ public class Phone implements Serializable {
         this.rearCamera = rearCamera;
     }
 
-    public Integer getCameraCapability() {
-        return cameraCapability;
+    public String getPhotoFeatures() {
+        return photoFeatures;
     }
 
-    public void setCameraCapability(Integer cameraCapability) {
-        this.cameraCapability = cameraCapability;
+    public void setPhotoFeatures(String photoFeatures) {
+        this.photoFeatures = photoFeatures;
     }
 
-    public String getScreenSurface() {
-        return screenSurface;
+    public String getBody() {
+        return body;
     }
 
-    public void setScreenSurface(String screenSurface) {
-        this.screenSurface = screenSurface;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getFingerprintModule() {
-        return fingerprintModule;
+    public String getCommunication() {
+        return communication;
     }
 
-    public void setFingerprintModule(String fingerprintModule) {
-        this.fingerprintModule = fingerprintModule;
+    public void setCommunication(String communication) {
+        this.communication = communication;
     }
 
-    public String getBodyColor() {
-        return bodyColor;
+    public String getEndurance() {
+        return endurance;
     }
 
-    public void setBodyColor(String bodyColor) {
-        this.bodyColor = bodyColor;
+    public void setEndurance(String endurance) {
+        this.endurance = endurance;
     }
 
-    public String getPicture1() {
-        return picture1;
+    public String getScreen() {
+        return screen;
     }
 
-    public void setPicture1(String picture1) {
-        this.picture1 = picture1;
+    public void setScreen(String screen) {
+        this.screen = screen;
     }
 
-    public String getPicture2() {
-        return picture2;
+    public String getOther() {
+        return other;
     }
 
-    public void setPicture2(String picture2) {
-        this.picture2 = picture2;
+    public void setOther(String other) {
+        this.other = other;
     }
 
-    public String getPicture3() {
-        return picture3;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPicture3(String picture3) {
-        this.picture3 = picture3;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public Integer getBodyWeight() {
-        return bodyWeight;
+    public String getUrl() {
+        return url;
     }
 
-    public void setBodyWeight(Integer bodyWeight) {
-        this.bodyWeight = bodyWeight;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public Integer getBodyMaterial() {
-        return bodyMaterial;
+    public String getAppearance1() {
+        return appearance1;
     }
 
-    public void setBodyMaterial(Integer bodyMaterial) {
-        this.bodyMaterial = bodyMaterial;
+    public void setAppearance1(String appearance1) {
+        this.appearance1 = appearance1;
     }
 
-    public Integer getResolution() {
-        return resolution;
+    public String getAppearance2() {
+        return appearance2;
     }
 
-    public void setResolution(Integer resolution) {
-        this.resolution = resolution;
+    public void setAppearance2(String appearance2) {
+        this.appearance2 = appearance2;
     }
 
-    public String getScreenManufacturer() {
-        return screenManufacturer;
+    public String getAppearance3() {
+        return appearance3;
     }
 
-    public void setScreenManufacturer(String screenManufacturer) {
-        this.screenManufacturer = screenManufacturer;
-    }
-
-    public Integer getBatteryCapacity() {
-        return batteryCapacity;
-    }
-
-    public void setBatteryCapacity(Integer batteryCapacity) {
-        this.batteryCapacity = batteryCapacity;
-    }
-
-    public String getChargingSpeed() {
-        return chargingSpeed;
-    }
-
-    public void setChargingSpeed(String chargingSpeed) {
-        this.chargingSpeed = chargingSpeed;
-    }
-
-    public String getActualPerformance() {
-        return actualPerformance;
-    }
-
-    public void setActualPerformance(String actualPerformance) {
-        this.actualPerformance = actualPerformance;
-    }
-
-    public String getHeadphonePlug() {
-        return headphonePlug;
-    }
-
-    public void setHeadphonePlug(String headphonePlug) {
-        this.headphonePlug = headphonePlug;
-    }
-
-    public String getWaterproofLevel() {
-        return waterproofLevel;
-    }
-
-    public void setWaterproofLevel(String waterproofLevel) {
-        this.waterproofLevel = waterproofLevel;
-    }
-
-    public Integer getSalesVolume() {
-        return salesVolume;
-    }
-
-    public void setSalesVolume(Integer salesVolume) {
-        this.salesVolume = salesVolume;
-    }
-
-    public String getChip() {
-        return chip;
-    }
-
-    public void setChip(String chip) {
-        this.chip = chip;
-    }
-
-    public String getSpeaker() {
-        return speaker;
-    }
-
-    public void setSpeaker(String speaker) {
-        this.speaker = speaker;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setAppearance3(String appearance3) {
+        this.appearance3 = appearance3;
     }
 
     public int getProductType() {
@@ -289,32 +208,23 @@ public class Phone implements Serializable {
     public String toString() {
         return "Phone{" +
                 "productId=" + productId +
-                ", phoneName='" + phoneName + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", afterSalesAbility=" + afterSalesAbility +
-                ", premiumAbility=" + premiumAbility +
+                ", brand='" + brand + '\'' +
+                ", productName='" + productName + '\'' +
+                ", performance='" + performance + '\'' +
+                ", interfaces='" + interfaces + '\'' +
                 ", frontCamera='" + frontCamera + '\'' +
                 ", rearCamera='" + rearCamera + '\'' +
-                ", cameraCapability=" + cameraCapability +
-                ", screenSurface='" + screenSurface + '\'' +
-                ", fingerprintModule='" + fingerprintModule + '\'' +
-                ", bodyColor='" + bodyColor + '\'' +
-                ", picture1='" + picture1 + '\'' +
-                ", picture2='" + picture2 + '\'' +
-                ", picture3='" + picture3 + '\'' +
-                ", bodyWeight=" + bodyWeight +
-                ", bodyMaterial=" + bodyMaterial +
-                ", resolution=" + resolution +
-                ", screenManufacturer='" + screenManufacturer + '\'' +
-                ", batteryCapacity=" + batteryCapacity +
-                ", chargingSpeed='" + chargingSpeed + '\'' +
-                ", actualPerformance='" + actualPerformance + '\'' +
-                ", headphonePlug='" + headphonePlug + '\'' +
-                ", waterproofLevel='" + waterproofLevel + '\'' +
-                ", salesVolume=" + salesVolume +
-                ", chip='" + chip + '\'' +
-                ", speaker='" + speaker + '\'' +
-                ", productCategory='" + productCategory + '\'' +
+                ", photoFeatures='" + photoFeatures + '\'' +
+                ", body='" + body + '\'' +
+                ", communication='" + communication + '\'' +
+                ", endurance='" + endurance + '\'' +
+                ", screen='" + screen + '\'' +
+                ", other='" + other + '\'' +
+                ", price=" + price +
+                ", url='" + url + '\'' +
+                ", appearance1='" + appearance1 + '\'' +
+                ", appearance2='" + appearance2 + '\'' +
+                ", appearance3='" + appearance3 + '\'' +
                 ", productType=" + productType +
                 ", library=" + library +
                 ", productAnalysis='" + productAnalysis + '\'' +

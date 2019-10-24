@@ -3,28 +3,24 @@
 <mapper namespace="com.bbt.back.dao.ComputerDao">
     <resultMap id="computerMap" type="com.bbt.back.entities.Computer">
         <id column="product_id" property="productId" />
-        <result column="computer_name" property="computerName" />
-        <result column="vendor" property="vendor" />
-        <result column="after_sales_ability" property="afterSalesAbility" />
-        <result column="premium_ability" property="premiumAbility" />
-        <result column="cpu" property="CPU" />
-        <result column="gpu" property="GPU" />
-        <result column="running_memory" property="runningMemory" />
-        <result column="storage_memory_type" property="storageMemoryType" />
-        <result column="storage_memory_size" property="storageMemorySize" />
-        <result column="body_weight" property="bodyWeight" />
-        <result column="life_time" property="lifeTime" />
-        <result column="keyboard_type" property="keyBoardType" />
-        <result column="unlock_mode" property="unlockMode" />
+        <result column="brand" property="brand" />
+        <result column="con_performance" property="conPerformance" />
+        <result column="game_performance" property="gamePerformance" />
+        <result column="interfaces" property="interfaces" />
+        <result column="storage" property="storage" />
+        <result column="sound" property="sound" />
         <result column="camera" property="camera" />
-        <result column="sound_system" property="soundSystem" />
-        <result column="heat_dissipation" property="heatDissipation" />
+        <result column="specification" property="specification" />
+        <result column="internet" property="internet" />
+        <result column="screen" property="screen" />
+        <result column="endurance" property="endurance" />
+        <result column="other" property="other" />
+        <result column="price" property="price" />
+        <result column="url" property="url" />
         <result column="appearance1" property="appearance1" />
         <result column="appearance2" property="appearance2" />
         <result column="appearance3" property="appearance3" />
-        <result column="screen" property="screen" />
-        <result column="interface_num" property="numOfInterfaces" />
-        <result column="product_category" property="productCategory" />
+        <result column="product_type" property="product_type" />
         <result column="library" property="library" />
         <result column="product_analysis" property="productAnalysis" />
     </resultMap>
@@ -35,41 +31,38 @@
     </delete>
 
     <insert id="insertComputer" parameterType="com.bbt.back.entities.Computer">
-    insert into `computer` (computer_name, vendor, after_sales_ability,
-      premium_ability, cpu, gpu, running_memory, storage_memory_type, storage_memory_size,
-      body_weight, life_time, keyboard_type, unlock_mode, camera, sound_system,
-      heat_dissipation, appearance1, appearance2, appearance3, screen, interface_num, product_category,
+    insert into `computer` (brand, con_performance, game_performance,
+      interfaces, storage, sound, camera, specification, peripheral,
+      internet, screen, endurance, other, price, url,
+      appearance1, appearance2, appearance3, screen, product_type,
       library, product_analysis)
-    values (#{computerName}, #{vendor}, #{afterSalesAbility}, #{premiumAbility}, #{CPU}, #{GPU}, #{runningMemory}, #{storageMemoryType},
-            #{storageMemorySize}, #{bodyWeight}, #{lifeTime}, #{keyBoardType}, #{unlockMode}, #{camera}, #{soundSystem}, #{heatDissipation},
-            #{appearance1}, #{appearance2}, #{appearance3}, #{screen}, #{numOfInterfaces}, #{productCategory}, #{library}, #{productAnalysis})
+    values (#{brand}, #{conPerformance}, #{gamePerformance}, #{interfaces}, #{storage}, #{sound}, #{camera}, #{specification},
+            #{peripheral}, #{internet}, #{screen}, #{endurance}, #{other}, #{price}, #{url}, #{appearance1}, #{appearance2},
+            #{appearance3}, #{productType}, #{library}, #{productAnalysis})
   </insert>
 
     <update id="updateComputer" parameterType="com.bbt.back.entities.Computer">
         update `computer`
         <set>
-            <if test="computerName != null and computerName != ''"> computer_name = #{computerName},</if>
-            <if test="vendor != null and vendor != ''"> vendor = #{vendor},</if>
-            <if test="afterSalesAbility != null and afterSalesAbility != ''"> after_sales_ability = #{afterSalesAbility},</if>
-            <if test="premiumAbility != null and premiumAbility != ''"> premium_ability = #{premiumAbility},</if>
-            <if test="CPU != null and CPU != ''"> cpu = #{CPU},</if>
-            <if test="GPU != null and GPU != ''"> gpu = #{GPU},</if>
-            <if test="runningMemory != null and runningMemory != ''"> running_memory = #{runningMemory},</if>
-            <if test="storageMemoryType != null and storageMemoryType != ''"> storage_memory_type = #{storageMemoryType},</if>
-            <if test="storageMemorySize != null and storageMemorySize != ''"> storage_memory_size = #{storageMemorySize},</if>
-            <if test="bodyWeight != null and bodyWeight != ''"> body_weight = #{bodyWeight},</if>
-            <if test="lifeTime != null and lifeTime != ''"> life_time = #{lifeTime},</if>
-            <if test="keyBoardType != null and keyBoardType != ''"> keyboard_type = #{keyBoardType},</if>
-            <if test="unlockMode != null and unlockMode != ''"> unlock_mode = #{unlockMode},</if>
+            <if test="brand != null and brand != ''"> brand = #{brand},</if>
+            <if test="conPerformance != null and conPerformance != ''"> con_performance = #{conPerformance},</if>
+            <if test="gamePerformance != null and gamePerformance != ''"> game_performance = #{gamePerformance},</if>
+            <if test="interfaces != null and interfaces != ''"> interfaces = #{interfaces},</if>
+            <if test="storage != null and storage != ''"> storage = #{storage},</if>
+            <if test="sound != null and sound != ''"> sound = #{sound},</if>
             <if test="camera != null and camera != ''"> camera = #{camera},</if>
-            <if test="soundSystem != null and soundSystem != ''"> sound_system = #{soundSystem},</if>
-            <if test="heatDissipation != null and heatDissipation != ''"> heat_dissipation = #{heatDissipation},</if>
+            <if test="specification != null and specification != ''"> specification = #{specification},</if>
+            <if test="peripheral != null and peripheral != ''"> peripheral = #{peripheral},</if>
+            <if test="internet != null and internet != ''"> internet = #{internet},</if>
+            <if test="screen != null and screen != ''"> screen = #{screen},</if>
+            <if test="endurance != null and endurance != ''"> endurance = #{endurance},</if>
+            <if test="other != null and other != ''"> other = #{other},</if>
+            <if test="price != null and price != ''"> price = #{price},</if>
+            <if test="url != null and url != ''"> url = #{url},</if>
             <if test="appearance1 != null and appearance1 != ''"> appearance1 = #{appearance1},</if>
             <if test="appearance2 != null and appearance2 != ''"> appearance2 = #{appearance2},</if>
             <if test="appearance3 != null and appearance3 != ''"> appearance3 = #{appearance3},</if>
-            <if test="screen != null and screen != ''"> screen = #{screen},</if>
-            <if test="numOfInterfaces != null and numOfInterfaces != ''"> interface_num = #{numOfInterfaces},</if>
-            <if test="productCategory != null and productCategory != ''"> product_category = #{productCategory},</if>
+            <if test="product_type != null and product_type != ''"> product_type = #{productType},</if>
             <if test="library != null and library != ''"> library = #{library},</if>
             <if test="productAnalysis != null and productAnalysis != ''"> product_analysis = #{productAnalysis}</if>
         </set>
