@@ -92,7 +92,7 @@ CREATE TABLE `computer`  (
   `appearance1` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观1',
   `appearance2` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观2',
   `appearance3` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观3',
-  `product_type` int(11) NULL DEFAULT NULL COMMENT '所属类型',
+  `product_type` int(11) DEFAULT 1 COMMENT '所属类型',
   `library` int(11) NULL DEFAULT NULL COMMENT '所属库',
   `product_analysis` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
@@ -134,7 +134,7 @@ CREATE TABLE `phone`  (
   `appearance1` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观1',
   `appearance2` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观2',
   `appearance3` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观3',
-  `product_type` int(11) NULL DEFAULT NULL COMMENT '所属类型',
+  `product_type` int(11) DEFAULT 0 COMMENT '所属类型',
   `library` int(11) NULL DEFAULT NULL COMMENT '所属库',
   `product_analysis` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
