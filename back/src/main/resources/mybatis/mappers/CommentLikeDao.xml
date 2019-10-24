@@ -10,7 +10,8 @@
 
     <delete id="deleteCommentLike" parameterType="java.lang.Integer">
       delete from `comment_like`
-      where comment_like_id = #{commentLikeId}
+      where user_id = #{userId} AND
+      comment_id = #{commentId}
     </delete>
 
     <insert id="insertCommentLike" parameterType="com.bbt.back.entities.CommentLike">

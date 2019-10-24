@@ -99,18 +99,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int likeProduct(ProductLikeObject likeObject,Integer userId) {
         UserLike userLike=userLikeDao.findByProductIdAndType(userId,likeObject.getProductId(),likeObject.getType());
+        ProductLike productLike=productLikeDao.findByProductIdAndType(likeObject.getProductId(),likeObject.getType());
+        int oldNum=productLike.getLikeNum();
+        //首先判断用户是否点赞
         if (userLike==null){
             userLike=new UserLike(userId,likeObject.getProductId(),likeObject.getType(),new Date());
             userLikeDao.insertUserLike(userLike);
         }else {
+            userLikeDao.deleteUserLike(userId,likeObject.getProductId(),likeObject.getType());
+            productLike.setLikeNum(oldNum-1);
+            productLikeDao.updateProductLike(productLike);
             return -1;
         }
-        ProductLike productLike=productLikeDao.findByProductIdAndType(likeObject.getProductId(),likeObject.getType());
         if (productLike==null){
             productLike=new ProductLike(likeObject.getProductId(),likeObject.getType(),1);
             productLikeDao.insertProductLike(productLike);
         }else {
-            int oldNum=productLike.getLikeNum();
             productLike.setLikeNum(oldNum+1);
             productLikeDao.updateProductLike(productLike);
         }

@@ -1,6 +1,7 @@
 package com.bbt.back.dao;
 
 import com.bbt.back.entities.UserLike;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,5 +13,8 @@ import org.springframework.stereotype.Component;
 public interface UserLikeDao {
     int insertUserLike(UserLike userLike);
 
-    UserLike findByProductIdAndType(int userId, int productId, int productType);
+    UserLike findByProductIdAndType(@Param("userId")int userId, @Param("productId")int productId, @Param("productType")int productType);
+
+
+    int deleteUserLike(@Param("userId")int userId,@Param("productId") int productId, @Param("productType")int productType);
 }

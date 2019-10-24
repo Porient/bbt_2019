@@ -83,8 +83,11 @@ public class CommentController {
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request, "userId");
         int commentId = HttpServletRequestUtil.getInt(request, "commentId");
-        commentService.likeComment(userId,commentId);
-        resultEntity.setMsg("点赞评论成功");
+        if(commentService.likeComment(userId,commentId)==1){
+            resultEntity.setMsg("点赞评论成功");
+        }else {
+            resultEntity.setMsg("取消点赞评论成功");
+        }
         return resultEntity;
     }
 }

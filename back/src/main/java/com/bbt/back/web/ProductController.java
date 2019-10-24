@@ -112,8 +112,11 @@ public class ProductController {
         String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
         ObjectMapper mapper = new ObjectMapper();
         ProductLikeObject likeObject = mapper.readValue(likeObjectStr,ProductLikeObject.class);
-        productService.likeProduct(likeObject,userId);
-        resultEntity.setMsg("点赞成功");
+        if(productService.likeProduct(likeObject,userId)==1){
+            resultEntity.setMsg("点赞成功");
+        }else{
+            resultEntity.setMsg("点赞取消");
+        }
         return resultEntity;
     }
 

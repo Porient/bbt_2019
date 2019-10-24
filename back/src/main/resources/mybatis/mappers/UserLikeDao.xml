@@ -11,7 +11,9 @@
 
     <delete id="deleteUserLike" parameterType="java.lang.Integer">
       delete from `user_like`
-      where user_like_id = #{userLikeId}
+      where user_id = #{userId} AND
+      product_id = #{productId} AND
+      product_type = #{productType}
     </delete>
 
     <insert id="insertUserLike" parameterType="com.bbt.back.entities.UserLike">

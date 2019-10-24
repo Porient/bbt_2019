@@ -14,4 +14,6 @@ public interface CommentLikeDao {
     int insertCommentLike(CommentLike commentLike);
 
     CommentLike findByUserIdAndCommentId(@Param("userId")int userId,@Param("commentId") int commentId);
+
+    int deleteCommentLike(@Param("userId")int userId,@Param("commentId") int commentId);
 }

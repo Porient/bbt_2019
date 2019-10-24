@@ -75,14 +75,17 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int likeComment(int userId, int commentId) {
         CommentLike commentLike=commentLikeDao.findByUserIdAndCommentId(userId,commentId);
+        Comment comment=commentDao.findCommentById(commentId);
+        int oldNum=comment.getLikeNum();
         if (commentLike==null){
             commentLike=new CommentLike(userId,commentId,new Date());
             commentLikeDao.insertCommentLike(commentLike);
         }else {
+            commentLikeDao.deleteCommentLike(userId,commentId);
+            comment.setLikeNum(oldNum-1);
+            commentDao.updateComment(comment);
             return -1;
         }
-        Comment comment=commentDao.findCommentById(commentId);
-        int oldNum=comment.getLikeNum();
         comment.setLikeNum(oldNum+1);
         commentDao.updateComment(comment);
         return 1;
