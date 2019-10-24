@@ -29,19 +29,6 @@ CREATE TABLE `admin`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for attitude
--- ----------------------------
-DROP TABLE IF EXISTS `attitude`;
-CREATE TABLE `attitude`  (
-  `attitude_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户态度id',
-  `user_id` int(11) NOT NULL COMMENT '用户id',
-  `product_id` int(11) NOT NULL COMMENT '产品id',
-  `product_type` int(11) NOT NULL COMMENT '产品类型',
-  `attitude` int(11) NOT NULL COMMENT '机会id',
-  PRIMARY KEY (`attitude_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for collect
 -- ----------------------------
 DROP TABLE IF EXISTS `collect`;
