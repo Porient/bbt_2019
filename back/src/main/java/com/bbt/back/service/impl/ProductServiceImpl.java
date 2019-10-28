@@ -4,10 +4,13 @@ import com.bbt.back.dao.ComputerDao;
 import com.bbt.back.dao.PhoneDao;
 import com.bbt.back.dao.ProductLikeDao;
 import com.bbt.back.dao.UserLikeDao;
+import com.bbt.back.entities.Computer;
+import com.bbt.back.entities.Phone;
 import com.bbt.back.entities.ProductLike;
 import com.bbt.back.entities.UserLike;
 import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
+import com.bbt.back.model.ProductResult;
 import com.bbt.back.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -130,5 +133,20 @@ public class ProductServiceImpl implements ProductService {
         } else {
             return computerDao.selectByProductId(likeObject.getProductId());
         }
+    }
+
+    @Override
+    public ProductResult findByProductIdAndType(ProductLikeObject likeObject) {
+        ProductResult productResult =new ProductResult();
+        if (likeObject.getType()==0){
+            Phone phone=phoneDao.findPhoneById(likeObject.getProductId());
+            productResult.setProductName(phone.getProductName());
+            productResult.setProductPicture(phone.getAppearance1());
+        }else {
+            Computer computer = computerDao.findComputerById(likeObject.getProductId());
+            productResult.setProductName(computer.getBrand());
+            productResult.setProductPicture(computer.getAppearance1());
+        }
+        return productResult;
     }
 }

@@ -49,6 +49,11 @@
       select count(1)
       from `collect` c
       where c.user_id = #{userId}
-      GROUP BY user_id
+    </select>
+
+    <select id="sumByUserIdList" resultType="java.util.HashMap">
+        SELECT user_id as 'key', count(1) as 'value'
+        FROM comment
+        GROUP BY user_id;
     </select>
 </mapper>

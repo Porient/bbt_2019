@@ -20,6 +20,9 @@
         <result column="appearance1" property="appearance1" />
         <result column="appearance2" property="appearance2" />
         <result column="appearance3" property="appearance3" />
+        <result column="tag1" property="tag1" />
+        <result column="tag2" property="tag2" />
+        <result column="tag3" property="tag3" />
         <result column="product_type" property="product_type" />
         <result column="library" property="library" />
         <result column="product_analysis" property="productAnalysis" />
@@ -34,11 +37,11 @@
     insert into `phone` (brand, product_name, performance,
       interfaces, front_camera, rear_camera, photo_features, body, communication,
       endurance, screen, other, price, url,
-      appearance1, appearance2, appearance3, screen, product_type,
+      appearance1, appearance2, appearance3, tag1, tag2, tag3, screen, product_type,
       library, product_analysis)
     values (#{brand}, #{productName}, #{performance}, #{interfaces}, #{frontCamera}, #{rearCamera}, #{photoFeatures}, #{body},
             #{communication}, #{endurance}, #{screen}, #{other}, #{price}, #{url}, #{appearance1}, #{appearance2},
-            #{appearance3}, #{productType}, #{library}, #{productAnalysis})
+            #{appearance3}, #{tag1}, #{tag2}, #{tag3}, #{productType}, #{library}, #{productAnalysis})
   </insert>
 
     <update id="updatePhone" parameterType="com.bbt.back.entities.Phone">
@@ -60,6 +63,9 @@
             <if test="appearance1 != null and appearance1 != ''"> appearance1 = #{appearance1},</if>
             <if test="appearance2 != null and appearance2 != ''"> appearance2 = #{appearance2},</if>
             <if test="appearance3 != null and appearance3 != ''"> appearance3 = #{appearance3},</if>
+            <if test="tag1 != null and tag1 != ''"> tag1 = #{tag1},</if>
+            <if test="tag2 != null and tag2 != ''"> tag2 = #{tag2},</if>
+            <if test="tag3 != null and tag3 != ''"> tag3 = #{tag3},</if>
             <if test="product_type != null and product_type != ''"> product_type = #{productType},</if>
             <if test="library != null and library != ''"> library = #{library},</if>
             <if test="productAnalysis != null and productAnalysis != ''"> product_analysis = #{productAnalysis}</if>

@@ -3,6 +3,7 @@ package com.bbt.back.dao;
 import com.bbt.back.entities.Collect;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,4 +26,6 @@ public interface CollectDao {
     List<Collect> selectByUserId(int userId);
 
     int countByUserId(int userId);
+
+    List<HashMap<Integer,Object>> sumByUserIdList();
 }

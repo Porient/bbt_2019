@@ -9,7 +9,6 @@
         <result column="product_name" property="productName" />
         <result column="product_picture" property="productPicture" />
         <result column="browse_time" property="browseTime" />
-        <result column="browse_num" property="browseNum" />
     </resultMap>
 
     <delete id="deleteRecord" parameterType="java.lang.Integer">
@@ -18,8 +17,8 @@
     </delete>
 
     <insert id="insertRecord" parameterType="com.bbt.back.entities.Record">
-      insert into `record` (user_id, product_id,  product_Type, product_name, product_picture, browse_time, browse_num)
-      values (#{userId}, #{productId}, #{productType}, #{productName}, #{productPicture}, #{browseTime}, #{browseNum})
+      insert into `record` (user_id, product_id,  product_Type, product_name, product_picture, browse_time)
+      values (#{userId}, #{productId}, #{productType}, #{productName}, #{productPicture}, #{browseTime})
     </insert>
 
     <update id="updateRecord" parameterType="com.bbt.back.entities.Record">
@@ -30,8 +29,7 @@
             <if test="productType != null and productType != ''"> product_type = #{productType},</if>
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
             <if test="productPicture != null and productPicture != ''"> product_picture = #{productPicture},</if>
-            <if test="browseTime != null and browseTime != ''"> browse_time = #{browseTime},</if>
-            <if test="browseNum != null and browseNum != ''"> browse_num = #{browseNum}</if>
+            <if test="browseTime != null and browseTime != ''"> browse_time = #{browseTime}</if>
         </set>
         where record_id = #{recordId}
     </update>
@@ -51,5 +49,30 @@
       select r.*
       from `record` r
       where r.user_id = #{userId}
+    </select>
+
+    <select id="findRecordNumByUserId" parameterType="java.lang.Integer" resultMap="recordMap">
+      select count (1)
+      from `record` r
+      where r.user_id = #{userId}
+    </select>
+
+    <select id="findProductNumByUserIdAndType" parameterType="java.lang.Integer" resultMap="recordMap">
+      select count (1)
+      from `record` r
+      where r.user_id = #{userId} AND
+      product_type = #{productType}
+    </select>
+
+    <select id="sumByUserIdList" resultType="java.util.HashMap">
+        SELECT record_id as 'key', count(1) as 'value'
+        FROM record
+        GROUP BY user_id;
+    </select>
+
+    <select id="sumByTimeList" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(CheckTime,'%Y-%m-%d') as 'key', count(1) as 'value'
+        FROM record
+        GROUP BY 'key';
     </select>
 </mapper>

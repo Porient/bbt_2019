@@ -18,7 +18,19 @@ public class Record implements Serializable {
     private String productName;
     private String productPicture;
     private Date browseTime;
-    private Integer browseNum;
+
+    public Record(){
+
+    }
+
+    public Record(Integer userId, Integer productId, Integer productType, String productName, String productPicture, Date browseTime) {
+        this.userId = userId;
+        this.productId = productId;
+        this.productType = productType;
+        this.productName = productName;
+        this.productPicture = productPicture;
+        this.browseTime = browseTime;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -72,14 +84,6 @@ public class Record implements Serializable {
         this.browseTime = browseTime;
     }
 
-    public Integer getBrowseNum() {
-        return browseNum;
-    }
-
-    public void setBrowseNum(Integer browseNum) {
-        this.browseNum = browseNum;
-    }
-
     public Integer getProductType() {
         return productType;
     }
@@ -98,7 +102,6 @@ public class Record implements Serializable {
                 ", productName='" + productName + '\'' +
                 ", productPicture='" + productPicture + '\'' +
                 ", browseTime=" + browseTime +
-                ", browseNum=" + browseNum +
                 '}';
     }
 }

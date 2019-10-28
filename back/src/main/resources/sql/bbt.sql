@@ -164,7 +164,6 @@ CREATE TABLE `record`  (
   `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
   `product_picture` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品缩略图',
   `browse_time` datetime(0) NOT NULL COMMENT '浏览时间',
-  `browse_num` int(11) NOT NULL COMMENT '浏览次数',
   PRIMARY KEY (`record_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

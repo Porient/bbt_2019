@@ -46,20 +46,6 @@ public class RecordController {
         return resultEntity;
     }
 
-    @RequestMapping("/add")
-    private Object addRecord(HttpServletRequest request) throws IOException {
-        ResultEntity resultEntity = new ResultEntity();
-        String recordStr = HttpServletRequestUtil.getString(request,"recordStr");
-        ObjectMapper mapper = new ObjectMapper();
-        Record record = mapper.readValue(recordStr,Record.class);
-        if (recordService.addRecord(record) == 0){
-            resultEntity.setMsg("添加成功");
-        } else {
-            resultEntity.setMsg("添加失败");
-        }
-        return resultEntity;
-    }
-
     @RequestMapping("/detail")
     private Object getRecordDetail(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();

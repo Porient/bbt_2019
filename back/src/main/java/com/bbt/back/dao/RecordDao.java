@@ -1,8 +1,10 @@
 package com.bbt.back.dao;
 
 import com.bbt.back.entities.Record;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,4 +26,12 @@ public interface RecordDao {
 
     //新增
     List<Record> selectByUserId(int userId);
+
+    Integer findRecordNumByUserId(Integer userId);
+
+    Integer findProductNumByUserIdAndType(@Param("userId")Integer userId ,@Param("productType") Integer productType);
+
+    List<HashMap<Integer,Object>> sumByUserIdList();
+
+    List<HashMap<String,Object>> sumByTimeList();
 }

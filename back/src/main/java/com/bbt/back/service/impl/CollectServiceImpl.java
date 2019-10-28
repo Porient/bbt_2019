@@ -1,14 +1,19 @@
 package com.bbt.back.service.impl;
 
 import com.bbt.back.dao.CollectDao;
+import com.bbt.back.dao.ComputerDao;
+import com.bbt.back.dao.PhoneDao;
 import com.bbt.back.entities.Collect;
+import com.bbt.back.entities.Computer;
+import com.bbt.back.entities.Phone;
+import com.bbt.back.entities.Record;
 import com.bbt.back.service.CollectService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @Description:
@@ -19,11 +24,10 @@ import java.util.List;
 public class CollectServiceImpl implements CollectService {
     @Autowired
     private CollectDao collectDao;
-
-    @Override
-    public int countByUserId(int userId) {
-        return collectDao.countByUserId(userId);
-    }
+    @Autowired
+    private ComputerDao computerDao;
+    @Autowired
+    private PhoneDao phoneDao;
 
     @Override
     public PageInfo<Collect> selectAllByUserId(int userId, Integer pageNum, Integer pageSize) {
@@ -43,5 +47,100 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public int deleteCollect(int collectId) {
         return collectDao.deleteCollect(collectId);
+    }
+
+    @Override
+    public Integer findCollectNumByUserId(Integer userId) {
+        return collectDao.countByUserId(userId);
+    }
+
+    @Override
+    public Integer rankByUserId(Integer userId) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Integer rank=-1;
+        List<HashMap<Integer, Object>> list = collectDao.sumByUserIdList();
+        if (list != null && !list.isEmpty()) {
+            for (HashMap<Integer, Object> map1 : list) {
+                Integer key = null;
+                Integer value = null;
+                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
+                    if ("key".equals(entry.getKey())) {
+                        key = (Integer) entry.getValue();
+                    } else if ("value".equals(entry.getKey())) {
+                        value = (Integer) entry.getValue();
+                    }
+                }
+                map.put(key, value);
+            }
+        }
+
+        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            sortList.add(entry); //将map中的元素放入list中
+        }
+
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+
+        for (int i = 0; i < sortList.size(); i++) {
+            if(sortList.get(i).getKey()==userId){
+                rank=i+1;
+                break;
+            }
+        }
+        return rank;
+    }
+
+    @Override
+    public HashMap<String, Integer> sumByUserId(Integer userId) {
+        Map<Integer, Integer> map = new HashMap<>();
+        HashMap<String, Integer> result = new HashMap<>();
+        List<HashMap<Integer, Object>> list = collectDao.sumByUserIdList();
+        if (list != null && !list.isEmpty()) {
+            for (HashMap<Integer, Object> map1 : list) {
+                Integer key = null;
+                Integer value = null;
+                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
+                    if ("key".equals(entry.getKey())) {
+                        key = (Integer) entry.getValue();
+                    } else if ("value".equals(entry.getKey())) {
+                        value = (Integer) entry.getValue();
+                    }
+                }
+                map.put(key, value);
+            }
+        }
+
+        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            sortList.add(entry); //将map中的元素放入list中
+        }
+
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+
+        for (int i=0;i<sortList.size();i++){
+            Integer recordId =sortList.get(i).getKey();
+            Collect collect=collectDao.findCollectById(recordId);
+            String productName="";
+            if(collect.getProductType()==0){
+                Phone phone = phoneDao.findPhoneById(collect.getProductId());
+                productName=phone.getProductName();
+            }else {
+                Computer computer = computerDao.findComputerById(collect.getProductId());
+                productName=computer.getBrand();
+            }
+            result.put(productName,sortList.get(i).getValue());
+        }
+
+        return result;
     }
 }

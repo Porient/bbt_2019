@@ -4,6 +4,7 @@ import com.bbt.back.entities.Comment;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -65,7 +66,15 @@ public interface CommentService {
 
     List<Comment> selectByUserId(Integer userId);
 
-    int getLikeCount(Integer userId);
-
     int likeComment(int userId, int commentId);
+
+    Integer findCommentNumByUserId(Integer userId);
+
+    Integer rankByUserId(Integer userId);
+
+    Integer sumByLikeNumLess(int i);
+
+    Integer sumByLikeNumBetween(int i, int j);
+
+    Integer sumByLikeNumMore(int i);
 }

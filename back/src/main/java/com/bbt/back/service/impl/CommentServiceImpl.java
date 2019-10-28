@@ -3,16 +3,13 @@ package com.bbt.back.service.impl;
 import com.bbt.back.dao.*;
 import com.bbt.back.entities.Comment;
 import com.bbt.back.entities.CommentLike;
-import com.bbt.back.entities.Computer;
-import com.bbt.back.entities.User;
 import com.bbt.back.service.CommentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Description:
@@ -67,10 +64,6 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.selectByUserId(userId);
     }
 
-    @Override
-    public int getLikeCount(Integer userId) {
-        return commentDao.getLikeCount(userId);
-    }
 
     @Override
     public int likeComment(int userId, int commentId) {
@@ -89,5 +82,66 @@ public class CommentServiceImpl implements CommentService {
         comment.setLikeNum(oldNum+1);
         commentDao.updateComment(comment);
         return 1;
+    }
+
+    @Override
+    public Integer findCommentNumByUserId(Integer userId) {
+        return commentDao.findCommentNumByUserId(userId);
+    }
+
+    @Override
+    public Integer rankByUserId(Integer userId) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Integer rank=-1;
+        List<HashMap<Integer, Object>> list = commentDao.sumByUserIdList();
+        if (list != null && !list.isEmpty()) {
+            for (HashMap<Integer, Object> map1 : list) {
+                Integer key = null;
+                Integer value = null;
+                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
+                    if ("key".equals(entry.getKey())) {
+                        key = (Integer) entry.getValue();
+                    } else if ("value".equals(entry.getKey())) {
+                        value = (Integer) entry.getValue();
+                    }
+                }
+                map.put(key, value);
+            }
+        }
+
+        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            sortList.add(entry); //将map中的元素放入list中
+        }
+
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+
+        for (int i = 0; i < sortList.size(); i++) {
+            if(sortList.get(i).getKey()==userId){
+                rank=i+1;
+                break;
+            }
+        }
+        return rank;
+    }
+
+    @Override
+    public Integer sumByLikeNumLess(int i) {
+        return commentDao.sumByLikeNumLess(i);
+    }
+
+    @Override
+    public Integer sumByLikeNumBetween(int i, int j) {
+        return commentDao.sumByLikeNumBetween(i,j);
+    }
+
+    @Override
+    public Integer sumByLikeNumMore(int i) {
+        return commentDao.sumByLikeNumMore(i);
     }
 }

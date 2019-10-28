@@ -1,7 +1,9 @@
 package com.bbt.back.web;
 
+import com.bbt.back.entities.Record;
 import com.bbt.back.model.*;
 import com.bbt.back.service.ProductService;
+import com.bbt.back.service.RecordService;
 import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +27,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private RecordService recordService;
 
     @RequestMapping("/delete")
     private Object deleteProduct(HttpServletRequest request) throws IOException {
@@ -124,9 +129,14 @@ public class ProductController {
     private Object getDetail(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String likeObjectStr = HttpServletRequestUtil.getString(request,"likeObject");
+        int userId = HttpServletRequestUtil.getInt(request, "userId");
         ObjectMapper mapper = new ObjectMapper();
         ProductLikeObject likeObject = mapper.readValue(likeObjectStr,ProductLikeObject.class);
         Object object = productService.selectByProductId(likeObject);
+        //插入足迹
+        ProductResult product=productService.findByProductIdAndType(likeObject);
+        Record record=new Record(userId,likeObject.getProductId(),likeObject.getType(),product.getProductName(),product.getProductPicture(),new Date());
+        recordService.addRecord(record);
         resultEntity.setMsg("获取成功");
         resultEntity.setData(object);
         return resultEntity;

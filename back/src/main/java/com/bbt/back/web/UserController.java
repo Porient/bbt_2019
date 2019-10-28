@@ -1,21 +1,23 @@
 package com.bbt.back.web;
 
-import com.bbt.back.entities.Collect;
-import com.bbt.back.entities.Comment;
+import com.bbt.back.entities.Record;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.SystemErrorEnum;
 import com.bbt.back.enums.UserResultEnum;
 import com.bbt.back.exception.UserException;
-import com.bbt.back.model.CommentAbbr;
+import com.bbt.back.model.CollectPic;
+import com.bbt.back.model.CommentPic;
 import com.bbt.back.model.Common.Constant;
+import com.bbt.back.model.RecordPic;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.CollectService;
 import com.bbt.back.service.CommentService;
+import com.bbt.back.service.RecordService;
 import com.bbt.back.service.UserService;
 import com.bbt.back.utils.DateUtil;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageInfo;
+import com.sun.prism.impl.Disposer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * @Description:
@@ -41,6 +43,9 @@ public class UserController {
     private CommentService commentService;
     @Autowired
     private CollectService collectService;
+    @Autowired
+    private RecordService recordService;
+
 
     @PostMapping("/changePassword")
     private Object changePassword(HttpServletRequest request) {
@@ -110,32 +115,44 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/getCommentAbbr")
-    private Object getCommentAbbr(HttpServletRequest request) throws Exception{
+    @RequestMapping("/getCommentPic")
+    private Object getCommentPic(HttpServletRequest request) throws Exception{
         ResultEntity resultEntity = new ResultEntity();
         Integer userId = HttpServletRequestUtil.getInt(request,"userId");
-        List<Comment> comments = commentService.selectByUserId(userId);
-        resultEntity.setMsg("获取成功");
-        if (comments.size() == 0){
-            resultEntity.setData("你是一个新用户哦");
-        } else {
-            int commentCount = comments.size();
-            int likeCount = commentService.getLikeCount(userId);
-            Comment comment = commentService.getMostLikeComment(userId);
-            CommentAbbr commentAbbr = new CommentAbbr(commentCount,likeCount,comment);
-            resultEntity.setData(commentAbbr);
-        }
+        Integer commentNum=commentService.findCommentNumByUserId(userId);
+        Integer rank=commentService.rankByUserId(userId);
+        Integer likeNum1=commentService.sumByLikeNumLess(50);
+        Integer likeNum2=commentService.sumByLikeNumBetween(50,100);
+        Integer likeNum3=commentService.sumByLikeNumBetween(100,200);
+        Integer likeNum4=commentService.sumByLikeNumMore(200);
+        CommentPic commentPic=new CommentPic(commentNum,rank,likeNum1,likeNum2,likeNum3,likeNum4);
+        resultEntity.setData(commentPic);
         return resultEntity;
     }
 
-    @RequestMapping("/collectCount")
-    private Object getCollectCount(HttpServletRequest request) throws Exception{
+    @RequestMapping("/getRecordPic")
+    private Object getRecordPic(HttpServletRequest request) throws Exception{
         ResultEntity resultEntity = new ResultEntity();
-        int userId = HttpServletRequestUtil.getInt(request,"userId");
-        int collectCount = collectService.countByUserId(userId);
-        resultEntity.setMsg("获取收藏数目成功");
-        resultEntity.setData(collectCount);
+        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
+        Integer recordNum=recordService.findRecordNumByUserId(userId);
+        Integer computerNum=recordService.findComputerNumByUserId(userId);
+        Integer phoneNum=recordService.findPhoneNumByUserId(userId);
+        HashMap<String,Integer> recordMap=recordService.sumByUserId(userId);
+        HashMap<String,Integer> timeMap=recordService.sumByTime();
+        RecordPic recordPic=new RecordPic(recordNum,computerNum,phoneNum,recordMap,timeMap);
+        resultEntity.setData(recordPic);
         return resultEntity;
     }
 
+    @RequestMapping("/getCollectPic")
+    private Object getCollectPic(HttpServletRequest request) throws Exception{
+        ResultEntity resultEntity = new ResultEntity();
+        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
+        Integer collectNum=collectService.findCollectNumByUserId(userId);
+        Integer rank=collectService.rankByUserId(userId);
+        HashMap<String,Integer> map=collectService.sumByUserId(userId);
+        CollectPic collectPic=new CollectPic(collectNum,rank,map);
+        resultEntity.setData(collectPic);
+        return resultEntity;
+    }
 }

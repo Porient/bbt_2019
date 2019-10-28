@@ -4,6 +4,7 @@ import com.bbt.back.entities.Comment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,4 +34,14 @@ public interface CommentDao {
     List<Comment> selectByUserId(Integer userId);
 
     int getLikeCount(Integer userId);
+
+    Integer findCommentNumByUserId(Integer userId);
+
+    List<HashMap<Integer,Object>> sumByUserIdList();
+
+    Integer sumByLikeNumLess(Integer i);
+
+    Integer sumByLikeNumBetween(@Param("i") Integer i,@Param("j") Integer j);
+
+    Integer sumByLikeNumMore(Integer i);
 }

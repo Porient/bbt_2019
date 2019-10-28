@@ -2,6 +2,7 @@ package com.bbt.back.service;
 
 import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
+import com.bbt.back.model.ProductResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Component;
 
@@ -22,4 +23,6 @@ public interface ProductService {
     int likeProduct(ProductLikeObject likeObject,Integer userId);
 
     Object selectByProductId(ProductLikeObject likeObject);
+
+    ProductResult findByProductIdAndType(ProductLikeObject likeObject);
 }

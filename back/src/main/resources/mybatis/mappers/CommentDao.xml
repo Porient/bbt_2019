@@ -58,4 +58,34 @@
         from  comment c
         where c.user_id = #{userId}
     </select>
+
+    <select id="findCommentNumByUserId" parameterType="java.lang.Integer" resultType="Integer">
+        select count(1)
+        from  comment c
+        where c.user_id = #{userId}
+    </select>
+
+    <select id="sumByUserIdList" resultType="java.util.HashMap">
+        SELECT user_id as 'key', count(1) as 'value'
+        FROM comment
+        GROUP BY user_id;
+    </select>
+
+    <select id="sumByLikeNumLess" parameterType="java.lang.Integer" resultType="Integer">
+        select count(1)
+        from  comment c
+        where c.like_num &lt; #{i};
+    </select>
+
+    <select id="sumByLikeNumBetween" parameterType="java.lang.Integer" resultType="Integer">
+        select count(1)
+        from  comment c
+        where  c.like_num between #{i} AND #{j};
+    </select>
+
+    <select id="sumByLikeNumMore" parameterType="java.lang.Integer" resultType="Integer">
+        select count(1)
+        from  comment c
+        where c.like_num &gt; #{i};
+    </select>
 </mapper>

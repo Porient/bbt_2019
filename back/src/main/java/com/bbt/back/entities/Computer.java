@@ -29,6 +29,9 @@ public class Computer implements Serializable {
     private String appearance1;
     private String appearance2;
     private String appearance3;
+    private String tag1;
+    private String tag2;
+    private String tag3;
     private int productType;
     private Integer library;
     private String productAnalysis;
@@ -213,6 +216,30 @@ public class Computer implements Serializable {
         this.productAnalysis = productAnalysis;
     }
 
+    public String getTag1() {
+        return tag1;
+    }
+
+    public void setTag1(String tag1) {
+        this.tag1 = tag1;
+    }
+
+    public String getTag2() {
+        return tag2;
+    }
+
+    public void setTag2(String tag2) {
+        this.tag2 = tag2;
+    }
+
+    public String getTag3() {
+        return tag3;
+    }
+
+    public void setTag3(String tag3) {
+        this.tag3 = tag3;
+    }
+
     @Override
     public String toString() {
         return "Computer{" +
@@ -235,6 +262,9 @@ public class Computer implements Serializable {
                 ", appearance1='" + appearance1 + '\'' +
                 ", appearance2='" + appearance2 + '\'' +
                 ", appearance3='" + appearance3 + '\'' +
+                ", tag1='" + tag1 + '\'' +
+                ", tag2='" + tag2 + '\'' +
+                ", tag3='" + tag3 + '\'' +
                 ", productType=" + productType +
                 ", library=" + library +
                 ", productAnalysis='" + productAnalysis + '\'' +
