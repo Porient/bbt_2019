@@ -43,7 +43,7 @@ public class ProductController {
         return resultEntity;
     }
 
-    @RequestMapping("/List")
+    @RequestMapping("/list")
     private Object getList(HttpServletRequest request, Integer pageNum, Integer pageSize){
         ResultEntity resultEntity = new ResultEntity();
         int type = HttpServletRequestUtil.getInt(request,"productType");
