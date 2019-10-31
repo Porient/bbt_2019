@@ -9,12 +9,26 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/index",
+      redirect: "/index/search",
+    },
+    {
+      path: "/index",
+      redirect: "/index/search",
     },
     {
       path: "/index",
       name: "index",
       component: () => import("@/views/index/index.vue"),
+      children: [
+        {
+          path: "search",
+          component: () => import("@/views/Search/Search.vue"),
+        },
+        {
+          path: "userspace",
+          component: () => import("@/views/UserSpace/UserSpace.vue"),
+        },
+      ],
     },
     {
       path: "/admin",

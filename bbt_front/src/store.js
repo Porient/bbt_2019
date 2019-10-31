@@ -17,7 +17,7 @@ export default new Vuex.Store({
   mutations: {
     // 从cookie检查当前登录的状态
     checkLoginState: state => {
-      state.isLogin = false;
+      state.isLogin = true;
     },
   },
   actions: {},
