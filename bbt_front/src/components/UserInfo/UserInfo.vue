@@ -66,6 +66,9 @@
               :format="progressFormat"
             />
           </a-col>
+          <a-col :span="8" :offset="contentSpan.offset" class="form-content-right">
+            <span class="text">6到20个字符，必须包含数字和字母</span>
+          </a-col>
         </a-row>
         <a-row>
           <a-col :span="contentSpan.left">
@@ -76,6 +79,9 @@
             >
               <a-input-password placeholder="请再次输入密码" />
             </a-form-item>
+          </a-col>
+          <a-col :span="8" :offset="contentSpan.offset" class="form-content-right">
+            <span class="text">与上方密码相同</span>
           </a-col>
         </a-row>
         <a-row>

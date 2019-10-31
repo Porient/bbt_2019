@@ -47,10 +47,10 @@ export default {
       if (percent === 0) {
         this.progressStatus = "exception";
         return "无效";
-      } else if (percent <= 33) {
+      } else if (percent < 34) {
         this.progressStatus = "exception";
         return "低";
-      } else if (percent <= 66) {
+      } else if (percent < 67) {
         this.progressStatus = "normal";
         return "中";
       } else {
@@ -60,25 +60,33 @@ export default {
     },
     valuatePassword() {
       let p = 0;
-      if (this.password.length >= this.minPasswordLen) {
-        if ()
+      const uppercase = this.password.match(/([A-Z])+/);
+      const lower = this.password.match(/([a-z])+/);
+      const number = this.password.match(/([0-9])+/);
+      // 必须满足：大于{{minPasswordLen}}个字符，匹配到数字，匹配到字母（部分大小写）
+      if (
+        this.password.length >= this.minPasswordLen &&
+        number &&
+        (uppercase || lower)
+      ) {
+
+        // 匹配到大写字母
+        if (uppercase) {
+          p++;
+        }
+
+        // 匹配到小写字母
+        if (lower) {
+          p++;
+        }
+
+        // 匹配到特殊字符
+        if (this.password.match(/[^A-Za-z0-9_]+/)) {
+          p++;
+        }
       }
 
-      if (this.password.match(/([a-z])+/)) {
-        ls++;
-      }
-
-      if (this.password.match(/([0-9])+/)) {
-        ls++;
-      }
-
-      if (this.password.match(/([A-Z])+/)) {
-        ls++;
-      }
-      if (this.password.match(/[^a-zA-Z0-9]+/)) {
-        ls++;
-      }
-      return ls;
+      this.progressPercent = (p / 3) * 100;
     },
   },
 };
