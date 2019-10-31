@@ -10,4 +10,12 @@ Vue.use(Row);
 
 export default {
   name: "Forget",
+  data() {
+    return {
+      form: this.$form.createForm(this, { name: "forgetForm" }),
+    };
+  },
+  methods: {
+    reset() {},
+  },
 };

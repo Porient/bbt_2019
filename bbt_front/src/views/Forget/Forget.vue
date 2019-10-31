@@ -44,7 +44,7 @@
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" block @click="register">注册</a-button>
+        <a-button type="primary" block @click="reset">重置</a-button>
       </a-form-item>
     </a-form>
   </div>
