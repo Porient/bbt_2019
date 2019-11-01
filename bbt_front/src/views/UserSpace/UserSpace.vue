@@ -9,7 +9,6 @@
         <span slot="tab">
           <a-icon type="user" />个人信息
         </span>
-        <!-- <div class="tab-content">个人信息</div> -->
         <UserInfo />
       </a-tab-pane>
       <a-tab-pane key="persona">
@@ -34,7 +33,8 @@
         <span slot="tab">
           <a-icon type="message" />我的评论
         </span>
-        <div class="tab-content">我的评论</div>
+        <!-- <div class="tab-content">我的评论</div> -->
+        <UserComments />
       </a-tab-pane>
     </a-tabs>
   </div>

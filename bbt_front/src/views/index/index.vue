@@ -12,7 +12,7 @@
               <a-icon type="user" />个人中心
             </a-menu-item>
             <a-menu-item key="1">
-              <a-icon type="logout" />推出登陆
+              <a-icon type="logout" />退出登陆
             </a-menu-item>
           </a-menu>
         </a-dropdown>

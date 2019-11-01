@@ -1,7 +1,7 @@
 <template>
   <div class="user-info-card">
     <a-card title="基本信息" :bordered="false">
-      <a-form layout="horizontal">
+      <a-form layout="horizontal" :form="form" :hideRequiredMark="true">
         <a-row>
           <a-col :span="contentSpan.left">
             <a-form-item
@@ -9,7 +9,9 @@
               :label-col="formItemLayout.labelCol"
               :wrapper-col="formItemLayout.wrapperCol"
             >
-              <a-avatar icon="user" :size="80" />
+              <a-upload name="avatar">
+                <a-avatar icon="user" :size="80" />
+              </a-upload>
             </a-form-item>
           </a-col>
         </a-row>
@@ -20,7 +22,10 @@
               :label-col="formItemLayout.labelCol"
               :wrapper-col="formItemLayout.wrapperCol"
             >
-              <a-input placeholder="请输入昵称" />
+              <a-input
+                v-decorator="['username',{ rules:[{required:true, message:'请输入你的昵称' } ] } ]"
+                placeholder="请输入昵称"
+              />
             </a-form-item>
           </a-col>
           <a-col
@@ -38,7 +43,10 @@
               :label-col="formItemLayout.labelCol"
               :wrapper-col="formItemLayout.wrapperCol"
             >
-              <a-input placeholder="请输入邮箱" />
+              <a-input
+                placeholder="请输入邮箱"
+                v-decorator="['email',{ rules:[{required:true, message:'请输入你的邮箱地址' } ] } ]"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="2" :offset="contentSpan.offset" class="form-content-right">
@@ -55,7 +63,12 @@
               :label-col="formItemLayout.labelCol"
               :wrapper-col="formItemLayout.wrapperCol"
             >
-              <a-input-password placeholder="请输入密码" @change="valuatePassword" v-model="password" />
+              <a-input-password
+                placeholder="请输入密码"
+                @change="valuatePassword"
+                v-model="password"
+                v-decorator="['password',{rules:[{required: true, message: '请输入你的密码'}]}]"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="3" :offset="contentSpan.offset" class="form-content-right">
@@ -77,7 +90,10 @@
               :label-col="formItemLayout.labelCol"
               :wrapper-col="formItemLayout.wrapperCol"
             >
-              <a-input-password placeholder="请再次输入密码" />
+              <a-input-password
+                placeholder="请再次输入密码"
+                v-decorator="['passwordAgain',{rules:[{required: true, message: '请输入你的密码'}]}]"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="8" :offset="contentSpan.offset" class="form-content-right">

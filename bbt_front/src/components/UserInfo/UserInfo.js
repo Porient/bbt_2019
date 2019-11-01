@@ -7,6 +7,7 @@ import {
   Input,
   Button,
   Progress,
+  Upload
 } from "ant-design-vue";
 
 Vue.use(Form);
@@ -16,11 +17,13 @@ Vue.use(Avatar);
 Vue.use(Input);
 Vue.use(Button);
 Vue.use(Progress);
+Vue.use(Upload);
 
 export default {
   name: "UserInfo",
   data() {
     return {
+      form: this.$form.createForm(this, { name: "userInfoForm" }),
       // 表单的标题和内容分别占的比例
       formItemLayout: {
         labelCol: { span: 8 },
