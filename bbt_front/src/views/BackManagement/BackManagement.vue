@@ -11,11 +11,11 @@
       style="text-align:left">
         <a-menu-item key='Library'>
           <a-icon type="profile" />
-          <span>产品库管理</span>
+          <span>产品库</span>
         </a-menu-item>
         <a-menu-item key='ScriptSetting'>
           <a-icon type="setting" />
-          <span>爬取管理</span>
+          <span>预选库</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

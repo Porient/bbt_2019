@@ -1,87 +1,150 @@
 import Vue from "vue";
-import { Upload, Table, Button, Popconfirm, Select, Switch } from "ant-design-vue";
-import EditableCell from './EditableCell'
+import { Table, Tag, Button, Popconfirm,Alert } from "ant-design-vue";
 
-/*
- * EditableCell Code https://github.com/vueComponent/ant-design-vue/blob/master/components/table/demo/EditableCell.vue
- */
-
-Vue.use(Upload);
 Vue.use(Table);
+Vue.use(Tag);
 Vue.use(Button);
 Vue.use(Popconfirm);
-Vue.use(Select);
-Vue.use(Switch);
+Vue.use(Alert);
 
 const columns = [
   {
-    title: "备注",
+    title:"品牌",
+    dataIndex:"brand",
+  },
+  {
+    title: "产品名称",
     dataIndex: "name",
     key: "name",
-    scopedSlots: { customRender: "name" },
+    scopedSlots: {
+      filterDropdown: "filterDropdown",
+      filterIcon: "filterIcon",
+      customRender: "customRender",
+    },
+    onFilter: (value, record) =>
+      record.name.toLoweCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => {
+          this.searchInput.focus();
+        }, 0);
+      }
+    },
   },
   {
-    title: "起始地址",
-    dataIndex: "start",
-    key: "start",
-    scopedSlots: { customRender: "start" },
+    title: "类型",
+    dataIndex: "type",
+    key: "type",
+    scopedSlots: { customRender: "type" },
+    filters: [
+      {
+        text: "手机",
+        value: "手机",
+      },
+      {
+        text: "电脑",
+        value: "电脑",
+      },
+    ],
+    onFilter: (value, record) => record.type.indexOf(value) === 0,
   },
   {
-    title: "抓取间隔（天）",
-    dataIndex: "timeMargin",
-    key: "timeMargin",
-    scopedSlots: { customRender: "timeMargin" },
+    title: "价格",
+    dataIndex: "price",
+    key: "price",
+    scopedSlots: { customRender: "price" },
+    // sorter: "sortByPrice",
+    sorter: (a, b) => a.price - b.price,
   },
   {
-    title: "脚本",
-    dataIndex: "script",
-    key: "script",
-    scopedSlots: { customRender: "script" },
+    title: "创建时间",
+    dataIndex: "settime",
+    key: "settime",
+    scopedSlots: { customRender: "settime" },
+    // sorter: "sortByTime",
   },
   {
-    title: "状态",
-    dataIndex: "status",
-    key: "status",
-    scopedSlots: { customRender: "status" },
+    title: "修改时间",
+    dataIndex: "fixtime",
+    key: "fixtime",
+    scopedSlots: { customRender: "fixtime" },
+    // filters: [
+    //   {
+    //     text: "未审核",
+    //     value: 0,
+    //   },
+    //   {
+    //     text: "审核通过",
+    //     value: 1,
+    //   },
+    //   {
+    //     text: "审核未通过",
+    //     value: -1,
+    //   },
+    // ],
+  },
+  {
+    title: "操作",
+    dataIndex: "action",
+    key: "x",
+    scopedSlots: { customRender: "action" },
   },
 ];
 
 const data = [
   {
-    name: "京东",
-    start: "www.jd.com",
-    timeMargin: 1,
-    script: "jd.py",
-    status: 1,
-  },
-  {
-    name: "公众号",
-    start: "www.wechat.com",
-    timeMargin: 2,
-    script: "wechat.py",
+    key: "1",
+    brand:"华为",
+    name: "Hua Wei Mate 30 pro",
+    type: "手机",
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
     status: 0,
   },
+  {
+    key: "2",
+    brand:"华为",
+    name: "Hua Wei Mate 30 pro",
+    type: "手机",
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
+  },
+  {
+    key: "3",
+    brand:"华为",
+    name: "Hua Wei Mate 30 pro",
+    type: "手机",
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
+  },
+  {
+    key: "4",
+    brand:"华为",
+    name: "Hua Wei MateBook 13",
+    type: "电脑",
+    price: 53990.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
+  }
 ];
 
-const filelist =[
-  {
-    name:"jd",
-    address:"www.jd.com"
-  }
-]
-
 export default {
-  name: "ScriptSetting",
+  name: "Library",
   data() {
     return {
       data,
       columns,
+      searchText: "",
+      searchInput: null,
       selectedRowKeys: [],
-      filelist,
+      loading: false,
     };
-  },
-  components: {
-    EditableCell,
   },
   computed: {
     hasSelected() {
@@ -89,66 +152,39 @@ export default {
     },
   },
   methods: {
-    handleFileChange(info) {
-      const status = info.file.status;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        this.$message.success(`${info.file.name} file uploaded success fully.`);
-      } else if (status === "error") {
-        this.$message.error(`${info.file.name} file upload failed.`);
-      }
+    timeToMs(str) {
+      //将时间字符串转化为毫秒
+      return str - "0";
     },
-    handleMarginChange(value) {
-      //时间间隔选择器改变
-      console.log(`selected ${value}`);
+    sortByTime(a, b) {
+      //a,b为两个时间字符串
+      return this.timeToMs(a) - this.timeToMs(b);
     },
-    handleScriptChange(name) {
-      //脚本选择器改变
-      console.log(`selected ${name}`);
+    handleSearch(selectedKeys, confirm) {
+      //搜索
+      confirm();
+      this.searchText = selectedKeys[0];
     },
-    onCellChange(key, dataIndex, value) {
-      //可编辑部分改变
-      const dataSource = [...this.dataSource];
-      const target = dataSource.find(item => item.key === key);
-      if (target) {
-        target[dataIndex] = value;
-        this.dataSource = dataSource;
-      }
-    },
-    handleDelete(key) {
-      //删除
-      const dataSource = [...this.dataSource];
-      this.dataSource = dataSource.filter(item => item.key !== key);
-    },
-    handleAdd() {
-      //新增
-      const { count, dataSource } = this;
-      const newData = {
-        key: count,
-        name: `Edward King ${count}`,
-        age: 32,
-        address: `London, Park Lane no. ${count}`,
-      };
-      this.dataSource = [...dataSource, newData];
-      this.count = count + 1;
-    },
-    handleSubmit() {
-      //提交
+    handleReset(clearFilters) {
+      //重置筛选状态
+      clearFilters();
+      this.searchText = "";
     },
     handleReload() {
       //重载
       this.loading = true;
-      // axios request
+      //axios request
       setTimeout(() => {
         this.loading = false;
         this.selectedRowKeys = [];
       }, 1000);
     },
     onSelectChange(selectedRowKeys) {
-      console.log("selectedRowKeys changed: ", selectedRowKeys);
+      console.log("selectedRowKeys change: ", selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
+    },
+    handleDelete() {
+      //删除选中项
     },
   },
 };

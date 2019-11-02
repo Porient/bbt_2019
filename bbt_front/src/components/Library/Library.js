@@ -1,12 +1,18 @@
 import Vue from "vue";
-import { Table, Tag, Button, Popconfirm } from "ant-design-vue";
+import { Table, Tag, Button, Popconfirm, Alert, message } from "ant-design-vue";
 
 Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Button);
 Vue.use(Popconfirm);
+Vue.use(Alert);
+Vue.use(message);
 
 const columns = [
+  {
+    title:"品牌",
+    dataIndex:"brand",
+  },
   {
     title: "产品名称",
     dataIndex: "name",
@@ -44,37 +50,39 @@ const columns = [
     onFilter: (value, record) => record.type.indexOf(value) === 0,
   },
   {
-    title: "标签示例",
-    dataIndex: "tags",
-    key: "tags",
-    scopedSlots: { customRender: "tags" },
+    title: "价格",
+    dataIndex: "price",
+    key: "price",
+    scopedSlots: { customRender: "price" },
+    // sorter: "sortByPrice",
+    sorter: (a, b) => a.price - b.price,
   },
   {
     title: "创建时间",
-    dataIndex: "time",
-    key: "time",
-    scopedSlots: { customRender: "time" },
-    sorter: "sortByTime",
+    dataIndex: "settime",
+    key: "settime",
+    scopedSlots: { customRender: "settime" },
+    // sorter: "sortByTime",
   },
   {
-    title: "状态",
-    dataIndex: "status",
-    key: "status",
-    scopedSlots: { customRender: "status" },
-    filters: [
-      {
-        text: "未审核",
-        value: 0,
-      },
-      {
-        text: "审核通过",
-        value: 1,
-      },
-      {
-        text: "审核未通过",
-        value: -1,
-      },
-    ],
+    title: "修改时间",
+    dataIndex: "fixtime",
+    key: "fixtime",
+    scopedSlots: { customRender: "fixtime" },
+    // filters: [
+    //   {
+    //     text: "未审核",
+    //     value: 0,
+    //   },
+    //   {
+    //     text: "审核通过",
+    //     value: 1,
+    //   },
+    //   {
+    //     text: "审核未通过",
+    //     value: -1,
+    //   },
+    // ],
   },
   {
     title: "操作",
@@ -87,28 +95,44 @@ const columns = [
 const data = [
   {
     key: "1",
+    brand:"华为",
     name: "Hua Wei Mate 30 pro",
     type: "手机",
-    tags: ["曲面屏", "四摄", "双快充"],
-    time: "2019-10-5",
-    status: 1,
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
   },
   {
     key: "2",
+    brand:"华为",
     name: "Hua Wei Mate 30 pro",
     type: "手机",
-    tags: ["曲面屏", "四摄", "双快充"],
-    time: "2019-10-6",
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
     status: 0,
   },
   {
     key: "3",
+    brand:"华为",
     name: "Hua Wei Mate 30 pro",
     type: "手机",
-    tags: ["曲面屏", "四摄", "双快充"],
-    time: "2019-10-7",
-    status: -1,
+    price: 50000.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
   },
+  {
+    key: "4",
+    brand:"华为",
+    name: "Hua Wei MateBook 13",
+    type: "电脑",
+    price: 53990.00,
+    settime: "2019-01-01",
+    fixtime:"2019-01-01",
+    status: 0,
+  }
 ];
 
 export default {
@@ -162,6 +186,14 @@ export default {
     },
     handleDelete() {
       //删除选中项
+    },
+    confirm(e) {
+      // console.log(e);
+      // this.$message.success('Click on Yes');
+    },
+    cancel(e) {
+      // console.log(e);
+      // this.$message.error('Click on No');
     },
   },
 };
