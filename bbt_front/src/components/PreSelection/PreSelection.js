@@ -1,11 +1,17 @@
 import Vue from "vue";
-import { Table, Tag, Button, Popconfirm,Alert } from "ant-design-vue";
+import { Table, Tag, Button, Popconfirm,Alert, Modal, Form, Input, Select } from "ant-design-vue";
+
+import BackManageForm from "@/components/BackManageForm/BackManageForm.vue"
 
 Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Button);
 Vue.use(Popconfirm);
 Vue.use(Alert);
+Vue.use(Form);
+Vue.use(Modal);
+Vue.use(Input);
+Vue.use(Select);
 
 const columns = [
   {
@@ -35,6 +41,7 @@ const columns = [
     title: "类型",
     dataIndex: "type",
     key: "type",
+    width: '10%',
     scopedSlots: { customRender: "type" },
     filters: [
       {
@@ -52,8 +59,8 @@ const columns = [
     title: "价格",
     dataIndex: "price",
     key: "price",
+    width: '13%',
     scopedSlots: { customRender: "price" },
-    // sorter: "sortByPrice",
     sorter: (a, b) => a.price - b.price,
   },
   {
@@ -61,7 +68,6 @@ const columns = [
     dataIndex: "settime",
     key: "settime",
     scopedSlots: { customRender: "settime" },
-    // sorter: "sortByTime",
   },
   {
     title: "修改时间",
@@ -91,59 +97,65 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    brand:"华为",
-    name: "Hua Wei Mate 30 pro",
-    type: "手机",
-    price: 50000.00,
-    settime: "2019-01-01",
-    fixtime:"2019-01-01",
-    status: 0,
-  },
-  {
-    key: "2",
-    brand:"华为",
-    name: "Hua Wei Mate 30 pro",
-    type: "手机",
-    price: 50000.00,
-    settime: "2019-01-01",
-    fixtime:"2019-01-01",
-    status: 0,
-  },
-  {
-    key: "3",
-    brand:"华为",
-    name: "Hua Wei Mate 30 pro",
-    type: "手机",
-    price: 50000.00,
-    settime: "2019-01-01",
-    fixtime:"2019-01-01",
-    status: 0,
-  },
-  {
-    key: "4",
-    brand:"华为",
-    name: "Hua Wei MateBook 13",
-    type: "电脑",
-    price: 53990.00,
-    settime: "2019-01-01",
-    fixtime:"2019-01-01",
-    status: 0,
-  }
-];
-
 export default {
-  name: "Library",
+  name: "PreSelection",
   data() {
     return {
-      data,
+      datalist: [
+        {
+          key: "0",
+          brand:"华为",
+          name: "Mate 30 pro",
+          type: "手机",
+          price: 50000.00,
+          settime: "2019-01-01",
+          fixtime:"2019-01-01",
+          status: 0,
+          id:12345,
+        },
+        {
+          key: "1",
+          brand:"华为",
+          name: "Mate 30 pro",
+          type: "手机",
+          price: 50000.00,
+          settime: "2019-01-01",
+          fixtime:"2019-01-01",
+          status: 0,
+          id:23456,
+        },
+        {
+          key: "2",
+          brand:"华为",
+          name: "Mate 30 pro",
+          type: "手机",
+          price: 50000.00,
+          settime: "2019-01-01",
+          fixtime:"2019-01-01",
+          status: 0,
+          id:34567,
+        },
+        {
+          key: "3",
+          brand:"华为",
+          name: "MateBook 13",
+          type: "电脑",
+          price: 53990.00,
+          settime: "2019-01-01",
+          fixtime:"2019-01-01",
+          status: 0,
+          id:45678,
+        }
+      ],
       columns,
       searchText: "",
       searchInput: null,
       selectedRowKeys: [],
       loading: false,
+      ModalText: 'Content of the modal',
+      visible: false,
+      confirmLoading: false,
+      selectrecord:0,
     };
   },
   computed: {
@@ -151,6 +163,7 @@ export default {
       return this.selectedRowKeys.length > 0;
     },
   },
+  
   methods: {
     timeToMs(str) {
       //将时间字符串转化为毫秒
@@ -186,5 +199,27 @@ export default {
     handleDelete() {
       //删除选中项
     },
+    
+    //弹出编辑表单
+    editModal(e) {
+      console.log("edit "+e);
+      this.visible = true;
+      this.selectrecord=e;
+    },
+    handleOk() {
+      this.ModalText = 'The modal will be closed after two seconds';
+      this.confirmLoading = true;
+      setTimeout(() => {
+        this.visible = false;
+        this.confirmLoading = false;
+      }, 2000);
+    },
+    handleCancel() {
+      console.log('Clicked cancel button');
+      this.visible = false;
+    },
   },
+  components:{
+    BackManageForm
+  }
 };

@@ -1,19 +1,19 @@
 <template>
-    <a-layout id="components-layout-demo-custom-trigger">
-      <a-layout-sider
-        :trigger="null"
-        collapsible
-        v-model="collapsed"
-      >
+  <a-layout id="components-layout-demo-custom-trigger">
+    <a-layout-sider :trigger="null" collapsible v-model="collapsed">
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']" 
-      @click="(res)=>{whichShow = res.key}"
-      style="text-align:left">
-        <a-menu-item key='Library'>
+      <a-menu
+        theme="dark"
+        mode="inline"
+        :defaultSelectedKeys="['1']"
+        @click="(res)=>{whichShow = res.key}"
+        style="text-align:left"
+      >
+        <a-menu-item key="Product">
           <a-icon type="profile" />
           <span>产品库</span>
         </a-menu-item>
-        <a-menu-item key='ScriptSetting'>
+        <a-menu-item key="PreSelection">
           <a-icon type="setting" />
           <span>预选库</span>
         </a-menu-item>
@@ -27,10 +27,15 @@
           @click="()=> collapsed = !collapsed"
         />
         <a-popconfirm placement="bottom" title="确定注销吗" okText="确认" cancelText="取消">
-          <a style="float:right;margin-right:50px;"><a-icon type="user" />{{userName}}</a>
+          <a style="float:right;margin-right:50px;">
+            <a-icon type="user" />
+            {{userName}}
+          </a>
         </a-popconfirm>
       </a-layout-header>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+      <a-layout-content
+        :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+      >
         <!--根据绑定的组件名称改变-->
         <component v-bind:is="whichShow"></component>
       </a-layout-content>
