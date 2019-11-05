@@ -1,7 +1,8 @@
 import Vue from "vue";
 import { Table, Tag, Button, Popconfirm, Alert, message } from "ant-design-vue";
 
-import BackManageForm from "@/components/BackManageForm/BackManageForm.vue"
+import PhoneForm from "@/components/PhoneForm/PhoneForm.vue"
+import ComputerForm from "@/components/ComputerForm/ComputerForm.vue"
 
 Vue.use(Table);
 Vue.use(Tag);
@@ -72,20 +73,6 @@ const columns = [
     dataIndex: "fixtime",
     key: "fixtime",
     scopedSlots: { customRender: "fixtime" },
-    // filters: [
-    //   {
-    //     text: "未审核",
-    //     value: 0,
-    //   },
-    //   {
-    //     text: "审核通过",
-    //     value: 1,
-    //   },
-    //   {
-    //     text: "审核未通过",
-    //     value: -1,
-    //   },
-    // ],
   },
   {
     title: "操作",
@@ -107,7 +94,8 @@ export default {
           name: "Mate 30 pro",
           type: "手机",
           price: 50000.00,
-          status: 0,
+          status: 0,//状态
+          verified:1,//审核
           fixtime:"2019-01-01",
           id:12345,
         },
@@ -118,6 +106,7 @@ export default {
           type: "手机",
           price: 50000.00,
           status: 1,
+          verified:1,//审核
           fixtime:"2019-01-01",
           id:23456,
         },
@@ -128,6 +117,7 @@ export default {
           type: "手机",
           price: 50000.00,
           status: 0,
+          verified:1,//审核
           fixtime:"2019-01-01",
           id:34567,
         },
@@ -138,6 +128,7 @@ export default {
           type: "电脑",
           price: 53990.00,
           status: 0,
+          verified:1,//审核
           fixtime:"2019-01-01",
           id:45678,
         }
@@ -146,7 +137,9 @@ export default {
       searchText: "",
       searchInput: null,
       selectedRowKeys: [],
-      loading: false,
+      load_loading: false,
+      remove_loading:false,
+      delete_loading:false,
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
@@ -177,21 +170,59 @@ export default {
       clearFilters();
       this.searchText = "";
     },
-    handleReload() {
+    batchload(selectedRowKeys) {
       //重载
-      this.loading = true;
+      this.load_loading = true;
       //axios request
       setTimeout(() => {
-        this.loading = false;
+        this.load_loading = false;
+        for(var i=0;i<selectedRowKeys.length;++i)
+        {
+          this.datalist[selectedRowKeys[i]].status=1;
+        }
         this.selectedRowKeys = [];
+        console.log(this.selectedRowKeys);
       }, 1000);
     },
+
+    batchremove(selectedRowKeys){
+      //重载
+      this.remove_loading = true;
+      //axios request
+      setTimeout(() => {
+        this.remove_loading = false;
+        for(var i=0;i<selectedRowKeys.length;++i)
+        {
+          this.datalist[selectedRowKeys[i]].status=0;
+        }
+        this.selectedRowKeys = [];
+        console.log(this.selectedRowKeys);
+      }, 1000);
+    },
+
     onSelectChange(selectedRowKeys) {
       console.log("selectedRowKeys change: ", selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
     },
-    handleDelete() {
+    batchDelete(selectedRowKeys) {
+      //批量删除
+      // const datalist=[...this.datalist];
+      this.delete_loading=true;
+
+      setTimeout(() => {
+        this.delete_loading = false;
+        for(var i=0;i<selectedRowKeys.length;++i)
+        {
+          this.datalist=this.datalist.filter(item=>item.key!==selectedRowKeys[i]);
+        }
+        this.selectedRowKeys = [];
+        console.log(this.selectedRowKeys);
+      }, 1000);
+    },
+    onDelete(key) {
       //删除选中项
+      const datalist=[...this.datalist];
+      this.datalist=datalist.filter(item=>item.key !== key);
     },
     confirm(e) {
       console.log(e);
@@ -200,6 +231,16 @@ export default {
     cancel(e) {
       console.log(e);
       // this.$message.error('Click on No');
+    },
+
+    //上架
+    release(e){
+      this.datalist[e].status=1;
+    },
+
+    //下架
+    remove(e){
+      this.datalist[e].status=0;
     },
 
     //弹出编辑表单
@@ -220,8 +261,12 @@ export default {
       console.log('Clicked cancel button');
       this.visible = false;
     },
+    receive(){
+      this.visible=false;
+    }
   },
   components:{
-    BackManageForm
+    PhoneForm,
+    ComputerForm,
   }
 };

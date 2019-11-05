@@ -8,7 +8,7 @@ Vue.use(Row);
 Vue.use(Col);
 
 export default{
-    name:"BackManageForm",
+    name:"ComputerForm",
     data(){
         return{
             formLayout: 'horizontal',
@@ -31,21 +31,15 @@ export default{
                 console.log('Received values of form: ', values);
               }
             });
-          },
-          handleSelectChange(value) {
-            console.log(value);
-            this.form.setFieldsValue({
-              note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-            });
+            this.$emit("update");
           },
           initialValue(){
-            console.log(this.info),
+            // console.log(this.info),
             this.form.setFieldsValue({
-              id: this.info.id,
-              brand:this.info.brand,
-              product_name:this.info.name,
-              price:this.info.price,
-            })
+                product_id: this.info.id,
+                brand:this.info.brand,
+                price:this.info.price,
+            })  
           },
     },
 }

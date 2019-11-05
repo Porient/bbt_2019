@@ -5,7 +5,7 @@
         <a-col :span="12">
           <a-form-item label="产品id" :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }">
             <a-input
-              v-decorator="['id', { rules: [{ required: false, message: 'Please input your product id!' }] }]"
+              v-decorator="['product_id', { rules: [{ required: false, message: 'Please input your product id!' }] }]"
             />
           </a-form-item>
         </a-col>
@@ -198,9 +198,9 @@
 </template>
 
 
-<script src='./BackManageForm.js'></script>
+<script src='./PhoneForm.js'></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-@import "./BackManageForm.less";
+@import "./PhoneForm.less";
 </style>

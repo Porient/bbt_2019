@@ -2,12 +2,12 @@
   <div>
     <!--表格操作：重载、删除-->
     <div class="batchButton">
-      <a-button type="primary" @click="handleReload" :loading="loading" class="button">批量生成</a-button>
-      <a-popconfirm placement="top" okText="确认" cancelText="取消" @confirm="handleDelete">
+      <a-button type="primary" @click="handleReload" :loading="produce_loading" class="button">批量生成</a-button>
+      <a-popconfirm placement="top" okText="确认" cancelText="取消" @confirm="batchDelete(selectedRowKeys)">
         <template slot="title">
           <p>确认要删除所选项吗</p>
         </template>
-        <a-button type="danger" :disabled="!hasSelected" class="button" ghost>批量删除</a-button>
+        <a-button type="danger" :disabled="!hasSelected" :loading="delete_loading" class="button" ghost>批量删除</a-button>
       </a-popconfirm>
 
       <span class="choose">
@@ -53,23 +53,44 @@
           <span style="font-size:12px">编辑</span>
         </a-button>
         <a-modal
-          title="手机信息"
+          :title="`${datalist[selectrecord].type}信息`"
           :visible="visible"
           @ok="handleOk"
           :confirmLoading="confirmLoading"
           @cancel="handleCancel"
-          :centered=true
-          width=700px
+          :centered="true"
+          :footer="null"
+          width="700px"
         >
-        <!-- 解决不重载问题 -->
-        <div v-if="visible">
-          <BackManageForm v-show="visible" :info="datalist[selectrecord]"></BackManageForm>
-        </div>
+          <!-- 解决不重载问题 -->
+          <div v-if="visible&&datalist[selectrecord].type=='手机'">
+            <PhoneForm
+              v-show="visible&&datalist[selectrecord].type=='手机'"
+              :info="datalist[selectrecord]"
+              v-on:update="receive"
+            ></PhoneForm>
+          </div>
+
+          <div v-if="visible&&datalist[selectrecord].type=='电脑'">
+            <ComputerForm
+              v-show="visible&&datalist[selectrecord].type=='电脑'"
+              :info="datalist[selectrecord]"
+              v-on:update="receive"
+            ></ComputerForm>
+          </div>
         </a-modal>
 
-        <a-button class="button" href="javascript:;" type="danger" size="small" ghost>
-          <span style="font-size:12px">删除</span>
-        </a-button>
+        <a-popconfirm
+          title="你确定要删除吗?"
+          @confirm="()=>onDelete(record.key)"
+          @cancel="cancel"
+          okText="Yes"
+          cancelText="No"
+        >
+          <a-button class="button" href="javascript:;" type="danger" size="small" ghost>
+            <span style="font-size:12px">删除</span>
+          </a-button>
+        </a-popconfirm>
       </span>
     </a-table>
   </div>

@@ -1,7 +1,8 @@
 import Vue from "vue";
 import { Table, Tag, Button, Popconfirm,Alert, Modal, Form, Input, Select } from "ant-design-vue";
 
-import BackManageForm from "@/components/BackManageForm/BackManageForm.vue"
+import PhoneForm from "@/components/PhoneForm/PhoneForm.vue"
+import ComputerForm from "@/components/ComputerForm/ComputerForm.vue"
 
 Vue.use(Table);
 Vue.use(Tag);
@@ -74,20 +75,6 @@ const columns = [
     dataIndex: "fixtime",
     key: "fixtime",
     scopedSlots: { customRender: "fixtime" },
-    // filters: [
-    //   {
-    //     text: "未审核",
-    //     value: 0,
-    //   },
-    //   {
-    //     text: "审核通过",
-    //     value: 1,
-    //   },
-    //   {
-    //     text: "审核未通过",
-    //     value: -1,
-    //   },
-    // ],
   },
   {
     title: "操作",
@@ -111,6 +98,7 @@ export default {
           settime: "2019-01-01",
           fixtime:"2019-01-01",
           status: 0,
+          verified:0,//审核
           id:12345,
         },
         {
@@ -122,6 +110,7 @@ export default {
           settime: "2019-01-01",
           fixtime:"2019-01-01",
           status: 0,
+          verified:0,//审核
           id:23456,
         },
         {
@@ -133,6 +122,7 @@ export default {
           settime: "2019-01-01",
           fixtime:"2019-01-01",
           status: 0,
+          verified:0,//审核
           id:34567,
         },
         {
@@ -144,6 +134,7 @@ export default {
           settime: "2019-01-01",
           fixtime:"2019-01-01",
           status: 0,
+          verified:0,//审核
           id:45678,
         }
       ],
@@ -151,7 +142,8 @@ export default {
       searchText: "",
       searchInput: null,
       selectedRowKeys: [],
-      loading: false,
+      produce_loading: false,
+      delete_loading:false,
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
@@ -196,8 +188,33 @@ export default {
       console.log("selectedRowKeys change: ", selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
     },
-    handleDelete() {
+    batchDelete(selectedRowKeys) {
+      //批量删除
+      // const datalist=[...this.datalist];
+      this.delete_loading=true;
+
+      setTimeout(() => {
+        this.delete_loading = false;
+        for(var i=0;i<selectedRowKeys.length;++i)
+        {
+          this.datalist=this.datalist.filter(item=>item.key!==selectedRowKeys[i]);
+        }
+        this.selectedRowKeys = [];
+        console.log(this.selectedRowKeys);
+      }, 1000);
+    },
+    onDelete(key) {
       //删除选中项
+      const datalist=[...this.datalist];
+      this.datalist=datalist.filter(item=>item.key !== key);
+    },
+    confirm(e) {
+      console.log(e);
+      // this.$message.success('Click on Yes');
+    },
+    cancel(e) {
+      console.log(e);
+      // this.$message.error('Click on No');
     },
     
     //弹出编辑表单
@@ -218,8 +235,12 @@ export default {
       console.log('Clicked cancel button');
       this.visible = false;
     },
+    receive(){
+      this.visible=false;
+    }
   },
   components:{
-    BackManageForm
+    PhoneForm,
+    ComputerForm,
   }
 };
