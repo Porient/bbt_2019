@@ -1,8 +1,8 @@
 import Vue from "vue";
 import { Layout, Menu, Icon, Popconfirm } from "ant-design-vue";
 
-import Library from "@/components/Library/Library.vue";
-import ScriptSetting from "@/components/ScriptSetting/ScriptSetting.vue";
+import Product from "@/components/Product/Product.vue";
+import PreSelection from "@/components/PreSelection/PreSelection.vue";
 
 Vue.use(Layout);
 Vue.use(Icon);
@@ -14,14 +14,14 @@ export default {
   data() {
     return {
       collapsed: false,
-      whichShow: "Library",
+      whichShow: "Product",
       userName: 13242524133
     };
   },
   method: {
   },
   components: {
-    Library,
-    ScriptSetting,
+    Product,
+    PreSelection,
   },
 };
