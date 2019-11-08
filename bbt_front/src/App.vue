@@ -24,7 +24,10 @@
   }
 }
 
-html,body,#app{
+html,
+body,
+#app {
   height: 100%;
+  overflow: auto;
 }
 </style>
