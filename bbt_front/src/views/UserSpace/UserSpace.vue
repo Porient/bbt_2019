@@ -15,7 +15,7 @@
         <span slot="tab">
           <a-icon type="solution" />个人画像
         </span>
-        <div class="tab-content">个人画像</div>
+        <Persona />
       </a-tab-pane>
       <a-tab-pane key="collection">
         <span slot="tab">
