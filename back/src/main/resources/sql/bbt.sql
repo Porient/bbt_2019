@@ -751,8 +751,8 @@ CREATE TABLE `record`  (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
   `product_type` int(11) NOT NULL COMMENT '产品类型',
-  `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
-  `product_picture` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品缩略图',
+  `product_name` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
+  `product_picture` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品缩略图',
   `browse_time` datetime(0) NOT NULL COMMENT '浏览时间',
   PRIMARY KEY (`record_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
