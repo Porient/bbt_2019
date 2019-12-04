@@ -14,6 +14,10 @@ import com.bbt.back.model.ProductResult;
 import com.bbt.back.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.python.core.PyFunction;
+import org.python.core.PyInteger;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -148,5 +152,53 @@ public class ProductServiceImpl implements ProductService {
             productResult.setProductPicture(computer.getAppearance1());
         }
         return productResult;
+    }
+
+    @Override
+    public String getRecommendProduct(Integer userId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile(System.getProperty("user.dir")+"/src/main/python/recommend/recommend_top_n.py ");
+        PyFunction func = (PyFunction) interpreter.get("recommendBoth",
+                PyFunction.class);
+
+        PyObject pyobj = func.__call__(new PyInteger(userId));
+        return pyobj.toString();
+    }
+
+    @Override
+    public int genPhoneReport(int productId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        String productAnalysis;
+        Phone phone=phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir")+"/src/main/python/data_process/data_mining.py ");
+        //basicInfo
+        PyFunction func = (PyFunction) interpreter.get("getBasicInfo",
+                PyFunction.class);
+        PyObject basicInfoObj = func.__call__(new PyInteger(productId));
+        String basicInfo=basicInfoObj.toString();
+        //statisticInfo
+        func=(PyFunction) interpreter.get("getStatisticInfo",
+                PyFunction.class);
+        PyObject statisticInfoObj = func.__call__(new PyInteger(productId));
+        String statisticInfo=statisticInfoObj.toString();
+        //compareInfo
+        func=(PyFunction) interpreter.get("getCompareInfo",
+                PyFunction.class);
+        PyObject compareInfoObj = func.__call__(new PyInteger(productId));
+        String compareInfo=compareInfoObj.toString();
+        //commentInfo
+        func=(PyFunction) interpreter.get("getCommentInfo",
+                PyFunction.class);
+        PyObject commentInfoObj = func.__call__(new PyInteger(productId));
+        String commentInfo=commentInfoObj.toString();
+        //miningInfo
+        func=(PyFunction) interpreter.get("getMiningInfo",
+                PyFunction.class);
+        PyObject miningInfoObj = func.__call__(new PyInteger(productId));
+        String miningInfo=miningInfoObj.toString();
+        //合成分析
+        productAnalysis="basicInfo: "+basicInfo+" statisticInfo: "+statisticInfo+ " compareInfo: "+ compareInfo;
+        phone.setProductAnalysis(productAnalysis);
+        return phoneDao.updatePhone(phone);
     }
 }

@@ -73,6 +73,18 @@ public class ProductController {
         return resultEntity;
     }
 
+    @RequestMapping("/genPhoneReport")
+    private Object genPhoneReport(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        int productId = HttpServletRequestUtil.getInt(request, "productId");
+        if (productService.genPhoneReport(productId) == 0){
+            resultEntity.setMsg("生成电话报告成功");
+        } else {
+            resultEntity.setMsg("生成电话报告失败");
+        }
+        return resultEntity;
+    }
+
     @RequestMapping("/hotProduct")
     private Object getHotProduct(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
@@ -81,6 +93,20 @@ public class ProductController {
             resultEntity.setMsg("获取热门产品失败");
         } else {
             resultEntity.setMsg("获取热门产品成功");
+            resultEntity.setData(products);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/recommendProduct")
+    private Object getRecommendProduct(HttpServletRequest request){
+        int userId = HttpServletRequestUtil.getInt(request, "userId");
+        ResultEntity resultEntity = new ResultEntity();
+        String products = productService.getRecommendProduct(userId);
+        if (products.isEmpty()){
+            resultEntity.setMsg("获取推荐产品失败");
+        } else {
+            resultEntity.setMsg("获取推荐产品成功");
             resultEntity.setData(products);
         }
         return resultEntity;

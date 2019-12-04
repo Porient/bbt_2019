@@ -6509,7 +6509,7 @@ CREATE TABLE `computer`  (
   `appearance3` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观3',
   `product_type` int(11) NULL DEFAULT 1 COMMENT '所属类型',
   `library` int(11) NULL DEFAULT 0 COMMENT '所属库',
-  `product_analysis` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
+  `product_analysis` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 224 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -6781,7 +6781,7 @@ CREATE TABLE `phone`  (
   `appearance3` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外观3',
   `product_type` int(11) NULL DEFAULT 0 COMMENT '所属类型',
   `library` int(11) NULL DEFAULT 0 COMMENT '所属库',
-  `product_analysis` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
+  `product_analysis` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品分析',
   PRIMARY KEY (`product_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 223 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
