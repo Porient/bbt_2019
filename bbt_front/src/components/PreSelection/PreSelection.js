@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { Table, Tag, Button, Popconfirm,Alert, Modal, Form, Input, Select } from "ant-design-vue";
+import { Table, Tag, Button, Popconfirm,Alert, Modal, Form, Input, Select, Tabs } from "ant-design-vue";
 
 import PhoneForm from "@/components/PhoneForm/PhoneForm.vue"
 import ComputerForm from "@/components/ComputerForm/ComputerForm.vue"
@@ -13,6 +13,7 @@ Vue.use(Form);
 Vue.use(Modal);
 Vue.use(Input);
 Vue.use(Select);
+Vue.use(Tabs);
 
 const columns = [
   {
@@ -37,24 +38,6 @@ const columns = [
         }, 0);
       }
     },
-  },
-  {
-    title: "类型",
-    dataIndex: "type",
-    key: "type",
-    width: '10%',
-    scopedSlots: { customRender: "type" },
-    filters: [
-      {
-        text: "手机",
-        value: "手机",
-      },
-      {
-        text: "电脑",
-        value: "电脑",
-      },
-    ],
-    onFilter: (value, record) => record.type.indexOf(value) === 0,
   },
   {
     title: "价格",
@@ -88,7 +71,7 @@ export default {
   name: "PreSelection",
   data() {
     return {
-      datalist: [
+      datalist1:[
         {
           key: "0",
           brand:"华为",
@@ -124,9 +107,11 @@ export default {
           status: 0,
           verified:0,//审核
           id:34567,
-        },
+        }
+      ],
+      datalist2:[
         {
-          key: "3",
+          key: "0",
           brand:"华为",
           name: "MateBook 13",
           type: "电脑",
@@ -138,25 +123,50 @@ export default {
           id:45678,
         }
       ],
+      datalist: [],
       columns,
       searchText: "",
       searchInput: null,
       selectedRowKeys: [],
+      selectedRowKeys_phone:[],
+      selectedRowKeys_computer:[],
       produce_loading: false,
       delete_loading:false,
-      ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
       selectrecord:0,
+      type:"1"
     };
   },
   computed: {
-    hasSelected() {
-      return this.selectedRowKeys.length > 0;
-    },
+    hasSelected(){
+      if(this.type==="1")
+      {
+        return this.selectedRowKeys_phone.length > 0;
+      }
+      if(this.type==="2")
+      {
+        return this.selectedRowKeys_computer.length > 0;
+      }
+    }
   },
-  
+  created(){
+    this.datalist=this.datalist1,
+    this.type="1"
+  },
   methods: {
+    callback(key) {
+      if(key==="1")
+      {
+        this.datalist=this.datalist1,
+        this.type="1"
+      }
+      if(key==="2")
+      {
+        this.datalist=this.datalist2,
+        this.type="2"
+      }
+    },
     timeToMs(str) {
       //将时间字符串转化为毫秒
       return str - "0";
@@ -164,16 +174,6 @@ export default {
     sortByTime(a, b) {
       //a,b为两个时间字符串
       return this.timeToMs(a) - this.timeToMs(b);
-    },
-    handleSearch(selectedKeys, confirm) {
-      //搜索
-      confirm();
-      this.searchText = selectedKeys[0];
-    },
-    handleReset(clearFilters) {
-      //重置筛选状态
-      clearFilters();
-      this.searchText = "";
     },
     handleReload() {
       //重载
@@ -185,28 +185,54 @@ export default {
       }, 1000);
     },
     onSelectChange(selectedRowKeys) {
-      console.log("selectedRowKeys change: ", selectedRowKeys);
-      this.selectedRowKeys = selectedRowKeys;
+      if(this.type==="1")
+      {
+        this.selectedRowKeys_phone = selectedRowKeys;
+      }
+      if(this.type==="2")
+      {
+        this.selectedRowKeys_computer = selectedRowKeys;
+      }
     },
-    batchDelete(selectedRowKeys) {
+    batchDelete() {
       //批量删除
       // const datalist=[...this.datalist];
       this.delete_loading=true;
-
       setTimeout(() => {
         this.delete_loading = false;
-        for(var i=0;i<selectedRowKeys.length;++i)
+        if(this.type==="1")
         {
-          this.datalist=this.datalist.filter(item=>item.key!==selectedRowKeys[i]);
+          for(var i=0;i<this.selectedRowKeys_phone.length;++i)
+          {
+            this.datalist=this.datalist.filter(item=>item.key!==this.selectedRowKeys_phone[i]);
+            this.datalist1=this.datalist;
+            console.log(this.datalist)
+          }
+          this.selectedRowKeys_phone=[]
         }
-        this.selectedRowKeys = [];
-        console.log(this.selectedRowKeys);
+        if(this.type==="2")
+        {
+          for(var j=0;j<this.selectedRowKeys_computer.length;++j)
+          {
+            this.datalist=this.datalist.filter(item=>item.key!==this.selectedRowKeys_computer[j]);
+            this.datalist2=this.datalist;
+          }
+          this.selectedRowKeys_computer=[]
+        }
       }, 1000);
     },
     onDelete(key) {
       //删除选中项
       const datalist=[...this.datalist];
       this.datalist=datalist.filter(item=>item.key !== key);
+      if(this.type==="1")
+      {
+        this.datalist1=this.datalist
+      }
+      if(this.type==="2")
+      {
+        this.datalist2=this.datalist
+      }
     },
     confirm(e) {
       console.log(e);
@@ -221,10 +247,16 @@ export default {
     editModal(e) {
       console.log("edit "+e);
       this.visible = true;
-      this.selectrecord=e;
+      for(var i=0;i<this.datalist.length;++i)
+      {
+        if(this.datalist[i].key===e)
+        {
+          this.selectrecord=i;
+        }
+      }
+      // this.selectrecord=e;
     },
     handleOk() {
-      this.ModalText = 'The modal will be closed after two seconds';
       this.confirmLoading = true;
       setTimeout(() => {
         this.visible = false;
@@ -232,7 +264,6 @@ export default {
       }, 2000);
     },
     handleCancel() {
-      console.log('Clicked cancel button');
       this.visible = false;
     },
     receive(){

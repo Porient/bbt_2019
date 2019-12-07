@@ -25,4 +25,8 @@ public interface ProductService {
     Object selectByProductId(ProductLikeObject likeObject);
 
     ProductResult findByProductIdAndType(ProductLikeObject likeObject);
+
+    String getRecommendProduct(Integer userId);
+
+    int genPhoneReport(int productId);
 }
