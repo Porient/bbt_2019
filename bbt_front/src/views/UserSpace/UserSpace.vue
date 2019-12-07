@@ -11,11 +11,11 @@
         </span>
         <UserInfo />
       </a-tab-pane>
-      <a-tab-pane key="persona">
+      <a-tab-pane key="personal">
         <span slot="tab">
           <a-icon type="solution" />个人画像
         </span>
-        <Persona />
+        <Personal />
       </a-tab-pane>
       <a-tab-pane key="collection">
         <span slot="tab">

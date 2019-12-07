@@ -2,7 +2,7 @@ import Vue from "vue";
 import { Tabs, Card } from "ant-design-vue";
 import UserInfo from "@/components/UserInfo/UserInfo.vue";
 import UserComments from "@/components/UserComments/UserComments.vue";
-import Persona from "@/components/Persona/Persona.vue";
+import Personal from "@/components/Personal/Personal.vue";
 
 Vue.use(Tabs);
 Vue.use(Card);
@@ -12,6 +12,6 @@ export default {
   components: {
     UserInfo,
     UserComments,
-    Persona,
+    Personal,
   },
 };

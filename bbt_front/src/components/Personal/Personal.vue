@@ -82,7 +82,7 @@ Vue.use(Row);
 Vue.use(Statistic);
 
 export default {
-  name: "Persona",
+  name: "Personal",
   data() {
     return {
       statisticValueStyle: {
