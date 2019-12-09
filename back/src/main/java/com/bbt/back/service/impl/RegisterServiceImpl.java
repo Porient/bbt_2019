@@ -35,7 +35,7 @@ public class RegisterServiceImpl implements RegisterService {
         ResultEntity result = new ResultEntity();
         //1.判断输入是否为空
         if (user == null ) {
-            result.setErrCode(RegisterResultEnum.INPUT_NULL.getCode());
+            result.setCode(RegisterResultEnum.INPUT_NULL.getCode());
             result.setMsg(RegisterResultEnum.INPUT_NULL.getMsg());
             return result;
         }
@@ -44,15 +44,15 @@ public class RegisterServiceImpl implements RegisterService {
             User oldUser = userDao.findByUserEmail(user.getUserEmail());
             if (oldUser != null) {
                 // 用户已经存在
-                result.setErrCode(RegisterResultEnum.USER_FAILD.getCode());
+                result.setCode(RegisterResultEnum.USER_FAILD.getCode());
                 result.setMsg(RegisterResultEnum.USER_FAILD.getMsg());
             }
             //3.插入用户信息，其实这里就是为了简便，不再捕获系统可能出现的异常，更复杂的逻辑是先判断用户是否存在，再去判断是否出现系统异常
             if (userDao.insertUser(user) == 1) {
-                result.setErrCode(RegisterResultEnum.SUCCESS.getCode());
+                result.setCode(RegisterResultEnum.SUCCESS.getCode());
                 result.setMsg(RegisterResultEnum.SUCCESS.getMsg());
             } else {
-                result.setErrCode(RegisterResultEnum.USER_FAILD.getCode());
+                result.setCode(RegisterResultEnum.USER_FAILD.getCode());
                 result.setMsg(RegisterResultEnum.USER_FAILD.getMsg());
             }
             return result;
@@ -67,17 +67,17 @@ public class RegisterServiceImpl implements RegisterService {
         ResultEntity result = new ResultEntity();
         //1.判断输入是否为空
         if (admin == null ) {
-            result.setErrCode(RegisterResultEnum.INPUT_NULL.getCode());
+            result.setCode(RegisterResultEnum.INPUT_NULL.getCode());
             result.setMsg(RegisterResultEnum.INPUT_NULL.getMsg());
             return result;
         }
         try {
             //3.插入管理员信息
             if (adminDao.insertAdmin(admin) == 1) {
-                result.setErrCode(RegisterResultEnum.APPLY_SUCCESS.getCode());
+                result.setCode(RegisterResultEnum.APPLY_SUCCESS.getCode());
                 result.setMsg(RegisterResultEnum.APPLY_SUCCESS.getMsg());
             } else {
-                result.setErrCode(RegisterResultEnum.ADMIN_FAILD.getCode());
+                result.setCode(RegisterResultEnum.ADMIN_FAILD.getCode());
                 result.setMsg(RegisterResultEnum.ADMIN_FAILD.getMsg());
             }
             return result;

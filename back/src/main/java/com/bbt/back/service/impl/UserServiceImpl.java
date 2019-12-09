@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public ResultEntity updateUser(User user) {
         ResultEntity userResult = new ResultEntity();
         if (user == null) {
-            userResult.setErrCode(UserResultEnum.INPUT_NULL.getCode());
+            userResult.setCode(UserResultEnum.INPUT_NULL.getCode());
             userResult.setMsg(UserResultEnum.INPUT_NULL.getMsg());
             return userResult;
         }
@@ -57,10 +57,10 @@ public class UserServiceImpl implements UserService {
             //调用dao层更新数据
             int result = userDao.updateUser(user);
             if (result == 1){
-                userResult.setErrCode(UserResultEnum.SUCCESS.getCode());
+                userResult.setCode(UserResultEnum.SUCCESS.getCode());
                 userResult.setMsg(UserResultEnum.SUCCESS.getMsg());
             } else {
-                userResult.setErrCode(UserResultEnum.FAILD.getCode());
+                userResult.setCode(UserResultEnum.FAILD.getCode());
                 userResult.setMsg(UserResultEnum.FAILD.getMsg());
             }
             return userResult;

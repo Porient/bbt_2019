@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
     public ResultEntity loginByUser(String userEmail, String password) {
         ResultEntity loginResult = new ResultEntity();
         if (userEmail == null || password == null){
-            loginResult.setErrCode(LoginResultEnum.INPUT_NULL.getCode());
+            loginResult.setCode(LoginResultEnum.INPUT_NULL.getCode());
             loginResult.setMsg(LoginResultEnum.INPUT_NULL.getMsg());
             return loginResult;
         }
@@ -37,14 +37,14 @@ public class LoginServiceImpl implements LoginService {
             User u = userDao.findByUserEmail(userEmail);
             //用户是否存在
             if (u == null){
-                loginResult.setErrCode(LoginResultEnum.USER_NOT_EXIT.getCode());
+                loginResult.setCode(LoginResultEnum.USER_NOT_EXIT.getCode());
                 loginResult.setMsg(LoginResultEnum.USER_NOT_EXIT.getMsg());
             } else if (null != u.getPassword() && !u.getPassword().equals(password)){
                 //用户名密码是否一致
-                loginResult.setErrCode(LoginResultEnum.NOT_MATCH.getCode());
+                loginResult.setCode(LoginResultEnum.NOT_MATCH.getCode());
                 loginResult.setMsg(LoginResultEnum.NOT_MATCH.getMsg());
             } else{
-                loginResult.setErrCode(LoginResultEnum.SUCCESS.getCode());
+                loginResult.setCode(LoginResultEnum.SUCCESS.getCode());
                 loginResult.setMsg(LoginResultEnum.SUCCESS.getMsg());
                 loginResult.setData(u);
             }
@@ -58,17 +58,17 @@ public class LoginServiceImpl implements LoginService {
     public ResultEntity loginByAdmin(String adminEmail, String password) {
         ResultEntity loginResult = new ResultEntity();
         if (password == null){
-            loginResult.setErrCode(LoginResultEnum.INPUT_NULL.getCode());
+            loginResult.setCode(LoginResultEnum.INPUT_NULL.getCode());
             loginResult.setMsg(LoginResultEnum.INPUT_NULL.getMsg());
             return loginResult;
         }
         try{
             Admin admin = adminDao.findByAdminEmailAndPassword(adminEmail,password);
             if (admin== null) {
-                loginResult.setErrCode(LoginResultEnum.NOT_MATCH.getCode());
+                loginResult.setCode(LoginResultEnum.NOT_MATCH.getCode());
                 loginResult.setMsg(LoginResultEnum.NOT_MATCH.getMsg());
             } else {
-                loginResult.setErrCode(LoginResultEnum.SUCCESS.getCode());
+                loginResult.setCode(LoginResultEnum.SUCCESS.getCode());
                 loginResult.setMsg(LoginResultEnum.SUCCESS.getMsg());
                 loginResult.setData(admin);
             }

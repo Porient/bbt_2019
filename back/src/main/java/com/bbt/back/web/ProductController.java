@@ -52,9 +52,11 @@ public class ProductController {
         PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         if (pageInfo!=null){
             resultEntity.setMsg("获取成功");
+            resultEntity.setCode(200);
             resultEntity.setData(pageInfoResult);
         } else{
             resultEntity.setMsg("获取失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -67,8 +69,10 @@ public class ProductController {
         ProductObject productObject = mapper.readValue(productObjectStr,ProductObject.class);
         if (productService.changeState(productObject) == 0){
             resultEntity.setMsg("操作成功");
+            resultEntity.setCode(200);
         } else {
             resultEntity.setMsg("操作失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -79,8 +83,10 @@ public class ProductController {
         int productId = HttpServletRequestUtil.getInt(request, "productId");
         if (productService.genPhoneReport(productId) == 0){
             resultEntity.setMsg("生成电话报告成功");
+            resultEntity.setCode(200);
         } else {
             resultEntity.setMsg("生成电话报告失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -91,6 +97,7 @@ public class ProductController {
         List<Object> products = productService.getHotProduct();
         if (products.isEmpty()){
             resultEntity.setMsg("获取热门产品失败");
+            resultEntity.setCode(500);
         } else {
             resultEntity.setMsg("获取热门产品成功");
             resultEntity.setData(products);
@@ -105,8 +112,10 @@ public class ProductController {
         String products = productService.getRecommendProduct(userId);
         if (products.isEmpty()){
             resultEntity.setMsg("获取推荐产品失败");
+            resultEntity.setCode(500);
         } else {
             resultEntity.setMsg("获取推荐产品成功");
+            resultEntity.setCode(200);
             resultEntity.setData(products);
         }
         return resultEntity;
@@ -132,6 +141,7 @@ public class ProductController {
         Integer pageSize1=pageInfo.getPageSize();
         SearchResult searchResult = new SearchResult(searchTokens,products,total,pageNum1,pageSize1);
         resultEntity.setMsg("搜索成功");
+        resultEntity.setCode(200);
         resultEntity.setData(searchResult);
         return  resultEntity;
     }
@@ -145,8 +155,10 @@ public class ProductController {
         ProductLikeObject likeObject = mapper.readValue(likeObjectStr,ProductLikeObject.class);
         if(productService.likeProduct(likeObject,userId)==1){
             resultEntity.setMsg("点赞成功");
+            resultEntity.setCode(200);
         }else{
             resultEntity.setMsg("点赞取消");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -164,6 +176,7 @@ public class ProductController {
         Record record=new Record(userId,likeObject.getProductId(),likeObject.getType(),product.getProductName(),product.getProductPicture(),new Date());
         recordService.addRecord(record);
         resultEntity.setMsg("获取成功");
+        resultEntity.setCode(200);
         resultEntity.setData(object);
         return resultEntity;
     }
