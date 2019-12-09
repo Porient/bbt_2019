@@ -13,9 +13,38 @@
   </div>
 </template>
 
-<script src="./Login.js">
+<script>
+import Vue from "vue";
+import { Tabs } from "ant-design-vue";
+import LoginForm from "@/components/LoginForm/LoginForm.vue";
+import RegisterForm from "@/components/RegisterForm/RegisterForm.vue";
+
+Vue.use(Tabs);
+
+export default {
+  name: "Login",
+  data() {
+    return {};
+  },
+  components: {
+    LoginForm,
+    RegisterForm,
+  },
+};
 </script>
 
 <style lang="less" scoped>
-@import "./Login.less";
+.box {
+  width: 450px;
+  height: 450px;
+  padding: 25px 50px;
+  background-color: white;
+  display: inline-block;
+  margin-top: 200px;
+  .tab-text {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0 8px;
+  }
+}
 </style>

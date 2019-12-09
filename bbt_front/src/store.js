@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { getUserInfo } from "./commom/js/util.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLogin: false, // 判断是否登录，只作为判断cookie的中介
+    isLogin: false, // 判断是否登录，只作为判断localStorage的中介
     tagsColor: ["pink", "red", "orange", "green", "cyan", "blue", "purple"],
   },
   getters: {
@@ -15,9 +16,13 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    // 从cookie检查当前登录的状态
+    // 从localStorage检查当前登录的状态
     checkLoginState: state => {
-      state.isLogin = true;
+      if (getUserInfo()) {
+        state.isLogin = true;
+      } else {
+        state.isLogin = false;
+      }
     },
   },
   actions: {},
