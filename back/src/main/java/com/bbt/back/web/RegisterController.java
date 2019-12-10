@@ -72,14 +72,14 @@ public class RegisterController {
         //2.进行注册,user是由是由前端传递过来的json字符串
         try {
             ResultEntity result = registerService.registerByUser(user);
-            if (result.getErrCode().intValue() == RegisterResultEnum.SUCCESS.getCode().intValue()) {
+            if (result.getCode().intValue() == RegisterResultEnum.SUCCESS.getCode().intValue()) {
                 resultEntity.setData(result.getData());
             }
-            resultEntity.setErrCode(result.getErrCode());
+            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             return resultEntity;
         } catch (RegisterException e) {
-            resultEntity.setErrCode(e.getCode());
+            resultEntity.setCode(e.getCode());
             resultEntity.setMsg(e.getMessage());
             return resultEntity;
         }
@@ -110,7 +110,7 @@ public class RegisterController {
             request.getSession().setAttribute("user_code_" + userEmail,verifyCode);
             request.getSession().setAttribute("user_codeTime_" + userEmail,new Date());
         } catch (LoginException ex) {
-            resultEntity.setErrCode(ex.getCode());
+            resultEntity.setCode(ex.getCode());
             resultEntity.setMsg(ex.getMessage());
         }
         return resultEntity;
@@ -132,14 +132,14 @@ public class RegisterController {
         //3.进行注册,manager为前端传递过来的json字符串
         try {
             ResultEntity result = registerService.registerByAdmin(admin);
-            if (result.getErrCode().intValue() == RegisterResultEnum.APPLY_SUCCESS.getCode().intValue()) {
+            if (result.getCode().intValue() == RegisterResultEnum.APPLY_SUCCESS.getCode().intValue()) {
                 resultEntity.setData(result.getData());
             }
-            resultEntity.setErrCode(result.getErrCode());
+            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             return resultEntity;
         } catch (RegisterException e) {
-            resultEntity.setErrCode(e.getCode());
+            resultEntity.setCode(e.getCode());
             resultEntity.setMsg(e.getMessage());
             return resultEntity;
         }

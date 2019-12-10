@@ -30,6 +30,7 @@ public class RecordController {
         int userId = HttpServletRequestUtil.getInt(request,"userId");
         PageInfo<Record> recordPageInfo = recordService.selectAllByUserId(userId,pageNo,pageSize);
         resultEntity.setMsg("获取成功");
+        resultEntity.setCode(200);
         resultEntity.setData(recordPageInfo);
         return resultEntity;
     }
@@ -40,8 +41,10 @@ public class RecordController {
         int recordId = HttpServletRequestUtil.getInt(request,"recordId");
         if (recordService.deleteById(recordId) == 0){
             resultEntity.setMsg("删除成功");
+            resultEntity.setCode(200);
         } else {
             resultEntity.setMsg("删除失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -52,6 +55,7 @@ public class RecordController {
         int recordId = HttpServletRequestUtil.getInt(request,"record");
         Record record = recordService.findById(recordId);
         resultEntity.setMsg("获取成功");
+        resultEntity.setCode(200);
         resultEntity.setData(record);
         return resultEntity;
     }

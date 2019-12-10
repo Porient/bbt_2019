@@ -6,16 +6,16 @@ package com.bbt.back.model;
  * @Date: 2019/2/23
  */
 public class ResultEntity {
-    private Integer errCode;
+    private Integer code;
     private String msg;
     private Object data;
 
-    public Integer getErrCode() {
-        return errCode;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setErrCode(Integer errCode) {
-        this.errCode = errCode;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -37,7 +37,7 @@ public class ResultEntity {
     @Override
     public String toString() {
         return "ResultEntity{" +
-                "errCode=" + errCode +
+                "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';

@@ -11,38 +11,66 @@
         </span>
         <UserInfo />
       </a-tab-pane>
-      <a-tab-pane key="persona">
+      <a-tab-pane key="personal">
         <span slot="tab">
           <a-icon type="solution" />个人画像
         </span>
-        <Persona />
+        <Personal />
       </a-tab-pane>
       <a-tab-pane key="collection">
         <span slot="tab">
           <a-icon type="star" />我的收藏
         </span>
-        <div class="tab-content">我的收藏</div>
+        <MyCollection />
       </a-tab-pane>
       <a-tab-pane key="footprint">
         <span slot="tab">
           <a-icon type="environment" />我的足迹
         </span>
-        <div class="tab-content">我的足迹</div>
+        <MyFootStep />
       </a-tab-pane>
       <a-tab-pane key="comment">
         <span slot="tab">
           <a-icon type="message" />我的评论
         </span>
-        <!-- <div class="tab-content">我的评论</div> -->
         <UserComments />
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 
-<script src="./UserSpace.js">
+<script>
+import Vue from "vue";
+import { Tabs, Card } from "ant-design-vue";
+import UserInfo from "@/components/UserInfo/UserInfo.vue";
+import UserComments from "@/components/UserComments/UserComments.vue";
+import Personal from "@/components/Personal/Personal.vue";
+import MyCollection from "@/components/MyCollection/MyCollection.vue";
+import MyFootStep from "@/components/MyFootStep/MyFootStep.vue";
+
+Vue.use(Tabs);
+Vue.use(Card);
+
+export default {
+  name: "UserSpace",
+  components: {
+    UserInfo,
+    UserComments,
+    Personal,
+    MyCollection,
+    MyFootStep,
+  },
+};
 </script>
 
 <style lang='less' scoped>
-@import "./UserSpace.less";
+.userspace {
+  width: 1000px;
+  display: inline-block;
+  margin-top: 50px;
+}
+.tab-content {
+  background-color: white;
+  height: 600px;
+}
 </style>

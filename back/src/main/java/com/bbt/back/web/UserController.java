@@ -82,14 +82,14 @@ public class UserController {
         //2.调用userService更新用户密码信息
         try {
             ResultEntity result = userService.updateUser(user);
-            if (result.getErrCode().equals(UserResultEnum.SUCCESS.getCode())) {
+            if (result.getCode().equals(UserResultEnum.SUCCESS.getCode())) {
                 resultEntity.setData(result.getData());
             }
-            resultEntity.setErrCode(result.getErrCode());
+            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             return resultEntity;
         } catch (UserException e) {
-            resultEntity.setErrCode(e.getCode());
+            resultEntity.setCode(e.getCode());
             resultEntity.setMsg(e.getMessage());
             return resultEntity;
         }
@@ -104,11 +104,11 @@ public class UserController {
         User user = mapper.readValue(userStr, User.class);
         try {
             ResultEntity userResult = userService.updateUser(user);
-            resultEntity.setErrCode(userResult.getErrCode());
+            resultEntity.setCode(userResult.getCode());
             resultEntity.setMsg(userResult.getMsg());
             return resultEntity;
         } catch (UserException ex) {
-            resultEntity.setErrCode(ex.getCode());
+            resultEntity.setCode(ex.getCode());
             resultEntity.setMsg(ex.getMessage());
             return resultEntity;
         }

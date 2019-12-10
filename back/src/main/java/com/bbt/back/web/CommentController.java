@@ -33,6 +33,7 @@ public class CommentController {
         PageInfo<Comment> pageInfo = commentService.selectAllByUserId(userId, pageNo, pageSize);
         PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         resultEntity.setMsg("获取成功");
+        resultEntity.setCode(200);
         resultEntity.setData(pageInfoResult);
         return resultEntity;
     }
@@ -44,8 +45,10 @@ public class CommentController {
         int code = commentService.delComment(commentId);
         if (code == 0){
             resultEntity.setMsg("删除评论成功");
+            resultEntity.setCode(200);
         } else {
-            resultEntity.setMsg("删除评论成功");
+            resultEntity.setMsg("删除评论失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -58,8 +61,10 @@ public class CommentController {
         Comment comment = mapper.readValue(commentStr,Comment.class);
         if (commentService.updateComment(comment) == 0){
             resultEntity.setMsg("更新评论成功");
+            resultEntity.setCode(200);
         } else{
             resultEntity.setMsg("更新评论失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -72,8 +77,10 @@ public class CommentController {
         Comment comment = mapper.readValue(commentStr,Comment.class);
         if (commentService.addComment(comment) == 0){
             resultEntity.setMsg("添加评论成功");
+            resultEntity.setCode(200);
         } else {
             resultEntity.setMsg("添加评论失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -85,8 +92,10 @@ public class CommentController {
         int commentId = HttpServletRequestUtil.getInt(request, "commentId");
         if(commentService.likeComment(userId,commentId)==1){
             resultEntity.setMsg("点赞评论成功");
+            resultEntity.setCode(200);
         }else {
-            resultEntity.setMsg("取消点赞评论成功");
+            resultEntity.setMsg("取消点赞评论失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }

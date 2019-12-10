@@ -41,9 +41,64 @@
   </a-form>
 </template>
 
-<script src="./LoginForm.js">
+<script>
+import Vue from "vue";
+import { Form, Input, Button, Icon, Radio, Col, Row } from "ant-design-vue";
+import { setUserInfo } from "@/commom/js/util.js"
+
+Vue.use(Form);
+Vue.use(Input);
+Vue.use(Button);
+Vue.use(Radio);
+Vue.use(Icon);
+Vue.use(Col);
+Vue.use(Row);
+
+export default {
+  name: "LoginForm",
+  data() {
+    return {
+      form: this.$form.createForm(this, { name: "loginForm" }),
+    };
+  },
+  methods: {
+    login() {
+      // 使用组件的校验函数获取输入值
+      this.form.validateFields((error, values) => {
+        if (!error) {
+          if (values.loginType === "user") {
+            // 用户登陆
+            this.$api.userLogin({
+              userEmail: values.email, // 请求需要的参数
+              password: values.password,
+            }).then(response => {
+              // response 就是接口返回的东西
+              // 在这处理下一步
+              if(response.code === 200) {
+                // 成功登陆以后
+                setUserInfo(values.email, values.password, "user")
+              }
+            });
+          } else if( values.loginType === 'admin') {
+            // 管理员登陆
+            this.$api.adminLogin({
+              adminEmail: values.email,
+              password: values.password,
+            }).then(response => {
+              if(response.code === 200) {
+                setUserInfo(values.email, values.password, "admin")
+              }
+            })
+          }
+        }
+      });
+    },
+    resetPassword() {
+      this.$router.push({ path: "/forget" });
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
-@import "./LoginForm.less";
 </style>

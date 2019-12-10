@@ -19,7 +19,7 @@ import java.util.Map;
 public class ResultUtil {
     public static ResultEntity resultReturner(int code, String msg, Object data){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(code);
+        resultEntity.setCode(code);
         resultEntity.setMsg(msg);
         resultEntity.setData(data);
         return resultEntity;
@@ -27,7 +27,7 @@ public class ResultUtil {
 
     public static ResultEntity resultGoodReturner(Object data){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(0);
+        resultEntity.setCode(0);
         resultEntity.setMsg("ok");
         resultEntity.setData(data);
         return resultEntity;
@@ -35,7 +35,7 @@ public class ResultUtil {
 
     public static ResultEntity resultGoodReturner( ){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(0);
+        resultEntity.setCode(0);
         resultEntity.setMsg("ok");
         resultEntity.setData(null);
         return resultEntity;
@@ -43,7 +43,7 @@ public class ResultUtil {
 
     public static ResultEntity resultBadReturner(String msg){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(1);
+        resultEntity.setCode(1);
         resultEntity.setMsg(msg);
         resultEntity.setData(null);
         return resultEntity;
@@ -51,7 +51,7 @@ public class ResultUtil {
 
     public static ResultEntity resultBadReturner(Object data){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(1);
+        resultEntity.setCode(1);
         resultEntity.setMsg("error");
         resultEntity.setData(data);
         return resultEntity;
@@ -59,7 +59,7 @@ public class ResultUtil {
 
     public static ResultEntity resultBadReturner(String msg, Object data){
         ResultEntity resultEntity = new ResultEntity();
-        resultEntity.setErrCode(1);
+        resultEntity.setCode(1);
         resultEntity.setMsg(msg);
         resultEntity.setData(data);
         return resultEntity;

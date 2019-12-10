@@ -43,10 +43,10 @@ public class LoginController {
         String password = HttpServletRequestUtil.getString(request, "password");
         try {
             ResultEntity result = loginService.loginByUser(userEmail, password);
-            if (result.getErrCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
+            if (result.getCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
                 resultEntity.setData(result.getData());
             }
-            resultEntity.setErrCode(result.getErrCode());
+            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             //将用户信息存入session中
             if (result.getData() != null) {
@@ -60,7 +60,7 @@ public class LoginController {
                 request.getSession().setAttribute("userList", userList);
             }
         } catch (LoginException ex) {
-            resultEntity.setErrCode(ex.getCode());
+            resultEntity.setCode(ex.getCode());
             resultEntity.setMsg(ex.getMessage());
         }
         return resultEntity;
@@ -74,10 +74,10 @@ public class LoginController {
         String password = HttpServletRequestUtil.getString(request, "password");
         try {
             ResultEntity result = loginService.loginByAdmin(adminEmail, password);
-            if (result.getErrCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
+            if (result.getCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
                 resultEntity.setData(result.getData());
             }
-            resultEntity.setErrCode(result.getErrCode());
+            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             //将管理员信息存入session中
             if (result.getData() != null) {
@@ -92,7 +92,7 @@ public class LoginController {
             }
         } catch (LoginException ex) {
             resultEntity.setMsg(ex.getMessage());
-            resultEntity.setErrCode(ex.getCode());
+            resultEntity.setCode(ex.getCode());
         }
         return resultEntity;
     }

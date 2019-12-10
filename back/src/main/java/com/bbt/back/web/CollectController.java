@@ -33,6 +33,7 @@ public class CollectController {
         PageInfo<Collect> pageInfo = collectService.selectAllByUserId(userId,pageNum,pageSize);
         PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         resultEntity.setMsg("获取收藏列表成功");
+        resultEntity.setCode(200);
         resultEntity.setData(pageInfoResult);
         return resultEntity;
     }
@@ -45,8 +46,10 @@ public class CollectController {
         Collect collect = mapper.readValue(collectStr,Collect.class);
         if (collectService.addCollect(collect) == 0){
             resultEntity.setMsg("添加收藏成功");
+            resultEntity.setCode(200);
         } else {
             resultEntity.setMsg("添加收藏失败");
+            resultEntity.setCode(500);
         }
         return resultEntity;
     }
@@ -57,8 +60,10 @@ public class CollectController {
         int collectId = HttpServletRequestUtil.getInt(request,"collectId");
         if (collectService.deleteCollect(collectId) == 0){
             resultEntity.setMsg("删除收藏成功");
+            resultEntity.setCode(200);
         } else{
-            resultEntity.setMsg("删除收藏成功");
+            resultEntity.setMsg("删除收藏失败");
+            resultEntity.setCode(500);
         }
         return  resultEntity;
     }
