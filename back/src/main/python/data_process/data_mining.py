@@ -624,8 +624,16 @@ def getMiningInfo(product_id):
         
         profession_list = collect_profession_list * 5 + like_profession_list * 3 + browse_profession_list
         #统计词频
-        profession_counts = collections.Counter(profession_list)
-        mining_info['profession_counts'] = profession_counts
+        profession_counts = collections.Counter(dict(profession_list))
+        counts = []
+        for key,num in profession_counts.items():
+            p = {}
+            p['name'] = key
+            p['num'] = num
+            counts.append(p)
+        mining_info['profession_counts'] = counts
+        #[{name:'医生', num:11}, {name:'老师', num:20}]
+
         profession_cloud_path = comment_cloud.createProfessionWordcloud(product_id,profession_counts)
         mining_info['profession_cloud_path'] = profession_cloud_path
 
