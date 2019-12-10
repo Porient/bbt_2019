@@ -76,7 +76,7 @@ export default {
               // 在这处理下一步
               if(response.code === 200) {
                 // 成功登陆以后
-                setUserInfo(values.email, values.password, "user")
+                setUserInfo(values.email, values.password, "user", response.userId)
               }
             });
           } else if( values.loginType === 'admin') {
@@ -86,7 +86,7 @@ export default {
               password: values.password,
             }).then(response => {
               if(response.code === 200) {
-                setUserInfo(values.email, values.password, "admin")
+                setUserInfo(values.email, values.password, "admin", response.adminId)
               }
             })
           }

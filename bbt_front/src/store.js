@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { getUserInfo } from "./commom/js/util.js";
+import { removeUserInfo } from "./commom/js/util.js"
 
 Vue.use(Vuex);
 
@@ -14,6 +15,8 @@ export default new Vuex.Store({
     getLoginState: state => {
       return state.isLogin;
     },
+    
+
   },
   mutations: {
     // 从localStorage检查当前登录的状态
@@ -24,6 +27,14 @@ export default new Vuex.Store({
         state.isLogin = false;
       }
     },
+    logout: state => {
+      //修改登录状态
+      if (state.isLogin){
+        state.isLogin = false;
+        //删除userInfo
+        removeUserInfo()
+      }
+    }
   },
   actions: {},
   modules: {

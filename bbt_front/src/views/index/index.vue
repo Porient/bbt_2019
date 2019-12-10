@@ -12,7 +12,7 @@
               <a-icon type="user" />个人中心
             </a-menu-item>
             <a-menu-item key="1">
-              <a-icon type="logout" />退出登陆
+              <a-icon type="logout" @click="logout"/>退出登陆
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -28,6 +28,8 @@
 import Vue from "vue";
 import { Layout, Avatar, Dropdown, Menu, Icon } from "ant-design-vue";
 import { mapGetters } from "vuex";
+import { userInfo } from 'os';
+import { getUserInfo } from "@/commom/js/util.js"
 
 Vue.use(Layout);
 Vue.use(Avatar);
@@ -55,6 +57,34 @@ export default {
     toUserSpace() {
       this.$router.push("userspace");
     },
+    logout() {
+      //发送注销请求
+      var info = getUserInfo()
+      if (info.type === "user"){
+        //用户注销
+        this.$api.userLogout({
+          userId: info.id,
+        }).then(response => {
+          if(response.code === 200){
+            //修改登录状态
+            this.$store.commit("logout")
+            //跳转到登录页面
+            this.$router.push("/login");
+          }
+        });
+      }else if (info.type === "admin"){
+        this.$api.adminLogout({
+          admin: info.id,
+        }).then(response => {
+          if(response.code === 200){
+            //修改登录状态
+            this.$store.commit("logout")
+            //跳转到登录页面
+            this.$router.push("/login");
+          }
+        });
+      }
+    }
   },
   computed: {
     ...mapGetters({

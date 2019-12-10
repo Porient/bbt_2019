@@ -48,14 +48,6 @@ export function userRegister(params) {
   });
 }
 
-export function adminRegister(params) {
-  //管理员注册
-  return request({
-    url: "/admin/register",
-    method: "POST",
-    data: params,
-  });
-}
 
 export function registerCode(params) {
   //注册验证码
@@ -206,6 +198,52 @@ export function collectList(params) {
 }
 
 //产品API
+export function getBasicInfo(params) {
+  //获取产品基本信息
+  return request({
+    url: "/product/getBasicInfo",
+    method: "POST",
+    data: params,
+  });
+}
+
+export function getCommentInfo(params) {
+  //获取产品评论信息
+  return request({
+    url: "/product/getCommentInfo",
+    method: "POST",
+    data: params,
+  });
+}
+
+export function getStatisticInfo(params) {
+  //获取产品统计信息
+  return request({
+    url: "/product/getStatisticInfo",
+    method: "POST",
+    data: params,
+  });
+}
+
+export function getCompareInfo(params) {
+  //获取产品比较信息
+  return request({
+    url: "/product/getCompareInfo",
+    method: "POST",
+    data: params,
+  });
+}
+
+export function getMiningInfo(params) {
+  //获取产品挖掘信息
+  return request({
+    url: "/product/getMiningInfo",
+    method: "POST",
+    data: params,
+  });
+}
+
+
 export function productRecommend(params) {
   //获取推荐产品
   return request({
@@ -234,7 +272,7 @@ export function productDelete(params) {
 }
 
 export function productDetail(params) {
-  //获取产品详情
+  //获取产品详情,数据库中未处理信息
   return request({
     url: "/product/detail",
     method: "POST",

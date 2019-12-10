@@ -37,7 +37,7 @@
       </a-col>
       <a-col :span="8">
         <a-form-item>
-          <a-button type="primary">发送验证码</a-button>
+          <a-button type="primary" @click="getCode">发送验证码</a-button>
         </a-form-item>
       </a-col>
     </a-row>
