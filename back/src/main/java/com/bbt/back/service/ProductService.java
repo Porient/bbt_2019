@@ -28,5 +28,13 @@ public interface ProductService {
 
     String getRecommendProduct(Integer userId);
 
-    int genPhoneReport(int productId);
+    String getBasicInfo(int productId);
+
+    String getStatisticInfo(int productId);
+
+    String getCompareInfo(int productId);
+
+    String getCommentInfo(int productId);
+
+    String getMiningInfo(int productId);
 }

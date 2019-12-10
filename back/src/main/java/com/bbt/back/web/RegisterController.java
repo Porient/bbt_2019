@@ -116,32 +116,4 @@ public class RegisterController {
         return resultEntity;
     }
 
-    @PostMapping("/admin/register")
-    private Object registerByAdmin(HttpServletRequest request) {
-        ResultEntity resultEntity=new ResultEntity();
-        //1.将前台获取的参数转换成Manager对象
-        String adminStr = HttpServletRequestUtil.getString(request, "admin");
-        ObjectMapper mapper = new ObjectMapper();
-        Admin admin = null;
-        try {
-            admin = mapper.readValue(adminStr, Admin.class);
-        } catch (IOException e) {
-            resultEntity.setMsg( SystemErrorEnum.SYSTEM_INNER_ERROR.getMsg());
-            return resultEntity;
-        }
-        //3.进行注册,manager为前端传递过来的json字符串
-        try {
-            ResultEntity result = registerService.registerByAdmin(admin);
-            if (result.getCode().intValue() == RegisterResultEnum.APPLY_SUCCESS.getCode().intValue()) {
-                resultEntity.setData(result.getData());
-            }
-            resultEntity.setCode(result.getCode());
-            resultEntity.setMsg(result.getMsg());
-            return resultEntity;
-        } catch (RegisterException e) {
-            resultEntity.setCode(e.getCode());
-            resultEntity.setMsg(e.getMessage());
-            return resultEntity;
-        }
-    }
 }
