@@ -48,6 +48,8 @@ public class LoginController {
             }
             resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
+            User user=(User)result.getData();
+            resultEntity.setData(user.getUserId());
             //将用户信息存入session中
             if (result.getData() != null) {
                 List<User> userList = new ArrayList<>();
@@ -79,6 +81,8 @@ public class LoginController {
             }
             resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
+            Admin admin=(Admin) result.getData();
+            resultEntity.setData(admin.getAdminId());
             //将管理员信息存入session中
             if (result.getData() != null) {
                 List<Admin> adminList = new ArrayList<>();
