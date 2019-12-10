@@ -77,15 +77,81 @@ public class ProductController {
         return resultEntity;
     }
 
-    @RequestMapping("/genPhoneReport")
-    private Object genPhoneReport(HttpServletRequest request){
+    @RequestMapping("/getBasicInfo")
+    private Object getBasicInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        if (productService.genPhoneReport(productId) == 0){
-            resultEntity.setMsg("生成电话报告成功");
+        String basicInfo=productService.getBasicInfo(productId);
+        if (basicInfo.length() != 0){
+            resultEntity.setData(basicInfo);
+            resultEntity.setMsg("生成BasicInfo成功");
             resultEntity.setCode(200);
         } else {
-            resultEntity.setMsg("生成电话报告失败");
+            resultEntity.setMsg("生成BasicInfo失败");
+            resultEntity.setCode(500);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/getStatisticInfo")
+    private Object getStatisticInfo(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        int productId = HttpServletRequestUtil.getInt(request, "productId");
+        String statisticInfo=productService.getStatisticInfo(productId);
+        if (statisticInfo.length() != 0){
+            resultEntity.setData(statisticInfo);
+            resultEntity.setMsg("生成StatisticInfo成功");
+            resultEntity.setCode(200);
+        } else {
+            resultEntity.setMsg("生成StatisticInfo失败");
+            resultEntity.setCode(500);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/getCompareInfo")
+    private Object getCompareInfo(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        int productId = HttpServletRequestUtil.getInt(request, "productId");
+        String compareInfo=productService.getCompareInfo(productId);
+        if (compareInfo.length() != 0){
+            resultEntity.setData(compareInfo);
+            resultEntity.setMsg("生成CompareInfo成功");
+            resultEntity.setCode(200);
+        } else {
+            resultEntity.setMsg("生成CompareInfo失败");
+            resultEntity.setCode(500);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/getCommentInfo")
+    private Object getCommentInfo(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        int productId = HttpServletRequestUtil.getInt(request, "productId");
+        String commentInfo=productService.getCommentInfo(productId);
+        if (commentInfo.length() != 0){
+            resultEntity.setData(commentInfo);
+            resultEntity.setMsg("生成CommentInfo成功");
+            resultEntity.setCode(200);
+        } else {
+            resultEntity.setMsg("生成CommentInfo失败");
+            resultEntity.setCode(500);
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/getMiningInfo")
+    private Object getMiningInfo(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        int productId = HttpServletRequestUtil.getInt(request, "productId");
+        String miningInfo=productService.getMiningInfo(productId);
+        if (miningInfo.length() != 0){
+            resultEntity.setData(miningInfo);
+            resultEntity.setMsg("生成MiningInfo成功");
+            resultEntity.setCode(200);
+        } else {
+            resultEntity.setMsg("生成MiningInfo失败");
             resultEntity.setCode(500);
         }
         return resultEntity;

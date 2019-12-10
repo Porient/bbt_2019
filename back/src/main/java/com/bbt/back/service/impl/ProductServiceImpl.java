@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int deleteProduct(ProductLikeObject likeObject) {
-        if (likeObject.getType() == 0){
+        if (likeObject.getType() == 0) {
             phoneDao.deletePhone(likeObject.getProductId());
         } else {
             computerDao.deleteComputer(likeObject.getProductId());
@@ -56,12 +56,12 @@ public class ProductServiceImpl implements ProductService {
         pageNum = pageNum == -1 ? 1 : pageNum;
         pageSize = pageSize == -1 ? 10 : pageSize;
         List<Object> list;
-        if (type == 0){
-            list=phoneDao.selectByLibrary(library);
+        if (type == 0) {
+            list = phoneDao.selectByLibrary(library);
         } else {
-            list=computerDao.selectByLibrary(library);
+            list = computerDao.selectByLibrary(library);
         }
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         PageInfo<Object> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
@@ -69,10 +69,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int changeState(ProductObject productObject) {
-        if (productObject.getProductType() == 0){
-            return phoneDao.changeState(productObject.getProductIId(),1-productObject.getProductState());
+        if (productObject.getProductType() == 0) {
+            return phoneDao.changeState(productObject.getProductIId(), 1 - productObject.getProductState());
         } else {
-            return computerDao.changeState(productObject.getProductIId(),1-productObject.getProductState());
+            return computerDao.changeState(productObject.getProductIId(), 1 - productObject.getProductState());
         }
     }
 
@@ -80,8 +80,8 @@ public class ProductServiceImpl implements ProductService {
     public List<Object> getHotProduct() {
         List<Object> products = new ArrayList<>();
         List<ProductLike> productLikes = productLikeDao.getHotProduct();
-        for (ProductLike productLike : productLikes){
-            if (productLike.getProductType() == 0){
+        for (ProductLike productLike : productLikes) {
+            if (productLike.getProductType() == 0) {
                 products.add(phoneDao.findPhoneById(productLike.getProductId()));
             } else {
                 products.add(computerDao.findComputerById(productLike.getProductId()));
@@ -95,36 +95,36 @@ public class ProductServiceImpl implements ProductService {
         pageNum = pageNum == -1 ? 1 : pageNum;
         pageSize = pageSize == -1 ? 10 : pageSize;
         List<Object> list;
-        if (type == 0){
-            list=phoneDao.selectByToken(searchToken);
+        if (type == 0) {
+            list = phoneDao.selectByToken(searchToken);
         } else {
-            list=computerDao.selectByToken(searchToken);
+            list = computerDao.selectByToken(searchToken);
         }
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         PageInfo<Object> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
     @Override
-    public int likeProduct(ProductLikeObject likeObject,Integer userId) {
-        UserLike userLike=userLikeDao.findByProductIdAndType(userId,likeObject.getProductId(),likeObject.getType());
-        ProductLike productLike=productLikeDao.findByProductIdAndType(likeObject.getProductId(),likeObject.getType());
-        int oldNum=productLike.getLikeNum();
+    public int likeProduct(ProductLikeObject likeObject, Integer userId) {
+        UserLike userLike = userLikeDao.findByProductIdAndType(userId, likeObject.getProductId(), likeObject.getType());
+        ProductLike productLike = productLikeDao.findByProductIdAndType(likeObject.getProductId(), likeObject.getType());
+        int oldNum = productLike.getLikeNum();
         //首先判断用户是否点赞
-        if (userLike==null){
-            userLike=new UserLike(userId,likeObject.getProductId(),likeObject.getType(),new Date());
+        if (userLike == null) {
+            userLike = new UserLike(userId, likeObject.getProductId(), likeObject.getType(), new Date());
             userLikeDao.insertUserLike(userLike);
-        }else {
-            userLikeDao.deleteUserLike(userId,likeObject.getProductId(),likeObject.getType());
-            productLike.setLikeNum(oldNum-1);
+        } else {
+            userLikeDao.deleteUserLike(userId, likeObject.getProductId(), likeObject.getType());
+            productLike.setLikeNum(oldNum - 1);
             productLikeDao.updateProductLike(productLike);
             return -1;
         }
-        if (productLike==null){
-            productLike=new ProductLike(likeObject.getProductId(),likeObject.getType(),1);
+        if (productLike == null) {
+            productLike = new ProductLike(likeObject.getProductId(), likeObject.getType(), 1);
             productLikeDao.insertProductLike(productLike);
-        }else {
-            productLike.setLikeNum(oldNum+1);
+        } else {
+            productLike.setLikeNum(oldNum + 1);
             productLikeDao.updateProductLike(productLike);
         }
         return 1;
@@ -132,7 +132,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Object selectByProductId(ProductLikeObject likeObject) {
-        if (likeObject.getType() == 0){
+        if (likeObject.getType() == 0) {
             return phoneDao.selectByProductId(likeObject.getProductId());
         } else {
             return computerDao.selectByProductId(likeObject.getProductId());
@@ -141,12 +141,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResult findByProductIdAndType(ProductLikeObject likeObject) {
-        ProductResult productResult =new ProductResult();
-        if (likeObject.getType()==0){
-            Phone phone=phoneDao.findPhoneById(likeObject.getProductId());
+        ProductResult productResult = new ProductResult();
+        if (likeObject.getType() == 0) {
+            Phone phone = phoneDao.findPhoneById(likeObject.getProductId());
             productResult.setProductName(phone.getProductName());
             productResult.setProductPicture(phone.getAppearance1());
-        }else {
+        } else {
             Computer computer = computerDao.findComputerById(likeObject.getProductId());
             productResult.setProductName(computer.getBrand());
             productResult.setProductPicture(computer.getAppearance1());
@@ -157,7 +157,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String getRecommendProduct(Integer userId) {
         PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile(System.getProperty("user.dir")+"/src/main/python/recommend/recommend_top_n.py ");
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/recommend/recommend_top_n.py ");
         PyFunction func = (PyFunction) interpreter.get("recommendBoth",
                 PyFunction.class);
 
@@ -166,39 +166,72 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int genPhoneReport(int productId) {
+    public String getBasicInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone=phoneDao.findPhoneById(productId);
-        interpreter.execfile(System.getProperty("user.dir")+"/src/main/python/data_process/data_mining.py ");
+        Phone phone = phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getBasicInfo",
                 PyFunction.class);
         PyObject basicInfoObj = func.__call__(new PyInteger(productId));
-        String basicInfo=basicInfoObj.toString();
-        //statisticInfo
-        func=(PyFunction) interpreter.get("getStatisticInfo",
+        String basicInfo = basicInfoObj.toString();
+        return basicInfo;
+    }
+
+    @Override
+    public String getStatisticInfo(int productId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        String productAnalysis;
+        Phone phone = phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
+        //basicInfo
+        PyFunction func = (PyFunction) interpreter.get("getStatisticInfo",
                 PyFunction.class);
         PyObject statisticInfoObj = func.__call__(new PyInteger(productId));
-        String statisticInfo=statisticInfoObj.toString();
-        //compareInfo
-        func=(PyFunction) interpreter.get("getCompareInfo",
+        String statisticInfo = statisticInfoObj.toString();
+        return statisticInfo;
+    }
+
+    @Override
+    public String getCompareInfo(int productId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        String productAnalysis;
+        Phone phone = phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
+        //basicInfo
+        PyFunction func = (PyFunction) interpreter.get("getCompareInfo",
                 PyFunction.class);
         PyObject compareInfoObj = func.__call__(new PyInteger(productId));
-        String compareInfo=compareInfoObj.toString();
-        //commentInfo
-        func=(PyFunction) interpreter.get("getCommentInfo",
+        String compareInfo = compareInfoObj.toString();
+        return compareInfo;
+    }
+
+    @Override
+    public String getCommentInfo(int productId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        String productAnalysis;
+        Phone phone = phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
+        //basicInfo
+        PyFunction func = (PyFunction) interpreter.get("getCommentInfo",
                 PyFunction.class);
         PyObject commentInfoObj = func.__call__(new PyInteger(productId));
-        String commentInfo=commentInfoObj.toString();
-        //miningInfo
-        func=(PyFunction) interpreter.get("getMiningInfo",
+        String commentInfo = commentInfoObj.toString();
+        return commentInfo;
+    }
+
+    @Override
+    public String getMiningInfo(int productId) {
+        PythonInterpreter interpreter = new PythonInterpreter();
+        String productAnalysis;
+        Phone phone = phoneDao.findPhoneById(productId);
+        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
+        //basicInfo
+        PyFunction func = (PyFunction) interpreter.get("getMiningInfo",
                 PyFunction.class);
         PyObject miningInfoObj = func.__call__(new PyInteger(productId));
-        String miningInfo=miningInfoObj.toString();
-        //合成分析
-        productAnalysis="basicInfo: "+basicInfo+" statisticInfo: "+statisticInfo+ " compareInfo: "+ compareInfo;
-        phone.setProductAnalysis(productAnalysis);
-        return phoneDao.updatePhone(phone);
+        String miningInfo = miningInfoObj.toString();
+        return miningInfo;
     }
 }
