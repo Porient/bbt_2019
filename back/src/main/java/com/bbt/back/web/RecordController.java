@@ -52,7 +52,7 @@ public class RecordController {
     @RequestMapping("/detail")
     private Object getRecordDetail(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
-        int recordId = HttpServletRequestUtil.getInt(request,"record");
+        int recordId = HttpServletRequestUtil.getInt(request,"recordId");
         Record record = recordService.findById(recordId);
         resultEntity.setMsg("获取成功");
         resultEntity.setCode(200);
