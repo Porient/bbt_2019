@@ -8,17 +8,17 @@ import java.util.List;
  * @Date: 2019/10/15 16:15
  */
 public class DeleteObject {
-    private List<ProductLikeObject> likeObjects;
+    private List<ProductLikeObject> likeObject;
 
-    public DeleteObject(List<ProductLikeObject> likeObjects) {
-        this.likeObjects = likeObjects;
+    public DeleteObject(List<ProductLikeObject> likeObject) {
+        this.likeObject = likeObject;
     }
 
     public List<ProductLikeObject> getLikeObjects() {
-        return likeObjects;
+        return likeObject;
     }
 
-    public void setLikeObjects(List<ProductLikeObject> likeObjects) {
-        this.likeObjects = likeObjects;
+    public void setLikeObjects(List<ProductLikeObject> likeObject) {
+        this.likeObject = likeObject;
     }
 }
