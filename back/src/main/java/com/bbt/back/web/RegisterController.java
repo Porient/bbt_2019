@@ -103,8 +103,10 @@ public class RegisterController {
             if (verifyCode!=null||!verifyCode.equals("")) {
                 resultEntity.setData(verifyCode);
                 resultEntity.setMsg( "发送验证码成功");
+                resultEntity.setCode( 200);
             } else {
                 resultEntity.setMsg( "发送验证码失败");
+                resultEntity.setCode( 500);
             }
             //将验证码信息存入session中
             request.getSession().setAttribute("user_code_" + userEmail,verifyCode);
