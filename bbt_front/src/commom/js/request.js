@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8888" : "", // api 的 base_url
+  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:9090" : "", // api 的 base_url
   withCredentials: true, // 跨域请求时发送 cookies
   timeout: 30000, // request timeout
 });

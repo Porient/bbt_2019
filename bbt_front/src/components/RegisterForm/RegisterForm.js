@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { Form, Input, Button, Icon, Col, Row } from "ant-design-vue";
-import { ENGINE_METHOD_NONE } from "constants";
+// import { ENGINE_METHOD_NONE } from "constants";
 //import { threadId } from "worker_threads";
 
 Vue.use(Form);
@@ -25,12 +25,12 @@ export default {
         if (!error) {
           //用户注册,需要先判断VerifyCode是否相同
           if (values.code === this.verifyCode){
-            this.$api.userRegister({
+            this.$api.register({
               userEmail: values.email,
               username: values.username,
               password: values.password,
             }).then(response => {
-              if(response === 200) {
+              if(response.code === 200) {
                 //成功注册，跳转到login
                 this.$router.push({ path: "/login"});
               }
@@ -46,7 +46,7 @@ export default {
       //发送验证码
       this.form.validateFields((error, values) => {
         if (!error) {
-          this.$api.userCode({
+          this.$api.registerCode({
             userEmail: values.email,
           }).then(response => {
             if (response.code === 200) {

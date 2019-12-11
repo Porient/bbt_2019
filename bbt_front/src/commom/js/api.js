@@ -6,7 +6,7 @@ import request from "./request.js";
 export function userLogin(params) {
   //用户登录
   return request({
-    url: "/user/login",
+    url: "/user/login.do",
     method: "POST",
     data: params,
   });
@@ -15,7 +15,7 @@ export function userLogin(params) {
 export function adminLogin(params) {
   //管理员登录
   return request({
-    url: "/admin/login",
+    url: "/admin/login.do",
     method: "POST",
     data: params,
   });
@@ -24,7 +24,7 @@ export function adminLogin(params) {
 export function userLogout(params) {
   //用户注销
   return request({
-    url: "/user/logout",
+    url: "/user/logout.do",
     method: "POST",
     data: params,
   });
@@ -33,16 +33,16 @@ export function userLogout(params) {
 export function adminLogout(params) {
   //管理员注销
   return request({
-    url: "/admin/logout",
+    url: "/admin/logout.do",
     method: "POST",
     data: params,
   });
 }
 
-export function userRegister(params) {
+export function register(params) {
   //用户注册
   return request({
-    url: "/user/register",
+    url: "/user/register.do",
     method: "POST",
     data: params,
   });
@@ -52,7 +52,7 @@ export function userRegister(params) {
 export function registerCode(params) {
   //注册验证码
   return request({
-    url: "/user/code",
+    url: "/user/code.do",
     method: "POST",
     data: params,
   });
@@ -62,7 +62,7 @@ export function registerCode(params) {
 export function userCollectPic(params) {
   //用户收藏画像
   return request({
-    url: "/user/getCollectPic",
+    url: "/user/getCollectPic.do",
     method: "POST",
     data: params,
   });
@@ -71,7 +71,7 @@ export function userCollectPic(params) {
 export function userUpdate(params) {
   //更新个人信息
   return request({
-    url: "/user/update",
+    url: "/user/update.do",
     method: "POST",
     data: params,
   });
@@ -80,7 +80,7 @@ export function userUpdate(params) {
 export function userRecordPic(params) {
   //个人收藏画像
   return request({
-    url: "/user/getRecordPic",
+    url: "/user/getRecordPic.do",
     method: "POST",
     data: params,
   });
@@ -89,7 +89,7 @@ export function userRecordPic(params) {
 export function userCommentPic(params) {
   //个人评论画像
   return request({
-    url: "/user/getCommentPic",
+    url: "/user/getCommentPic.do",
     method: "POST",
     data: params,
   });
@@ -99,7 +99,7 @@ export function userCommentPic(params) {
 export function commentLike(params) {
   //点赞评论
   return request({
-    url: "/comment/likeComment",
+    url: "/comment/likeComment.do",
     method: "POST",
     data: params,
   });
@@ -108,16 +108,16 @@ export function commentLike(params) {
 export function commentDelete(params) {
   //删除评论
   return request({
-    url: "/comment/delete",
+    url: "/comment/delete.do",
     method: "POST",
     data: params,
   });
 }
 
-export function commentUpdata(params) {
+export function commentUpdate(params) {
   //更新评论
   return request({
-    url: "/comment/update",
+    url: "/comment/update.do",
     method: "POST",
     data: params,
   });
@@ -126,7 +126,7 @@ export function commentUpdata(params) {
 export function commentAdd(params) {
   //添加评论
   return request({
-    url: "/comment/add",
+    url: "/comment/add.do",
     method: "POST",
     data: params,
   });
@@ -135,7 +135,7 @@ export function commentAdd(params) {
 export function commentList(params) {
   //获取评论列表
   return request({
-    url: "/comment/list",
+    url: "/comment/list.do",
     method: "POST",
     data: params,
   });
@@ -145,7 +145,7 @@ export function commentList(params) {
 export function recordAdd(params) {
   //增加浏览记录
   return request({
-    url: "/record/add",
+    url: "/record/add.do",
     method: "POST",
     data: params,
   });
@@ -154,7 +154,7 @@ export function recordAdd(params) {
 export function recordDelete(params) {
   //删除浏览记录
   return request({
-    url: "/record/delete",
+    url: "/record/delete.do",
     method: "POST",
     data: params,
   });
@@ -163,7 +163,7 @@ export function recordDelete(params) {
 export function recordList(params) {
   //获取浏览记录列表
   return request({
-    url: "/record/list",
+    url: "/record/list.do",
     method: "POST",
     data: params,
   });
@@ -173,7 +173,7 @@ export function recordList(params) {
 export function collectDelete(params) {
   //删除收藏
   return request({
-    url: "/collect/delete",
+    url: "/collect/delete.do",
     method: "POST",
     data: params,
   });
@@ -182,7 +182,7 @@ export function collectDelete(params) {
 export function collectAdd(params) {
   //添加收藏
   return request({
-    url: "/collect/add",
+    url: "/collect/add.do",
     method: "POST",
     data: params,
   });
@@ -191,7 +191,7 @@ export function collectAdd(params) {
 export function collectList(params) {
   //收藏列表
   return request({
-    url: "/collect/list",
+    url: "/collect/list.do",
     method: "POST",
     data: params,
   });
@@ -201,7 +201,7 @@ export function collectList(params) {
 export function getBasicInfo(params) {
   //获取产品基本信息
   return request({
-    url: "/product/getBasicInfo",
+    url: "/product/getBasicInfo.do",
     method: "POST",
     data: params,
   });
@@ -210,7 +210,7 @@ export function getBasicInfo(params) {
 export function getCommentInfo(params) {
   //获取产品评论信息
   return request({
-    url: "/product/getCommentInfo",
+    url: "/product/getCommentInfo.do",
     method: "POST",
     data: params,
   });
@@ -219,7 +219,7 @@ export function getCommentInfo(params) {
 export function getStatisticInfo(params) {
   //获取产品统计信息
   return request({
-    url: "/product/getStatisticInfo",
+    url: "/product/getStatisticInfo.do",
     method: "POST",
     data: params,
   });
@@ -228,7 +228,7 @@ export function getStatisticInfo(params) {
 export function getCompareInfo(params) {
   //获取产品比较信息
   return request({
-    url: "/product/getCompareInfo",
+    url: "/product/getCompareInfo.do",
     method: "POST",
     data: params,
   });
@@ -237,17 +237,16 @@ export function getCompareInfo(params) {
 export function getMiningInfo(params) {
   //获取产品挖掘信息
   return request({
-    url: "/product/getMiningInfo",
+    url: "/product/getMiningInfo.do",
     method: "POST",
     data: params,
   });
 }
 
-
 export function productRecommend(params) {
   //获取推荐产品
   return request({
-    url: "/product/recommendProduct",
+    url: "/product/recommendProduct.do",
     method: "POST",
     data: params,
   });
@@ -256,7 +255,7 @@ export function productRecommend(params) {
 export function productList(params) {
   //获得产品列表
   return request({
-    url: "/product/list",
+    url: "/product/list.do",
     method: "POST",
     data: params,
   });
@@ -265,25 +264,25 @@ export function productList(params) {
 export function productDelete(params) {
   //删除产品
   return request({
-    url: "/product/delete",
+    url: "/product/delete.do",
     method: "POST",
     data: params,
   });
 }
 
-export function productDetail(params) {
-  //获取产品详情,数据库中未处理信息
-  return request({
-    url: "/product/detail",
-    method: "POST",
-    data: params,
-  });
-}
+// export function productDetail(params) {
+//   //获取产品详情,数据库中未处理信息
+//   return request({
+//     url: "/product/detail",
+//     method: "POST",
+//     data: params,
+//   });
+// }
 
 export function productLike(params) {
   //点赞产品
   return request({
-    url: "/product/likeProduct",
+    url: "/product/likeProduct.do",
     method: "POST",
     data: params,
   });
@@ -292,7 +291,7 @@ export function productLike(params) {
 export function productSearch(params) {
   //搜索产品
   return request({
-    url: "/product/searchProduct",
+    url: "/product/searchProduct.do",
     method: "POST",
     data: params,
   });
@@ -301,18 +300,18 @@ export function productSearch(params) {
 export function productChange(params) {
   //产品上下架
   return request({
-    url: "/product/changeState",
+    url: "/product/changeState.do",
     method: "POST",
     data: params,
   });
 }
 
-export function productHot(params) {
-  //获取热门产品
-  return request({
-    url: "/product/hotProduct",
-    method: "POST",
-    data: params,
-  });
-}
+// export function productHot(params) {
+//   //获取热门产品
+//   return request({
+//     url: "/product/hotProduct",
+//     method: "POST",
+//     data: params,
+//   });
+// }
 
