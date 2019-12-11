@@ -4,6 +4,7 @@ import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.model.ProductResult;
 import com.github.pagehelper.PageInfo;
+import org.python.core.PyObject;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,13 +29,13 @@ public interface ProductService {
 
     String getRecommendProduct(Integer userId);
 
-    String getBasicInfo(int productId);
+    PyObject getBasicInfo(int productId);
 
-    String getStatisticInfo(int productId);
+    PyObject getStatisticInfo(int productId);
 
-    String getCompareInfo(int productId);
+    PyObject getCompareInfo(int productId);
 
-    String getCommentInfo(int productId);
+    PyObject getCommentInfo(int productId);
 
-    String getMiningInfo(int productId);
+    PyObject getMiningInfo(int productId);
 }

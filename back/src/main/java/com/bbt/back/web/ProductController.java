@@ -8,6 +8,7 @@ import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
+import org.python.core.PyObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,8 +82,8 @@ public class ProductController {
     private Object getBasicInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String basicInfo=productService.getBasicInfo(productId);
-        if (basicInfo.length() != 0){
+        PyObject basicInfo=productService.getBasicInfo(productId);
+        if (basicInfo != null){
             resultEntity.setData(basicInfo);
             resultEntity.setMsg("生成BasicInfo成功");
             resultEntity.setCode(200);
@@ -97,8 +98,8 @@ public class ProductController {
     private Object getStatisticInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String statisticInfo=productService.getStatisticInfo(productId);
-        if (statisticInfo.length() != 0){
+        PyObject statisticInfo=productService.getStatisticInfo(productId);
+        if (statisticInfo != null){
             resultEntity.setData(statisticInfo);
             resultEntity.setMsg("生成StatisticInfo成功");
             resultEntity.setCode(200);
@@ -113,8 +114,8 @@ public class ProductController {
     private Object getCompareInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String compareInfo=productService.getCompareInfo(productId);
-        if (compareInfo.length() != 0){
+        PyObject compareInfo=productService.getCompareInfo(productId);
+        if (compareInfo != null){
             resultEntity.setData(compareInfo);
             resultEntity.setMsg("生成CompareInfo成功");
             resultEntity.setCode(200);
@@ -129,8 +130,8 @@ public class ProductController {
     private Object getCommentInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String commentInfo=productService.getCommentInfo(productId);
-        if (commentInfo.length() != 0){
+        PyObject commentInfo=productService.getCommentInfo(productId);
+        if (commentInfo != null){
             resultEntity.setData(commentInfo);
             resultEntity.setMsg("生成CommentInfo成功");
             resultEntity.setCode(200);
@@ -145,8 +146,8 @@ public class ProductController {
     private Object getMiningInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String miningInfo=productService.getMiningInfo(productId);
-        if (miningInfo.length() != 0){
+        PyObject miningInfo=productService.getMiningInfo(productId);
+        if (miningInfo != null){
             resultEntity.setData(miningInfo);
             resultEntity.setMsg("生成MiningInfo成功");
             resultEntity.setCode(200);

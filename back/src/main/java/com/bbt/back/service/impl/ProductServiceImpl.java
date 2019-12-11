@@ -166,7 +166,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String getBasicInfo(int productId) {
+    public PyObject getBasicInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
         Phone phone = phoneDao.findPhoneById(productId);
@@ -174,13 +174,12 @@ public class ProductServiceImpl implements ProductService {
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getBasicInfo",
                 PyFunction.class);
-        PyObject basicInfoObj = func.__call__(new PyInteger(productId));
-        String basicInfo = basicInfoObj.toString();
+        PyObject basicInfo = func.__call__(new PyInteger(productId));
         return basicInfo;
     }
 
     @Override
-    public String getStatisticInfo(int productId) {
+    public PyObject getStatisticInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
         Phone phone = phoneDao.findPhoneById(productId);
@@ -188,13 +187,12 @@ public class ProductServiceImpl implements ProductService {
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getStatisticInfo",
                 PyFunction.class);
-        PyObject statisticInfoObj = func.__call__(new PyInteger(productId));
-        String statisticInfo = statisticInfoObj.toString();
+        PyObject statisticInfo = func.__call__(new PyInteger(productId));
         return statisticInfo;
     }
 
     @Override
-    public String getCompareInfo(int productId) {
+    public PyObject getCompareInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
         Phone phone = phoneDao.findPhoneById(productId);
@@ -202,13 +200,12 @@ public class ProductServiceImpl implements ProductService {
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getCompareInfo",
                 PyFunction.class);
-        PyObject compareInfoObj = func.__call__(new PyInteger(productId));
-        String compareInfo = compareInfoObj.toString();
+        PyObject compareInfo = func.__call__(new PyInteger(productId));
         return compareInfo;
     }
 
     @Override
-    public String getCommentInfo(int productId) {
+    public PyObject getCommentInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
         Phone phone = phoneDao.findPhoneById(productId);
@@ -216,13 +213,12 @@ public class ProductServiceImpl implements ProductService {
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getCommentInfo",
                 PyFunction.class);
-        PyObject commentInfoObj = func.__call__(new PyInteger(productId));
-        String commentInfo = commentInfoObj.toString();
+        PyObject commentInfo = func.__call__(new PyInteger(productId));
         return commentInfo;
     }
 
     @Override
-    public String getMiningInfo(int productId) {
+    public PyObject getMiningInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
         Phone phone = phoneDao.findPhoneById(productId);
@@ -230,8 +226,7 @@ public class ProductServiceImpl implements ProductService {
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getMiningInfo",
                 PyFunction.class);
-        PyObject miningInfoObj = func.__call__(new PyInteger(productId));
-        String miningInfo = miningInfoObj.toString();
+        PyObject miningInfo = func.__call__(new PyInteger(productId));
         return miningInfo;
     }
 }
