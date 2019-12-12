@@ -23,6 +23,31 @@ public class User implements Serializable {
     private String used;
     private Integer isBan;
 
+    public User(){
+
+    }
+
+    public User(String userEmail, String nickname, String password) {
+        this.userEmail = userEmail;
+        this.nickname = nickname;
+        this.password = password;
+    }
+
+    public User(Integer userId, String userEmail, String nickname, String password, Integer phone, Integer age, String profession, String tag1, String tag2, String tag3, String used, Integer isBan) {
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.nickname = nickname;
+        this.password = password;
+        this.phone = phone;
+        this.age = age;
+        this.profession = profession;
+        this.tag1 = tag1;
+        this.tag2 = tag2;
+        this.tag3 = tag3;
+        this.used = used;
+        this.isBan = isBan;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

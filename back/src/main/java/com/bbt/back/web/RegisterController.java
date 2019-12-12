@@ -15,6 +15,7 @@ import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,18 +38,17 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping("/user/register")
-    private Object registerByUser(HttpServletRequest request) {
+    private Object registerByUser(HttpServletRequest request, @RequestBody User user) {
         //1.将前台获取的参数转换成User对象
         ResultEntity resultEntity=new ResultEntity();
         String userStr = HttpServletRequestUtil.getString(request, "user");
         ObjectMapper mapper = new ObjectMapper();
-        User user = null;
         try {
-            user = mapper.readValue(userStr, User.class);
             //1.比较验证码是否一致或者超时
             String sessionCode = (String) request.getSession().getAttribute("user_code_" + user.getUserEmail());
             if (sessionCode == null) {
                 resultEntity.setMsg("请先获取验证码");
+                resultEntity.setCode(500);
                 return resultEntity;
             }
             //获取前端传递过来的code参数
@@ -59,13 +59,15 @@ public class RegisterController {
                 long seconds = DateUtil.getDifferenceSeconds(sendTime, new Date());
                 if (seconds > Constant.OVERDUESECONDS) {
                     resultEntity.setMsg("验证码已过期");
+                    resultEntity.setCode(500);
                     return resultEntity;
                 }
             } else {
                 resultEntity.setMsg("验证码不正确");
+                resultEntity.setCode(500);
                 return resultEntity;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             resultEntity.setMsg(SystemErrorEnum.SYSTEM_INNER_ERROR.getMsg());
             return resultEntity;
         }
@@ -73,9 +75,10 @@ public class RegisterController {
         try {
             ResultEntity result = registerService.registerByUser(user);
             if (result.getCode().intValue() == RegisterResultEnum.SUCCESS.getCode().intValue()) {
-                resultEntity.setData(result.getData());
+                User user2=(User) result.getData();
+                resultEntity.setData(user2);
             }
-            resultEntity.setCode(result.getCode());
+            resultEntity.setCode(200);
             resultEntity.setMsg(result.getMsg());
             return resultEntity;
         } catch (RegisterException e) {
