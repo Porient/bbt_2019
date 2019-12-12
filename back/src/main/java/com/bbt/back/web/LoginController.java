@@ -153,9 +153,11 @@ public class LoginController {
             //更新已登录用户列表
             session.setAttribute("userList", userList);
             resultEntity.setMsg("注销成功！");
+            resultEntity.setCode(200);
             return resultEntity;
         } catch (Exception e) {
             e.printStackTrace();
+            resultEntity.setCode(500);
             resultEntity.setMsg("注销过程中发生异常！");
             return resultEntity;
         }
@@ -201,10 +203,12 @@ public class LoginController {
             //更新已登录用户列表
             session.setAttribute("adminList", adminList);
             resultEntity.setMsg("注销成功！");
+            resultEntity.setCode(200);
             return resultEntity;
         } catch (Exception e) {
             e.printStackTrace();
             resultEntity.setMsg("注销过程中发生异常！");
+            resultEntity.setCode(500);
             return resultEntity;
         }
     }
