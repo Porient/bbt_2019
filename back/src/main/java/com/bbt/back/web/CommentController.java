@@ -9,7 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.io.IOException;
  * @Author: Kobe
  * @Date: 2019/10/12 10:35
  */
-@Controller
+@RestController
 @RequestMapping("/comment")
 public class CommentController {
     @Autowired
@@ -43,7 +45,7 @@ public class CommentController {
         ResultEntity resultEntity = new ResultEntity();
         int commentId = HttpServletRequestUtil.getInt(request,"commentId");
         int code = commentService.delComment(commentId);
-        if (code == 0){
+        if (code == 1){
             resultEntity.setMsg("删除评论成功");
             resultEntity.setCode(200);
         } else {
@@ -59,7 +61,7 @@ public class CommentController {
         String commentStr = HttpServletRequestUtil.getString(request,"comment");
         ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
-        if (commentService.updateComment(comment) == 0){
+        if (commentService.updateComment(comment) == 1){
             resultEntity.setMsg("更新评论成功");
             resultEntity.setCode(200);
         } else{
@@ -75,7 +77,7 @@ public class CommentController {
         String commentStr = HttpServletRequestUtil.getString(request,"comment");
         ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
-        if (commentService.addComment(comment) == 0){
+        if (commentService.addComment(comment) == 1){
             resultEntity.setMsg("添加评论成功");
             resultEntity.setCode(200);
         } else {
@@ -85,7 +87,7 @@ public class CommentController {
         return resultEntity;
     }
 
-    @RequestMapping("/likeComment")
+    @PostMapping("/likeComment")
     private Object likeComment(HttpServletRequest request) throws IOException{
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request, "userId");

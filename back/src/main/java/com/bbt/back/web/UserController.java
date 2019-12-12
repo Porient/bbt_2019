@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import java.util.HashMap;
  * @Date: 2019/10/7 10:18
  */
 
-@Controller
+@RestController
 @RequestMapping("user")
 public class UserController {
     @Autowired
@@ -147,9 +148,9 @@ public class UserController {
     private Object getCollectPic(HttpServletRequest request) throws Exception{
         ResultEntity resultEntity = new ResultEntity();
         Integer userId = HttpServletRequestUtil.getInt(request,"userId");
-        Integer collectNum=collectService.findCollectNumByUserId(userId);
+        Long collectNum=collectService.findCollectNumByUserId(userId);
         Integer rank=collectService.rankByUserId(userId);
-        HashMap<String,Integer> map=collectService.sumByUserId(userId);
+        HashMap<String,Long> map=collectService.sumByUserId(userId);
         CollectPic collectPic=new CollectPic(collectNum,rank,map);
         resultEntity.setData(collectPic);
         return resultEntity;

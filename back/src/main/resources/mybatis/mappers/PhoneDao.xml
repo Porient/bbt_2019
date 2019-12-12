@@ -23,7 +23,7 @@
         <result column="tag1" property="tag1" />
         <result column="tag2" property="tag2" />
         <result column="tag3" property="tag3" />
-        <result column="product_type" property="product_type" />
+        <result column="product_type" property="productType" />
         <result column="library" property="library" />
         <result column="product_analysis" property="productAnalysis" />
     </resultMap>

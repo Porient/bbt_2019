@@ -2,54 +2,53 @@
   <div class="box">
     <div class="block">
       <div>登录注册API</div>
-      <a-button @click="register">用户注册</a-button>
+      <a-button type="primary" @click="register">用户注册</a-button>
       <a-button type="primary" @click="getCode">注册验证码</a-button>
-      <a-button @click="userLogin">用户登录</a-button>
-      <a-button @click="userLogout">用户注销</a-button>
-      <a-button @click="adminLogin">管理员登录</a-button>
-      <a-button @click="adminLogout">管理员注销</a-button>
+      <a-button type="primary" @click="userLogin">用户登录</a-button>
+      <a-button type="primary" @click="userLogout">用户注销</a-button>
+      <a-button type="primary" @click="adminLogin">管理员登录</a-button>
+      <a-button type="primary" @click="adminLogout">管理员注销</a-button>
     </div>
     <div class="block">
       <div>评论API</div>
-      <a-button @click="commentLike">点赞评论</a-button>
-      <a-button @click="commentDelete">删除评论</a-button>
-      <a-button @click="commentUpdate">更新评论</a-button>
-      <a-button @click="commentAdd">添加评论</a-button>
-      <a-button @click="commentList">评论列表</a-button>
+      <a-button type="primary" @click="commentLike">点赞评论</a-button>
+      <a-button type="primary" @click="commentDelete">删除评论</a-button>
+      <a-button type="primary" @click="commentUpdate">更新评论</a-button>
+      <a-button type="primary" @click="commentAdd">添加评论</a-button>
+      <a-button type="primary" @click="commentList">评论列表</a-button>
     </div>
     <div class="block">
       <div>用户个人中心API</div>
-      <a-button>获取用户收藏画像</a-button>
-      <a-button>更新个人信息</a-button>
-      <a-button>获取个人收藏画像</a-button>
-      <a-button>获取个人评论画像</a-button>
+      <a-button @click="userCollectPic"> 获取用户收藏画像</a-button>
+      <a-button type="primary" @click="userUpdate">更新个人信息</a-button>
+      <a-button @click="userRecordPic">获取个人收藏画像</a-button>
+      <a-button @click="userCommentPic">获取个人评论画像</a-button>
     </div>
     <div class="block">
       <div>浏览记录API</div>
-      <a-button>增加浏览记录</a-button>
-      <a-button>删除浏览记录</a-button>
-      <a-button>获取浏览记录列表</a-button>
+      <a-button type="primary" @click="recordAdd">增加浏览记录</a-button>
+      <a-button type="primary" @click="recordDelete">删除浏览记录</a-button>
+      <a-button type="primary" @click="recordList">获取浏览记录列表</a-button>
     </div>
     <div class="block">
       <div>收藏API</div>
-      <a-button>删除收藏</a-button>
-      <a-button>添加收藏</a-button>
-      <a-button>收藏列表</a-button>
+      <a-button type="primary" @click="collectDelete">删除收藏</a-button>
+      <a-button type="primary" @click="collectAdd" >添加收藏</a-button>
+      <a-button type="primary" @click="collectList">收藏列表</a-button>
     </div>
     <div class="block">
       <div>产品API</div>
-      <a-button>获取MiningInfo</a-button>
-      <a-button>获取CommentInfo</a-button>
-      <a-button>获取CompareInfo</a-button>
-      <a-button>获取StatisticsInfo</a-button>
-      <a-button>获取基本信息</a-button>
-      <a-button>获取推荐产品</a-button>
-      <a-button>获取产品列表</a-button>
-      <a-button>删除产品</a-button>
-      <a-button>点评产品</a-button>
-      <a-button>搜索产品</a-button>
-      <a-button>产品上下架</a-button>
-      <a-button>获取热门产品</a-button>
+      <a-button @click="getMiningInfo">获取MiningInfo</a-button>
+      <a-button @click="getCommentInfo">获取CommentInfo</a-button>
+      <a-button @click="getCompareInfo">获取CompareInfo</a-button>
+      <a-button @click="getStatisticInfo">获取StatisticsInfo</a-button>
+      <a-button @click="getBasicInfo">获取基本信息</a-button>
+      <a-button @click="productRecommend">获取推荐产品</a-button>
+      <a-button @click="productList">获取产品列表</a-button>
+      <a-button @click="productDelete">删除产品</a-button>
+      <a-button @click="productLike">点赞产品</a-button>
+      <a-button @click="productSearch">搜索产品</a-button>
+      <a-button @click="productChange"> 产品上下架</a-button>
     </div>
   </div>
 </template>
@@ -138,7 +137,7 @@ export default {
     userLogout(){
       //用户注销
       //请求参数
-      var userId = "101";
+      var userId = "66";
       //返回参数
       var msg = "";
       var code ="";
@@ -178,7 +177,7 @@ export default {
     adminLogout(){
       //管理员注销
       //请求参数
-      var adminId = "496612585@qq.com";
+      var adminId = "1";
       //返回参数
       var code = "";
       var msg = "";
@@ -217,16 +216,14 @@ export default {
     commentDelete(){
       //删除评论
       //请求参数
-      var commentId = ""
+      var commentId = "996"
       //返回参数
       var msg = "";
       var code = "";
-
-      commnetId = "1000";
       this.$api.commentDelete({
-        commnetId:commnetId,
+        commentId:commentId,
       }).then(response => {
-        if(response.code === 200) {
+        if(response.code === "200") {
           console.log(response)
           msg = response.msg;
           code = response.code;
@@ -237,7 +234,7 @@ export default {
       //更新评论
       //请求参数
       var comment = {
-        commentId:"1000",
+        commentId:"995",
         content:"修改评论内容"
         };
       //返回参数
@@ -261,7 +258,8 @@ export default {
         userId:"101",
         //
         productId:"1",
-        productName:"1",
+        productType:"0",
+        productName:"T91",
         content:"1",
       };
       //返回参数
@@ -312,7 +310,7 @@ export default {
     userCollectPic(){
       //用户收藏画像
       //请求参数
-      var userId = "";
+      var userId = "1";
       //返回参数
       var collectPic = {
         collectNum:"",
@@ -337,7 +335,8 @@ export default {
       //更新个人信息
       //请求参数
       var user = {
-        nickname:"",
+        userId: "101",
+        nickname:"10356",
         phone:"",
         age:"",
         profession:"",
@@ -364,7 +363,7 @@ export default {
     userRecordPic(){
       //个人收藏画像
       //请求参数
-      var userId = "";
+      var userId = "1";
       //返回参数
       var recordPic = {
         recordNum:"",
@@ -419,7 +418,7 @@ export default {
     recordAdd(){
       //获取记录详情
       //请求参数
-      var recordId = "";
+      var recordId = "1";
       //返回参数
       var record ={
         userId:"",
@@ -446,7 +445,7 @@ export default {
     recordDelete(){
       //删除浏览记录
       //请求参数
-      var recordId = "";
+      var recordId = "1000";
       //返回参数
       var msg = "";
       var code = "";
@@ -464,9 +463,9 @@ export default {
     recordList(){
       //获取浏览记录列表
       //请求参数
-      var userId = "";
-      var pageNo = "";
-      var pageSize = "";
+      var userId = "1";
+      var pageNo = "1";
+      var pageSize = "1";
       //返回参数
       var recordPageInfo = {
         obj:{},
@@ -495,7 +494,7 @@ export default {
     collectDelete(){
       //删除收藏
       //请求参数
-      var collectId = "";
+      var collectId = "398";
       //返回参数
       var msg = "";
       var code = "";
@@ -513,15 +512,18 @@ export default {
     collectAdd(){
       //添加收藏
       //请求参数
-      var userId = "";
-      var productId = "";
+      var collect = {
+         userId : "1",
+         productId : "1",
+         productType:"0",
+      };
+    
       //返回参数
       var msg = "";
       var code = "";
 
       this.$api.collectAdd({
-        userId:userId,
-        productId:productId,
+        collect:collect,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
@@ -533,9 +535,9 @@ export default {
     collectList(){
       //收藏列表
       //请求参数
-      var userId = "";
-      var pageNo = "";
-      var pageSize = "";
+      var userId = "1";
+      var pageNo = "1";
+      var pageSize = "1";
       //返回参数
       var pageInfoResult = {
         obj:{},
@@ -564,7 +566,7 @@ export default {
     getMiningInfo(){
       //获取挖掘信息
       //请求参数
-      var productId = "";
+      var productId = "1";
       //返回参数
       var miningInfo = {
         comment_confidence_list:[{

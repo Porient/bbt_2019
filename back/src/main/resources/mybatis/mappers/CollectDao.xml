@@ -45,8 +45,8 @@
       where c.user_id = #{userId}
     </select>
 
-    <select id="countByUserId" parameterType="java.lang.Integer">
-      select count(1)
+    <select id="countByUserId" parameterType="java.lang.Integer" resultType="java.lang.Long">
+      select count(*)
       from `collect` c
       where c.user_id = #{userId}
     </select>

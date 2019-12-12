@@ -52,26 +52,26 @@
     </select>
 
     <select id="findRecordNumByUserId" parameterType="java.lang.Integer" resultMap="recordMap">
-      select count (1)
+      select count(*)
       from `record` r
       where r.user_id = #{userId}
     </select>
 
     <select id="findProductNumByUserIdAndType" parameterType="java.lang.Integer" resultMap="recordMap">
-      select count (1)
+      select count(*)
       from `record` r
       where r.user_id = #{userId} AND
-      product_type = #{productType}
+      r.product_type = #{productType}
     </select>
 
     <select id="sumByUserIdList" resultType="java.util.HashMap">
-        SELECT record_id as 'key', count(1) as 'value'
+        SELECT record_id as 'key', count(*) as 'value'
         FROM record
-        GROUP BY user_id;
+        where user_id=#{userId};
     </select>
 
     <select id="sumByTimeList" resultType="java.util.HashMap">
-        SELECT DATE_FORMAT(CheckTime,'%Y-%m-%d') as 'key', count(1) as 'value'
+        SELECT DATE_FORMAT(CheckTime,'%Y-%m-%d') as 'key', count(*) as 'value'
         FROM record
         GROUP BY 'key';
     </select>

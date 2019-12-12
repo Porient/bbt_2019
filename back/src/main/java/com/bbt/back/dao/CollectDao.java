@@ -25,7 +25,7 @@ public interface CollectDao {
 
     List<Collect> selectByUserId(int userId);
 
-    int countByUserId(int userId);
+    long countByUserId(int userId);
 
-    List<HashMap<Integer,Object>> sumByUserIdList();
+    List<HashMap<Long,Object>> sumByUserIdList();
 }

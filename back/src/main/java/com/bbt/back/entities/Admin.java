@@ -14,6 +14,16 @@ public class Admin implements Serializable {
     private String adminEmail;
     private String password;
 
+    public Admin() {
+
+    }
+
+    public Admin(Integer adminId, String adminEmail, String password) {
+        this.adminId = adminId;
+        this.adminEmail = adminEmail;
+        this.password = password;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

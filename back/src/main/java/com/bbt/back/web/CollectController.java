@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -22,17 +23,17 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/12 16:43
  */
-@Controller
+@RestController
 @RequestMapping("/collect")
 public class CollectController {
     @Autowired
     private CollectService collectService;
 
     @RequestMapping("/list")
-    private Object getCollects(HttpServletRequest request, Integer pageNum, Integer pageSize){
+    private Object getCollects(HttpServletRequest request, Integer pageNo, Integer pageSize){
         ResultEntity resultEntity = new ResultEntity();
         int userId = HttpServletRequestUtil.getInt(request,"userId");
-        PageInfo<Collect> pageInfo = collectService.selectAllByUserId(userId,pageNum,pageSize);
+        PageInfo<Collect> pageInfo = collectService.selectAllByUserId(userId,pageNo,pageSize);
         PageInfoResult pageInfoResult=new PageInfoResult(pageInfo.getList(),pageInfo.getTotal(),pageInfo.getPageNum(),pageInfo.getPageSize());
         resultEntity.setMsg("获取收藏列表成功");
         resultEntity.setCode(200);
@@ -43,10 +44,10 @@ public class CollectController {
     @PostMapping("/add")
     private Object addCollect(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
-        String collectStr = HttpServletRequestUtil.getString(request,"collectStr");
+        String collectStr = HttpServletRequestUtil.getString(request,"collect");
         ObjectMapper mapper = new ObjectMapper();
         Collect collect = mapper.readValue(collectStr,Collect.class);
-        if (collectService.addCollect(collect) == 0){
+        if (collectService.addCollect(collect) == 1){
             resultEntity.setMsg("添加收藏成功");
             resultEntity.setCode(200);
         } else {
@@ -60,7 +61,7 @@ public class CollectController {
     private Object deleteCollect(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int collectId = HttpServletRequestUtil.getInt(request,"collectId");
-        if (collectService.deleteCollect(collectId) == 0){
+        if (collectService.deleteCollect(collectId) == 1){
             resultEntity.setMsg("删除收藏成功");
             resultEntity.setCode(200);
         } else{

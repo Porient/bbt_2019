@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.io.IOException;
  * @Author: Kobe
  * @Date: 2019/10/15 11:06
  */
-@Controller
+@RestController
 @RequestMapping("/record")
 public class RecordController {
     @Autowired
@@ -40,7 +41,7 @@ public class RecordController {
     private Object deleteRecord(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int recordId = HttpServletRequestUtil.getInt(request,"recordId");
-        if (recordService.deleteById(recordId) == 0){
+        if (recordService.deleteById(recordId) == 1){
             resultEntity.setMsg("删除成功");
             resultEntity.setCode(200);
         } else {

@@ -5,7 +5,7 @@
         <id column="comment_like_id" property="commentLikeId" />
         <result column="product_id" property="productId" />
         <result column="product_type" property="productType" />
-        <result column="like_num" property="likeNum" />
+        <result column="like_time" property="likeTime" />
     </resultMap>
 
     <delete id="deleteCommentLike" parameterType="java.lang.Integer">
@@ -24,7 +24,7 @@
         <set>
             <if test="userId != null and userId != ''"> user_id = #{userId},</if>
             <if test="commentId != null and commentId != ''"> comment_id = #{commentId},</if>
-            <if test="likeTime != null and likeTime != ''"> like_time = #{likeTime}</if>
+            <if test="likeTime != null"> like_time = #{likeTime}</if>
         </set>
         where comment_like_id = #{commentLikeId}
     </update>
@@ -44,6 +44,6 @@
       select c.*
       from `comment_like` c
       where c.user_id = #{userId} and
-      c.comment_id = {commentId}
+      c.comment_id = #{commentId}
     </select>
 </mapper>

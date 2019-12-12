@@ -50,38 +50,38 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public Integer findCollectNumByUserId(Integer userId) {
+    public Long findCollectNumByUserId(Integer userId) {
         return collectDao.countByUserId(userId);
     }
 
     @Override
     public Integer rankByUserId(Integer userId) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Long> map = new HashMap<>();
         Integer rank=-1;
-        List<HashMap<Integer, Object>> list = collectDao.sumByUserIdList();
+        List<HashMap<Long, Object>> list = collectDao.sumByUserIdList();
         if (list != null && !list.isEmpty()) {
-            for (HashMap<Integer, Object> map1 : list) {
+            for (HashMap<Long, Object> map1 : list) {
                 Integer key = null;
-                Integer value = null;
-                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
+                Long value = null;
+                for (Map.Entry<Long, Object> entry : map1.entrySet()) {
                     if ("key".equals(entry.getKey())) {
                         key = (Integer) entry.getValue();
                     } else if ("value".equals(entry.getKey())) {
-                        value = (Integer) entry.getValue();
+                        value = (Long) entry.getValue();
                     }
                 }
                 map.put(key, value);
             }
         }
 
-        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+        List<Map.Entry<Integer, Long>> sortList = new ArrayList<>();
+        for(Map.Entry<Integer, Long> entry : map.entrySet()){
             sortList.add(entry); //将map中的元素放入list中
         }
 
-        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Long>>() {
             @Override
-            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+            public int compare(Map.Entry<Integer, Long> o1, Map.Entry<Integer, Long> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
@@ -96,33 +96,33 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public HashMap<String, Integer> sumByUserId(Integer userId) {
-        Map<Integer, Integer> map = new HashMap<>();
-        HashMap<String, Integer> result = new HashMap<>();
-        List<HashMap<Integer, Object>> list = collectDao.sumByUserIdList();
+    public HashMap<String, Long> sumByUserId(Integer userId) {
+        Map<Integer, Long> map = new HashMap<>();
+        HashMap<String, Long> result = new HashMap<>();
+        List<HashMap<Long, Object>> list = collectDao.sumByUserIdList();
         if (list != null && !list.isEmpty()) {
-            for (HashMap<Integer, Object> map1 : list) {
+            for (HashMap<Long, Object> map1 : list) {
                 Integer key = null;
-                Integer value = null;
-                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
+                Long value = null;
+                for (Map.Entry<Long, Object> entry : map1.entrySet()) {
                     if ("key".equals(entry.getKey())) {
                         key = (Integer) entry.getValue();
                     } else if ("value".equals(entry.getKey())) {
-                        value = (Integer) entry.getValue();
+                        value = (Long) entry.getValue();
                     }
                 }
                 map.put(key, value);
             }
         }
 
-        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+        List<Map.Entry<Integer, Long>> sortList = new ArrayList<>();
+        for(Map.Entry<Integer, Long> entry : map.entrySet()){
             sortList.add(entry); //将map中的元素放入list中
         }
 
-        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Long>>() {
             @Override
-            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+            public int compare(Map.Entry<Integer, Long> o1, Map.Entry<Integer, Long> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });

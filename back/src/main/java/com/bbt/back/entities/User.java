@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String userEmail;
     private String nickname;
     private String password;
-    private Integer phone;
+    private String phone;
     private Integer age;
     private String profession;
     private String tag1;
@@ -33,7 +33,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(Integer userId, String userEmail, String nickname, String password, Integer phone, Integer age, String profession, String tag1, String tag2, String tag3, String used, Integer isBan) {
+    public User(Integer userId, String userEmail, String nickname, String password, String phone, Integer age, String profession, String tag1, String tag2, String tag3, String used, Integer isBan) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.nickname = nickname;
@@ -84,11 +84,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

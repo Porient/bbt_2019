@@ -221,9 +221,11 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getMiningInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone = phoneDao.findPhoneById(productId);
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
+        System.out.println(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
+
+        interpreter.execfile(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
         //basicInfo
+        System.out.println(2222222);
         PyFunction func = (PyFunction) interpreter.get("getMiningInfo",
                 PyFunction.class);
         PyObject miningInfo = func.__call__(new PyInteger(productId));

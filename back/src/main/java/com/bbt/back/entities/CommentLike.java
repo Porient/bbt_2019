@@ -3,6 +3,7 @@ package com.bbt.back.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+
 /**
  * @Description:
  * @Author: Kobe
@@ -19,7 +20,7 @@ public class CommentLike implements Serializable {
     public CommentLike() {
     }
 
-    public CommentLike(int userId, int commentId, Date likeTime) {
+    public CommentLike(int userId, int commentId, Date  likeTime) {
         this.userId = userId;
         this.commentId = commentId;
         this.likeTime = likeTime;
@@ -70,11 +71,11 @@ public class CommentLike implements Serializable {
         this.commentId = commentId;
     }
 
-    public Date getLikeTime() {
+    public Date  getLikeTime() {
         return likeTime;
     }
 
-    public void setLikeTime(Date likeTime) {
+    public void setLikeTime(Date  likeTime) {
         this.likeTime = likeTime;
     }
 }

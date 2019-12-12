@@ -15,9 +15,9 @@ public interface CollectService {
 
     int deleteCollect(int collectId);
 
-    Integer findCollectNumByUserId(Integer userId);
+    Long findCollectNumByUserId(Integer userId);
 
     Integer rankByUserId(Integer userId);
 
-    HashMap<String,Integer> sumByUserId(Integer userId);
+    HashMap<String,Long> sumByUserId(Integer userId);
 }

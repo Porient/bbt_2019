@@ -65,7 +65,7 @@
 
     <select id="findByUserEmailAndPassword" resultMap="userMap">
       select u.*
-      from `user`
+      from `user` u
       where u.user_email=#{userEmail}
       and u.password=#{password}
     </select>

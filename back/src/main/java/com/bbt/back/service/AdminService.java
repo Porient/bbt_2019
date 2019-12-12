@@ -28,14 +28,6 @@ public interface AdminService {
      */
     Admin getAdmin(@Param("adminEmail") String adminEmail, @Param("password")String password);
 
-    /**
-     * create by: Bin Liu
-     * description: 根据传入的管理员信息更新管理员
-     * create time: 2019/5/24 20:57
-     * @Param: null
-     * @return
-     */
-    ResultEntity updateAdmin(Admin admin);
 
     /**
      * create by: Bin Liu

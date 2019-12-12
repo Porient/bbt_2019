@@ -31,7 +31,7 @@
             <if test="productName != null and productName != ''"> product_name = #{productName},</if>
             <if test="content != null and content != ''"> content = #{content},</if>
             <if test="likeNum != null and likeNum != ''"> like_num = #{likeNum},</if>
-            <if test="date != null and date != ''"> `date` = #{date}</if>
+            <if test="date != null"> `date` = #{date}</if>
         </set>
         where comment_id = #{commentId}
     </update>

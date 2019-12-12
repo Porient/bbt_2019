@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -26,6 +27,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int addComment(Comment comment) {
         comment.setDate(new Date());
+        comment.setLikeNum(1);
         return commentDao.insertComment(comment);
     }
 
@@ -36,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int updateComment(Comment comment) {
-        return 0;
+        return commentDao.updateComment(comment);
     }
 
     @Override
@@ -71,7 +73,8 @@ public class CommentServiceImpl implements CommentService {
         Comment comment=commentDao.findCommentById(commentId);
         int oldNum=comment.getLikeNum();
         if (commentLike==null){
-            commentLike=new CommentLike(userId,commentId,new Date());
+
+            commentLike=new CommentLike(userId,commentId, new Timestamp(new Date().getTime()));
             commentLikeDao.insertCommentLike(commentLike);
         }else {
             commentLikeDao.deleteCommentLike(userId,commentId);
@@ -80,8 +83,7 @@ public class CommentServiceImpl implements CommentService {
             return -1;
         }
         comment.setLikeNum(oldNum+1);
-        commentDao.updateComment(comment);
-        return 1;
+        return commentDao.updateComment(comment);
     }
 
     @Override

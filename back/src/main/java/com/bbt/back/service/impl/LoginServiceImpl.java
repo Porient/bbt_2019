@@ -28,22 +28,18 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public ResultEntity loginByUser(String userEmail, String password) {
         ResultEntity loginResult = new ResultEntity();
-        if (userEmail == null || password == null){
+        if ( password == null){
             loginResult.setCode(LoginResultEnum.INPUT_NULL.getCode());
             loginResult.setMsg(LoginResultEnum.INPUT_NULL.getMsg());
             return loginResult;
         }
         try{
-            User u = userDao.findByUserEmail(userEmail);
+            User u = userDao.findByUserEmailAndPassword(userEmail,password);
             //用户是否存在
             if (u == null){
-                loginResult.setCode(LoginResultEnum.USER_NOT_EXIT.getCode());
-                loginResult.setMsg(LoginResultEnum.USER_NOT_EXIT.getMsg());
-            } else if (null != u.getPassword() && !u.getPassword().equals(password)){
-                //用户名密码是否一致
                 loginResult.setCode(LoginResultEnum.NOT_MATCH.getCode());
                 loginResult.setMsg(LoginResultEnum.NOT_MATCH.getMsg());
-            } else{
+            }  else{
                 loginResult.setCode(LoginResultEnum.SUCCESS.getCode());
                 loginResult.setMsg(LoginResultEnum.SUCCESS.getMsg());
                 loginResult.setData(u);

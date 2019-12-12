@@ -143,9 +143,9 @@ export function commentList(params) {
 
 //浏览记录
 export function recordAdd(params) {
-  //增加浏览记录
+  //获取记录详情
   return request({
-    url: "/record/add.do",
+    url: "/record/detail.do",
     method: "POST",
     params,
   });
