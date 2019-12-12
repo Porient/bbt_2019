@@ -4,6 +4,7 @@ import com.bbt.back.entities.Admin;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.AdminService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Description:

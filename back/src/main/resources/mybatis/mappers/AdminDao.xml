@@ -38,9 +38,9 @@
       where a.admin_email=#{adminEmail}
     </select>
 
-    <select id="findByAdminEmailAndPassword" resultMap="adminMap">
+    <select id="findByAdminEmailAndPassword" parameterType="java.lang.String" resultMap="adminMap">
       select a.*
-      from `admin`
+      from `admin` a
       where a.admin_email=#{adminEmail}
       and a.password=#{password}
     </select>
