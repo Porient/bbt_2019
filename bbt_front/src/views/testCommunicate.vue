@@ -3,7 +3,7 @@
     <div class="block">
       <div>登录注册API</div>
       <a-button @click="register">用户注册</a-button>
-      <a-button @click="getCode">注册验证码</a-button>
+      <a-button type="primary" @click="getCode">注册验证码</a-button>
       <a-button @click="userLogin">用户登录</a-button>
       <a-button @click="userLogout">用户注销</a-button>
       <a-button @click="adminLogin">管理员登录</a-button>
@@ -77,7 +77,7 @@ export default {
         username:"潘浩霖",
         password:"123456",
       };
-      var verifyCode = "";
+      var verifyCode = "199777";
       //返回参数
       var code = "";
       var msg = "";
@@ -108,11 +108,12 @@ export default {
           verifyCode = response.verifyCode;
         }
       });
+
     },
     userLogin(){
       //用户登录
       //请求参数
-      var email = "496612585@qq.com";
+      var email = "chenjing@yahoo.com";
       var password = "123456";
       //返回参数
       var userId = "";

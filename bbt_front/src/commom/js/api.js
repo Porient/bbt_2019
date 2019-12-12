@@ -8,7 +8,7 @@ export function userLogin(params) {
   return request({
     url: "/user/login.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -17,7 +17,7 @@ export function adminLogin(params) {
   return request({
     url: "/admin/login.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -26,7 +26,7 @@ export function userLogout(params) {
   return request({
     url: "/user/logout.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -35,7 +35,7 @@ export function adminLogout(params) {
   return request({
     url: "/admin/logout.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -44,7 +44,7 @@ export function register(params) {
   return request({
     url: "/user/register.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -54,7 +54,7 @@ export function registerCode(params) {
   return request({
     url: "/user/code.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -64,7 +64,7 @@ export function userCollectPic(params) {
   return request({
     url: "/user/getCollectPic.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -73,7 +73,7 @@ export function userUpdate(params) {
   return request({
     url: "/user/update.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -82,7 +82,7 @@ export function userRecordPic(params) {
   return request({
     url: "/user/getRecordPic.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -91,7 +91,7 @@ export function userCommentPic(params) {
   return request({
     url: "/user/getCommentPic.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -101,7 +101,7 @@ export function commentLike(params) {
   return request({
     url: "/comment/likeComment.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -110,7 +110,7 @@ export function commentDelete(params) {
   return request({
     url: "/comment/delete.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -119,7 +119,7 @@ export function commentUpdate(params) {
   return request({
     url: "/comment/update.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -128,7 +128,7 @@ export function commentAdd(params) {
   return request({
     url: "/comment/add.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -137,7 +137,7 @@ export function commentList(params) {
   return request({
     url: "/comment/list.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -147,7 +147,7 @@ export function recordAdd(params) {
   return request({
     url: "/record/add.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -156,7 +156,7 @@ export function recordDelete(params) {
   return request({
     url: "/record/delete.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -165,7 +165,7 @@ export function recordList(params) {
   return request({
     url: "/record/list.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -175,7 +175,7 @@ export function collectDelete(params) {
   return request({
     url: "/collect/delete.do",
     method: "POST",
-    data: params,
+    params,
   });
 } 
 
@@ -184,7 +184,7 @@ export function collectAdd(params) {
   return request({
     url: "/collect/add.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -193,7 +193,7 @@ export function collectList(params) {
   return request({
     url: "/collect/list.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -203,7 +203,7 @@ export function getBasicInfo(params) {
   return request({
     url: "/product/getBasicInfo.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -212,7 +212,7 @@ export function getCommentInfo(params) {
   return request({
     url: "/product/getCommentInfo.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -221,7 +221,7 @@ export function getStatisticInfo(params) {
   return request({
     url: "/product/getStatisticInfo.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -230,7 +230,7 @@ export function getCompareInfo(params) {
   return request({
     url: "/product/getCompareInfo.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -239,7 +239,7 @@ export function getMiningInfo(params) {
   return request({
     url: "/product/getMiningInfo.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -248,7 +248,7 @@ export function productRecommend(params) {
   return request({
     url: "/product/recommendProduct.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -257,7 +257,7 @@ export function productList(params) {
   return request({
     url: "/product/list.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -266,7 +266,7 @@ export function productDelete(params) {
   return request({
     url: "/product/delete.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -275,7 +275,7 @@ export function productDelete(params) {
 //   return request({
 //     url: "/product/detail",
 //     method: "POST",
-//     data: params,
+//     params,
 //   });
 // }
 
@@ -284,7 +284,7 @@ export function productLike(params) {
   return request({
     url: "/product/likeProduct.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -293,7 +293,7 @@ export function productSearch(params) {
   return request({
     url: "/product/searchProduct.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -302,7 +302,7 @@ export function productChange(params) {
   return request({
     url: "/product/changeState.do",
     method: "POST",
-    data: params,
+    params,
   });
 }
 
@@ -311,7 +311,7 @@ export function productChange(params) {
 //   return request({
 //     url: "/product/hotProduct",
 //     method: "POST",
-//     data: params,
+//     params,
 //   });
 // }
 
