@@ -8,6 +8,11 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/testCommunicate",
+      name: "testCommunicate",
+      component: () => import("@/views/testCommunicate.vue")
+    },
+    {
       path: "/",
       redirect: "/index/search",
     },
