@@ -2,6 +2,7 @@ package com.bbt.back.model;
 
 import com.github.pagehelper.PageInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/14 20:08
  */
-public class SearchResult {
+public class SearchResult implements Serializable {
     private List<String> words;
     private List<Object> products;
     private Long total;

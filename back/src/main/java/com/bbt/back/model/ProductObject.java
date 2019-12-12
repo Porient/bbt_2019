@@ -1,11 +1,13 @@
 package com.bbt.back.model;
 
+import java.io.Serializable;
+
 /**
  * @Description:
  * @Author: Kobe
  * @Date: 2019/10/13 20:26
  */
-public class ProductObject {
+public class ProductObject implements Serializable {
     private int productType;
     private int productState;
     private int productIId;

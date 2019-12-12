@@ -1,5 +1,6 @@
 package com.bbt.back.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @Author: Kobe
  * @Date: 2019/10/15 16:15
  */
-public class DeleteObject {
+public class DeleteObject implements Serializable {
     private List<ProductLikeObject> likeObject;
 
     public DeleteObject(List<ProductLikeObject> likeObject) {

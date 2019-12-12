@@ -1,11 +1,13 @@
 package com.bbt.back.model;
 
+import java.io.Serializable;
+
 /**
  * @Description:
  * @Author: 潘浩霖
  * @Date: 2019/2/23
  */
-public class ResultEntity {
+public class ResultEntity implements Serializable {
     private Integer code;
     private String msg;
     private Object data;

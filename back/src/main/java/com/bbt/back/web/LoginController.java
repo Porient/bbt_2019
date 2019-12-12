@@ -77,12 +77,15 @@ public class LoginController {
         try {
             ResultEntity result = loginService.loginByAdmin(adminEmail, password);
             if (result.getCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
+                resultEntity.setCode(200);
                 resultEntity.setData(result.getData());
+            }else{
+                resultEntity.setCode(500);
             }
-            resultEntity.setCode(result.getCode());
             resultEntity.setMsg(result.getMsg());
             Admin admin=(Admin) result.getData();
-            resultEntity.setData(admin.getAdminId());
+            int adminId=admin.getAdminId();
+            resultEntity.setData(adminId);
             //将管理员信息存入session中
             if (result.getData() != null) {
                 List<Admin> adminList = new ArrayList<>();

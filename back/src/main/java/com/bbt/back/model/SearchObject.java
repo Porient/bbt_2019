@@ -1,11 +1,13 @@
 package com.bbt.back.model;
 
+import java.io.Serializable;
+
 /**
  * @Description:
  * @Author: Kobe
  * @Date: 2019/10/14 20:37
  */
-public class SearchObject {
+public class SearchObject implements Serializable {
     private int type;
     private String searchStr;
 
