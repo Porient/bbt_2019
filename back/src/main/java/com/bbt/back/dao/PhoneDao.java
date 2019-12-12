@@ -1,6 +1,7 @@
 package com.bbt.back.dao;
 
 import com.bbt.back.entities.Phone;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface PhoneDao {
 
     List<Phone> selectByType(int type);
 
-    int changeState(int productIId, int i);
+    int changeState(@Param("productId")int productId, @Param("library")int library);
 
     List<Object> selectByToken(String searchToken);
 

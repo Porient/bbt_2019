@@ -1,15 +1,12 @@
 package com.bbt.back.web;
 
-import com.bbt.back.entities.Admin;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.RegisterResultEnum;
 import com.bbt.back.enums.SystemErrorEnum;
 import com.bbt.back.exception.LoginException;
 import com.bbt.back.exception.RegisterException;
 import com.bbt.back.model.Common.Constant;
-import com.bbt.back.model.RegisterDto;
 import com.bbt.back.model.ResultEntity;
-import com.bbt.back.model.UserDto;
 import com.bbt.back.service.RegisterService;
 import com.bbt.back.service.UserService;
 import com.bbt.back.utils.DateUtil;
@@ -17,14 +14,11 @@ import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * @Description: 注册控制器类
@@ -40,15 +34,14 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping("/user/register")
-    private Object registerByUser(HttpServletRequest request, @RequestBody RegisterDto registerDto) {
+    private Object registerByUser(HttpServletRequest request) {
         //1.将前台获取的参数转换成User对象
         ResultEntity resultEntity=new ResultEntity();
         String userStr = HttpServletRequestUtil.getString(request, "user");
         ObjectMapper mapper = new ObjectMapper();
-        User user=registerDto.getUser();
-        //获取前端传递过来的code参数
-        String verifyCode = registerDto.getVerifyCode();
+        User user = null;
         try {
+            user = mapper.readValue(userStr, User.class);
             //1.比较验证码是否一致或者超时
             String sessionCode = (String) request.getSession().getAttribute("user_code_" + user.getUserEmail());
             if (sessionCode == null) {
@@ -56,7 +49,8 @@ public class RegisterController {
                 resultEntity.setCode(500);
                 return resultEntity;
             }
-
+            //获取前端传递过来的code参数
+            String verifyCode = HttpServletRequestUtil.getString(request, "verifyCode");
             if (verifyCode != null && verifyCode.equals(sessionCode)) {
                 //判断验证码是否过期
                 Date sendTime = (Date) request.getSession().getAttribute("user_codeTime_" + user.getUserEmail());

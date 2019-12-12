@@ -83,5 +83,26 @@
       select p.*
       from `phone` p
     </select>
-    
+
+    <select id="selectByLibrary" parameterType="java.lang.Integer" resultMap="phoneMap">
+      select p.*
+      from `phone` p
+      where library=#{library}
+    </select>
+
+    <update id="changeState" parameterType="java.lang.Integer">
+        update `phone`
+        <set>
+            library = #{library}
+        </set>
+        where product_id = #{productId}
+    </update>
+
+    <select id="selectByToken" resultMap="phoneMap">
+      select p.*
+      from `phone` p
+      where product_name LIKE #{searchToken}
+            OR brand LIKE #{searchToken}
+            OR performance LIKE #{searchToken}
+    </select>
 </mapper>

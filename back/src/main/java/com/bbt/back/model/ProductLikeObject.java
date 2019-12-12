@@ -11,6 +11,10 @@ public class ProductLikeObject implements Serializable {
     private int type;
     private int productId;
 
+    public ProductLikeObject(){
+
+    }
+
     public ProductLikeObject(int type, int productId) {
         this.type = type;
         this.productId = productId;
@@ -30,5 +34,13 @@ public class ProductLikeObject implements Serializable {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductLikeObject{" +
+                "type=" + type +
+                ", productId=" + productId +
+                '}';
     }
 }

@@ -44,11 +44,11 @@
       <a-button @click="getStatisticInfo">获取StatisticsInfo</a-button>
       <a-button @click="getBasicInfo">获取基本信息</a-button>
       <a-button @click="productRecommend">获取推荐产品</a-button>
-      <a-button @click="productList">获取产品列表</a-button>
-      <a-button @click="productDelete">删除产品</a-button>
-      <a-button @click="productLike">点赞产品</a-button>
-      <a-button @click="productSearch">搜索产品</a-button>
-      <a-button @click="productChange"> 产品上下架</a-button>
+      <a-button type="primary" @click="productList">获取产品列表</a-button>
+      <a-button type="primary" @click="productDelete">删除产品</a-button>
+      <a-button type="primary" @click="productLike">点赞产品</a-button>
+      <a-button type="primary" @click="productSearch">搜索产品</a-button>
+      <a-button type="primary" @click="productChange"> 产品上下架</a-button>
     </div>
   </div>
 </template>
@@ -802,10 +802,10 @@ export default {
     productList(){
       //获取产品列表
       //请求参数
-      var productType="";
-      var library="";
-      var pageNum="";
-      var pageSize="";
+      var productType="1";
+      var library="1";
+      var pageNum="1";
+      var pageSize="1";
       //返回参数
       var pageInfoResult = {
         obj:{},
@@ -834,14 +834,23 @@ export default {
     productDelete(){
       //删除产品
       //请求参数
-      var likeObjects= [{type:"",productId:""},{}]
+      var deleteObject= {
+        "likeObject": [
+            {
+                "type": "0",
+                "productId": "219"
+            },
+            {
+                "type": "1",
+                "productId": "220"
+            }
+        ]
+      }
       //返回参数
       var msg = "";
       var code = "";
 
-      this.$api.productDelete({
-        likeObjects:likeObjects,
-      }).then(response => {
+      this.$api.productDelete(deleteObject).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
@@ -852,17 +861,19 @@ export default {
     productLike(){
       //点赞产品
       //请求参数
-      var type ="";
-      var productId = "";
+      var likeObject= {
+        type:"0",
+        productId:"1",
+        productId:"1"
+      };
       var userId = "";
       //返回参数
       var msg ="";
       var code = "";
 
       this.$api.productLike({
-        type:type,
-        productId:productId,
         userId:userId,
+        likeObject:likeObject,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
@@ -874,17 +885,26 @@ export default {
     productSearch(){
       //搜索产品
       //请求参数
-      var type = "";
-      var searchStr = "";
+      var searchObject= {
+        type:"0",
+        searchStr:"华为"
+      };
+      var pageNum = "1";
+      var pageSize = "1";
+
       //返回参数
-      var searchTokens = ["",""];
-      var products = {};
-      var code = "";
-      var msg ="";
+      var SearchResult = {
+        words:["",""],
+        products:{},
+        total:"",
+        pageNum:"",
+        pageSize:"",
+      };
 
       this.$api.productSearch({
-        type:type,
-        searchStr:searchStr,
+        searchObject:searchObject,
+        pageNum:pageNum,
+        pageSize:pageSize,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
@@ -898,17 +918,18 @@ export default {
     productChange(){
       //产品上下架
       //请求参数
-      var productType = "";
-      var productState = "";
-      var productId = "";
+      var productObject = {
+        productType:"0",
+        productState:"0",
+        productId:"1"
+      };
+      
       //返回参数
       var msg = "";
       var code = "";
 
       this.$api.productChange({
-        productType:productType,
-        productState:productState,
-        productId:productId,
+        productObject:productObject,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)

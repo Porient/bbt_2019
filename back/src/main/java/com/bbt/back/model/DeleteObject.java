@@ -11,15 +11,26 @@ import java.util.List;
 public class DeleteObject implements Serializable {
     private List<ProductLikeObject> likeObject;
 
+    public DeleteObject(){
+
+    }
+
     public DeleteObject(List<ProductLikeObject> likeObject) {
         this.likeObject = likeObject;
     }
 
-    public List<ProductLikeObject> getLikeObjects() {
+    public List<ProductLikeObject> getLikeObject() {
         return likeObject;
     }
 
-    public void setLikeObjects(List<ProductLikeObject> likeObject) {
+    public void setLikeObject(List<ProductLikeObject> likeObject) {
         this.likeObject = likeObject;
+    }
+
+    @Override
+    public String toString() {
+        return "DeleteObject{" +
+                "likeObject=" + likeObject +
+                '}';
     }
 }

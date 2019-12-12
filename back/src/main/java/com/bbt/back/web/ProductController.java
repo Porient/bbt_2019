@@ -11,14 +11,14 @@ import com.github.pagehelper.PageInfo;
 import org.python.core.PyObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -34,15 +34,27 @@ public class ProductController {
     private RecordService recordService;
 
     @DeleteMapping("/delete")
-    private Object deleteProduct(HttpServletRequest request) throws IOException {
+    private Object deleteProduct(@RequestBody DeleteObject deleteObject) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
-        String deleteObjectStr = HttpServletRequestUtil.getString(request,"deleteObject");
-        ObjectMapper mapper = new ObjectMapper();
-        DeleteObject deleteObject = mapper.readValue(deleteObjectStr,DeleteObject.class);
-        List<ProductLikeObject> likeObjects = deleteObject.getLikeObjects();
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("deleteObject",deleteObject);
+        List<ProductLikeObject> likeObjects = deleteObject.getLikeObject();
+        int deleteNum=0;
+        int deleteAim=likeObjects.size();//总目标
         for (ProductLikeObject likeObject : likeObjects){
-            productService.deleteProduct(likeObject);
+            deleteNum+=productService.deleteProduct(likeObject);
         }
+        if(deleteNum==0){
+            resultEntity.setMsg("全部删除不成功");
+            resultEntity.setCode(500);
+            return resultEntity;
+        }else if(deleteNum<deleteAim&&deleteNum>0){
+            resultEntity.setMsg("部分删除成功，部分删除不成功");
+            resultEntity.setCode(500);
+            return resultEntity;
+        }
+        resultEntity.setMsg("全部删除成功");
+        resultEntity.setCode(200);
         return resultEntity;
     }
 
@@ -70,7 +82,7 @@ public class ProductController {
         String productObjectStr = HttpServletRequestUtil.getString(request,"productObject");
         ObjectMapper mapper = new ObjectMapper();
         ProductObject productObject = mapper.readValue(productObjectStr,ProductObject.class);
-        if (productService.changeState(productObject) == 0){
+        if (productService.changeState(productObject) == 1){
             resultEntity.setMsg("操作成功");
             resultEntity.setCode(200);
         } else {
@@ -200,7 +212,6 @@ public class ProductController {
         String searchStr = searchObject.getSearchStr();
         List<String> searchTokens = CutWord.cutWord(searchStr);
         StringBuilder searchToken = new StringBuilder();
-        searchToken.append("%");
         for (String token : searchTokens){
             searchToken.append(token).append("%");
         }
@@ -210,8 +221,6 @@ public class ProductController {
         Integer pageNum1=pageInfo.getPageNum();
         Integer pageSize1=pageInfo.getPageSize();
         SearchResult searchResult = new SearchResult(searchTokens,products,total,pageNum1,pageSize1);
-        resultEntity.setMsg("搜索成功");
-        resultEntity.setCode(200);
         resultEntity.setData(searchResult);
         return  resultEntity;
     }

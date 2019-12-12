@@ -12,6 +12,7 @@ import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.model.ProductResult;
 import com.bbt.back.service.ProductService;
+import com.bbt.back.utils.DeduplicationUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.python.core.PyFunction;
@@ -44,11 +45,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int deleteProduct(ProductLikeObject likeObject) {
         if (likeObject.getType() == 0) {
-            phoneDao.deletePhone(likeObject.getProductId());
+            return phoneDao.deletePhone(likeObject.getProductId());
         } else {
-            computerDao.deleteComputer(likeObject.getProductId());
+            return computerDao.deleteComputer(likeObject.getProductId());
         }
-        return 0;
     }
 
     @Override
@@ -70,9 +70,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int changeState(ProductObject productObject) {
         if (productObject.getProductType() == 0) {
-            return phoneDao.changeState(productObject.getProductIId(), 1 - productObject.getProductState());
+            return phoneDao.changeState(productObject.getProductId(), 1 - productObject.getProductState());
         } else {
-            return computerDao.changeState(productObject.getProductIId(), 1 - productObject.getProductState());
+            return computerDao.changeState(productObject.getProductId(), 1 - productObject.getProductState());
         }
     }
 
@@ -94,13 +94,19 @@ public class ProductServiceImpl implements ProductService {
     public PageInfo<Object> selectByToken(int type, String searchToken, Integer pageNum, Integer pageSize) {
         pageNum = pageNum == -1 ? 1 : pageNum;
         pageSize = pageSize == -1 ? 10 : pageSize;
-        List<Object> list;
+        List<Object> list = new ArrayList<>();
+        String[] tokens = searchToken.split("%");
         if (type == 0) {
-            list = phoneDao.selectByToken(searchToken);
+            for (int i=0;i<tokens.length;i++){
+                list.addAll(phoneDao.selectByToken(searchToken));
+            }
         } else {
-            list = computerDao.selectByToken(searchToken);
+            for (int i=0;i<tokens.length;i++) {
+                list.addAll(computerDao.selectByToken(searchToken));
+            }
         }
         PageHelper.startPage(pageNum, pageSize);
+        list= DeduplicationUtil.deduplication(list);
         PageInfo<Object> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

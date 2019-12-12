@@ -11,6 +11,10 @@ public class SearchObject implements Serializable {
     private int type;
     private String searchStr;
 
+    public SearchObject(){
+
+    }
+
     public SearchObject(int type, String searchStr) {
         this.type = type;
         this.searchStr = searchStr;

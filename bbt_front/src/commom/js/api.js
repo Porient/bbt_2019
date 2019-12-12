@@ -266,7 +266,10 @@ export function productDelete(params) {
   return request({
     url: "/product/delete.do",
     method: "DELETE",
-    params,
+    data:params,
+    headers:{
+      "content-type":"application/json"
+    }
   });
 }
 

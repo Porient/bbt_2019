@@ -85,4 +85,26 @@
       select c.*
       from `computer` c
     </select>
+
+    <select id="selectByLibrary" parameterType="java.lang.Integer" resultMap="computerMap">
+      select c.*
+      from `computer` c
+      where library = #{library}
+    </select>
+
+    <update id="changeState" parameterType="java.lang.Integer">
+        update `computer`
+        <set>
+            library = #{library}
+        </set>
+        where product_id = #{productId}
+    </update>
+
+    <select id="selectByToken"  resultMap="computerMap">
+      select c.*
+      from `computer` c
+      where con_performance LIKE #{searchToken}
+            OR brand LIKE #{searchToken}
+            OR game_performance LIKE #{searchToken}
+    </select>
 </mapper>

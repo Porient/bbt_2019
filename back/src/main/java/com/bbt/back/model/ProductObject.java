@@ -10,7 +10,17 @@ import java.io.Serializable;
 public class ProductObject implements Serializable {
     private int productType;
     private int productState;
-    private int productIId;
+    private int productId;
+
+    public ProductObject(){
+        
+    }
+
+    public ProductObject(int productType, int productState, int productId) {
+        this.productType = productType;
+        this.productState = productState;
+        this.productId = productId;
+    }
 
     public int getProductType() {
         return productType;
@@ -28,11 +38,20 @@ public class ProductObject implements Serializable {
         this.productType = productType;
     }
 
-    public int getProductIId() {
-        return productIId;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProductIId(int productIId) {
-        this.productIId = productIId;
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductObject{" +
+                "productType=" + productType +
+                ", productState=" + productState +
+                ", productId=" + productId +
+                '}';
     }
 }
