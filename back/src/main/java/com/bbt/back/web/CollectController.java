@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +40,7 @@ public class CollectController {
         return resultEntity;
     }
 
-    @RequestMapping("/add")
+    @PostMapping("/add")
     private Object addCollect(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String collectStr = HttpServletRequestUtil.getString(request,"collectStr");
@@ -54,7 +56,7 @@ public class CollectController {
         return resultEntity;
     }
 
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     private Object deleteCollect(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int collectId = HttpServletRequestUtil.getInt(request,"collectId");

@@ -4,7 +4,9 @@ import com.bbt.back.entities.Admin;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.LoginResultEnum;
 import com.bbt.back.exception.LoginException;
+import com.bbt.back.model.AdminDto;
 import com.bbt.back.model.ResultEntity;
+import com.bbt.back.model.UserDto;
 import com.bbt.back.service.AdminService;
 import com.bbt.back.service.LoginService;
 import com.bbt.back.service.UserService;
@@ -44,12 +46,17 @@ public class LoginController {
         try {
             ResultEntity result = loginService.loginByUser(userEmail, password);
             if (result.getCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
+                resultEntity.setCode(200);
+                resultEntity.setMsg(result.getMsg());
                 resultEntity.setData(result.getData());
+            }else{
+                resultEntity.setCode(500);
+                resultEntity.setMsg(result.getMsg());
+                return resultEntity;
             }
-            resultEntity.setCode(result.getCode());
-            resultEntity.setMsg(result.getMsg());
             User user=(User)result.getData();
-            resultEntity.setData(user.getUserId());
+            UserDto userDto=new UserDto(user.getUserId());
+            resultEntity.setData(userDto);
             //将用户信息存入session中
             if (result.getData() != null) {
                 List<User> userList = new ArrayList<>();
@@ -86,8 +93,8 @@ public class LoginController {
                 return resultEntity;
             }
             Admin admin=(Admin) result.getData();
-            int adminId=admin.getAdminId();
-            resultEntity.setData(adminId);
+            AdminDto adminDto=new AdminDto(admin.getAdminId());
+            resultEntity.setData(adminDto);
             //将管理员信息存入session中
             if (result.getData() != null) {
                 List<Admin> adminList = new ArrayList<>();
