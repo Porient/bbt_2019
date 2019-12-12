@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import org.python.core.PyObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class ProductController {
     @Autowired
     private RecordService recordService;
 
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     private Object deleteProduct(HttpServletRequest request) throws IOException {
         ResultEntity resultEntity = new ResultEntity();
         String deleteObjectStr = HttpServletRequestUtil.getString(request,"deleteObject");
