@@ -133,7 +133,7 @@ export default {
     userLogout(){
       //用户注销
       //请求参数
-      var userId = "1";
+      var userId = "101";
       //返回参数
       var msg = "";
       var code ="";
@@ -155,7 +155,7 @@ export default {
       //返回参数
       var code = "";
       var msg = "";
-      var adminId = "1";
+      var adminId = "";
       this.$api.adminLogin({
         adminEmail: email,
         password: password,
@@ -190,8 +190,8 @@ export default {
     commentLike(){
       //点赞评论
       //请求参数
-      var userId = "1";
-      var commentId = "1";
+      var userId = "101"; 
+      var commentId = "1";  //like_num = 6+1
       //返回参数
       var msg = "";
       var code = "";
@@ -213,7 +213,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
-      commnetId = "1";
+      commnetId = "1000";
       this.$api.commentDelete({
         commnetId:commnetId,
       }).then(response => {
@@ -227,7 +227,10 @@ export default {
     commentUpdate(){
       //更新评论
       //请求参数
-      var comment = {content:""};
+      var comment = {
+        commentId:"1000",
+        content:"修改评论内容"
+        };
       //返回参数
       var msg = "";
       var code = "";
@@ -245,7 +248,8 @@ export default {
       //添加评论
       //请求参数
       var comment = {
-        userId:"1",
+        userId:"101",
+        //
         productId:"1",
         productName:"1",
         content:"1",
@@ -584,14 +588,14 @@ export default {
       var productId = "";
       //返回参数
       var compareInfo = {
-        collect_rank="",
-        browse_rank="",
-        running_memory_rank="",
-        length_rank="",
-        weight_rank="",
-        thick_rank="",
-        memory_rank="",
-        price_rank="",
+        collect_rank:"",
+        browse_rank:"",
+        running_memory_rank:"",
+        length_rank:"",
+        weight_rank:"",
+        thick_rank:"",
+        memory_rank:"",
+        price_rank:"",
       };
       var code = "";
       this.$api.getCompareInfo({
@@ -610,11 +614,11 @@ export default {
       var productId = "";
       //返回参数
       var statisticInfo = {
-        collect_num = "",
-        like_num = "",
-        browse_num = "",
-        review_num = "",
-        daily = [{
+        collect_num : "",
+        like_num : "",
+        browse_num : "",
+        review_num : "",
+        daily : [{
           date:"",
           browse_num:"",
           like_num:"",
@@ -817,10 +821,8 @@ export default {
       var products = {};
       var code = "";
       this.$api.productSearch({
-        productType:productType,
-        library:library,
-        pageNum:pageNum,
-        pageSize:pageSize,
+        type:type,
+        searchStr:searchStr,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
