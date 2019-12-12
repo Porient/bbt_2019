@@ -74,13 +74,14 @@ export default {
       //请求参数
       var user = {
         userEmail:"496612585@qq.com",
-        username:"潘浩霖",
+        nickname:"潘浩霖",
         password:"123456",
       };
-      var verifyCode = "199777";
+      var verifyCode = "904705";
       //返回参数
       var code = "";
       var msg = "";
+
       this.$api.register({
         user:user,
         verifyCode:verifyCode,
@@ -98,14 +99,16 @@ export default {
       var email = "496612585@qq.com";
       //返回参数
       var code = "";
+      var msg = ""
       var verifyCode = "";
+
       this.$api.registerCode({
         userEmail: email,
       }).then(response => {
         if(response.code === 200) {
           console.log(response);
           code = response.code;
-          verifyCode = response.verifyCode;
+          verifyCode = response.data.verifyCode;
         }
       });
 
@@ -119,13 +122,14 @@ export default {
       var userId = "";
       var msg = "";
       var code = "";
+
       this.$api.userLogin({
         userEmail: email,
         password: password,
       }).then(response => {
         if(response.code === 200) {
           console.log(response);
-          userId = response.userId;
+          userId = response.data.userId;
           msg = response.msg;
           code = response.code;
         }
@@ -138,6 +142,7 @@ export default {
       //返回参数
       var msg = "";
       var code ="";
+
       this.$api.userLogout({
         userId: userId
       }).then(response => {
@@ -154,16 +159,17 @@ export default {
       var email = "496612585@qq.com";
       var password = "123456";
       //返回参数
-      var code = "";
-      var msg = "";
-      var adminId = "";
+      var code = 200;
+      var msg = "登录成功";
+      var adminId = 1;
+
       this.$api.adminLogin({
         adminEmail: email,
         password: password,
       }).then(response => {
         if(response.code === 200) {
           console.log(response);
-          adminId = response.adminId;
+          adminId = response.dataadminId;
           code = response.code;
           msg = response.msg;
         }
@@ -172,7 +178,7 @@ export default {
     adminLogout(){
       //管理员注销
       //请求参数
-      var adminId = "1";
+      var adminId = "496612585@qq.com";
       //返回参数
       var code = "";
       var msg = "";
@@ -196,6 +202,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.commentLike({
         userId: userId,
         commentId: commentId,
@@ -210,10 +217,11 @@ export default {
     commentDelete(){
       //删除评论
       //请求参数
-      var commentId
+      var commentId = ""
       //返回参数
       var msg = "";
       var code = "";
+
       commnetId = "1000";
       this.$api.commentDelete({
         commnetId:commnetId,
@@ -235,6 +243,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.commentUpdate({
         comment:comment,
       }).then(response => {
@@ -254,11 +263,11 @@ export default {
         productId:"1",
         productName:"1",
         content:"1",
-        likeNum:"1"
       };
       //返回参数
       var msg = "";
       var code ="";
+
       this.$api.commentAdd({
         comment:comment
       }).then(response => {
@@ -283,6 +292,8 @@ export default {
         pageSize: "",
       };
       var code = "";
+      var msg = "";
+
       this.$api.commentList({
         userId: userId,
         pageNo: pageNo,
@@ -290,8 +301,9 @@ export default {
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          pageInfoResult = response.pageInfoResult;
+          pageInfoResult = response.data.pageInfoResult;
           code = response.code;
+          msg = response.msg;
         }
       });
     },
@@ -308,13 +320,16 @@ export default {
         map:{},
       }
       var code = "";
+      var msg = "";
+
       this.$api.userCollectPic({
         userId: userId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          collectPic = response.collectPic;
+          collectPic = response.data.collectPic;
           code = response.code;
+          msg = response.msg;
         }
       })
     },
@@ -335,6 +350,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.userUpdate({
         user:user
       }).then(response => {
@@ -358,13 +374,16 @@ export default {
         timeMap:{},
       }
       var code = "";
+      var msg = "";
+
       this.$api.userRecordPic({
         userId: userId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          recordPic = response.recordPic;
+          recordPic = response.data.recordPic;
           code = response.code;
+          msg = response.msg;
         }
       })
     },
@@ -382,13 +401,16 @@ export default {
         likeNum4:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.userCommentPic({
         userId: userId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          commentPic = commentPic;
+          commentPic = response.data.commentPic;
           code = response.code;
+          msg = response.msg;
         }
       })
     },
@@ -408,13 +430,16 @@ export default {
         browseTime:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.recordAdd({
         recordId : recordId
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          record = response.record;
+          msg = response.msg;
+          record = response.data.record;
         }
       });
     },
@@ -425,6 +450,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.recordDelete({
         recordId:recordId,
       }).then(response => {
@@ -449,6 +475,8 @@ export default {
         pageSize:"",
       }
       var code = "";
+      var msg = "";
+
       this.$api.recordList({
         userId: userId,
         pageNo: pageNo,
@@ -456,8 +484,9 @@ export default {
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          recordPageInfo = response.recordPageInfo;
+          recordPageInfo = response.data.recordPageInfo;
           code = response.code;
+          msg = response.msg;
         }
       });
     },
@@ -470,6 +499,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.collectDelete({
         collectId:collectId
       }).then(response => {
@@ -488,6 +518,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.collectAdd({
         userId:userId,
         productId:productId,
@@ -513,6 +544,8 @@ export default {
         pageSize:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.collectList({
         userId: userId,
         pageNo: pageNo,
@@ -520,8 +553,9 @@ export default {
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
-          pageInfoResult = response.pageInfoResult;
+          pageInfoResult = response.data.pageInfoResult;
           code = response.code;
+          msg = response.msg
         }
       });
     },
@@ -547,13 +581,16 @@ export default {
         profession_cloud_path:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.getMiningInfo({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          miningInfo = response.miningInfo;
+          msg = response.msg;
+          miningInfo = response.data.miningInfo;
         }
       });
     },
@@ -573,13 +610,16 @@ export default {
         },
       };
       var code = "";
+      var msg = "";
+
       this.$api.getCommentInfo({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          commentInfo = response.commentInfo;
+          msg = response.msg;
+          commentInfo = response.data.commentInfo;
         }
       });
     },
@@ -599,13 +639,16 @@ export default {
         price_rank:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.getCompareInfo({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          compareInfo = response.compareInfo;
+          msg = response.msg;
+          compareInfo = response.data.compareInfo;
         }
       });
     },
@@ -628,13 +671,16 @@ export default {
         comment_wordcloud_path:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.getStatisticInfo({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          statisticInfo = response.statisticInfo;
+          msg = response.msg;
+          statisticInfo = response.data.statisticInfo;
         }
       });
     },
@@ -707,13 +753,16 @@ export default {
         analysis:"",
       };
       var code = "";
+      var msg = "";
+
       this.$api.getBasicInfo({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          basicInfo = response.basicInfo;
+          msg = response.msg;
+          basicInfo = response.data.basicInfo;
         }
       });
     },
@@ -735,13 +784,16 @@ export default {
         },
       }
       var code = "";
+      var msg = "";
+
       this.$api.productRecommend({
         productId:productId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          products = response.products;
+          msg = response.msg;
+          products = response.data.products;
         }
       });
     },
@@ -761,6 +813,8 @@ export default {
       }
       
       var code = "";
+      var msg = "";
+
       this.$api.productList({
         productType:productType,
         library:library,
@@ -770,7 +824,8 @@ export default {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          pageInfoResult = response.pageInfoResult;
+          msg = response.msg;
+          pageInfoResult = response.data.pageInfoResult;
         }
       });
     },
@@ -781,6 +836,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.productDelete({
         likeObjects:likeObjects,
       }).then(response => {
@@ -800,6 +856,7 @@ export default {
       //返回参数
       var msg ="";
       var code = "";
+
       this.$api.productLike({
         type:type,
         productId:productId,
@@ -821,6 +878,8 @@ export default {
       var searchTokens = ["",""];
       var products = {};
       var code = "";
+      var msg ="";
+
       this.$api.productSearch({
         type:type,
         searchStr:searchStr,
@@ -828,8 +887,9 @@ export default {
         if(response.code === 200) {
           console.log(response)
           code = response.code;
-          searchTokens = response.searchTokens;
-          products = response.products;
+          msg = response.msg;
+          searchTokens = response.data.searchTokens;
+          products = response.data.products;
         }
       });
     },
@@ -842,6 +902,7 @@ export default {
       //返回参数
       var msg = "";
       var code = "";
+
       this.$api.productChange({
         productType:productType,
         productState:productState,

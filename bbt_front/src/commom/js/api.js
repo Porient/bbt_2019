@@ -25,7 +25,7 @@ export function userLogout(params) {
   //用户注销
   return request({
     url: "/user/logout.do",
-    method: "POST",
+    method: "GET",
     params,
   });
 }
@@ -34,7 +34,7 @@ export function adminLogout(params) {
   //管理员注销
   return request({
     url: "/admin/logout.do",
-    method: "POST",
+    method: "GET",
     params,
   });
 }
@@ -109,7 +109,7 @@ export function commentDelete(params) {
   //删除评论
   return request({
     url: "/comment/delete.do",
-    method: "POST",
+    method: "DELETE",
     params,
   });
 }
@@ -155,7 +155,7 @@ export function recordDelete(params) {
   //删除浏览记录
   return request({
     url: "/record/delete.do",
-    method: "POST",
+    method: "DELETE",
     params,
   });
 }
@@ -174,7 +174,7 @@ export function collectDelete(params) {
   //删除收藏
   return request({
     url: "/collect/delete.do",
-    method: "POST",
+    method: "DELETE",
     params,
   });
 } 
@@ -265,7 +265,7 @@ export function productDelete(params) {
   //删除产品
   return request({
     url: "/product/delete.do",
-    method: "POST",
+    method: "DELETE",
     params,
   });
 }

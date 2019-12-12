@@ -170,6 +170,8 @@ public class LoginController {
         int adminId;
         try {
             adminId = HttpServletRequestUtil.getInt(request, "adminId");
+            System.out.println("here:");
+            System.out.println(adminId);
         } catch (NumberFormatException e) {
             resultEntity.setMsg("获取管理员对象ID信息异常，无法完成注销。");
             return resultEntity;
@@ -179,6 +181,7 @@ public class LoginController {
         List<Admin> adminList = (List<Admin>) session.getAttribute("adminList");
         boolean loginYes = false;
         try {
+            System.out.println(adminId);
             Admin admin= adminService.getAdminById(adminId);
             Admin adminToRemove = null;
             if (adminList != null) {
