@@ -78,11 +78,13 @@ public class LoginController {
             ResultEntity result = loginService.loginByAdmin(adminEmail, password);
             if (result.getCode().intValue() == LoginResultEnum.SUCCESS.getCode().intValue()) {
                 resultEntity.setCode(200);
+                resultEntity.setMsg(result.getMsg());
                 resultEntity.setData(result.getData());
             }else{
                 resultEntity.setCode(500);
+                resultEntity.setMsg(result.getMsg());
+                return resultEntity;
             }
-            resultEntity.setMsg(result.getMsg());
             Admin admin=(Admin) result.getData();
             int adminId=admin.getAdminId();
             resultEntity.setData(adminId);
