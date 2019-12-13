@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
         pageNo = pageNo == -1 ? 1 : pageNo;
         pageSize = pageSize == -1 ? 10 : pageSize;
         List<Comment> list = commentDao.getCommentListByUserId(userId);
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(pageNo, pageSize);
         PageInfo<Comment> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
@@ -69,20 +69,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int likeComment(int userId, int commentId) {
-        CommentLike commentLike=commentLikeDao.findByUserIdAndCommentId(userId,commentId);
-        Comment comment=commentDao.findCommentById(commentId);
-        int oldNum=comment.getLikeNum();
-        if (commentLike==null){
+        CommentLike commentLike = commentLikeDao.findByUserIdAndCommentId(userId, commentId);
+        Comment comment = commentDao.findCommentById(commentId);
+        int oldNum = comment.getLikeNum();
+        if (commentLike == null) {
 
-            commentLike=new CommentLike(userId,commentId, new Timestamp(new Date().getTime()));
+            commentLike = new CommentLike(userId, commentId, new Timestamp(new Date().getTime()));
             commentLikeDao.insertCommentLike(commentLike);
-        }else {
-            commentLikeDao.deleteCommentLike(userId,commentId);
-            comment.setLikeNum(oldNum-1);
+        } else {
+            commentLikeDao.deleteCommentLike(userId, commentId);
+            comment.setLikeNum(oldNum - 1);
             commentDao.updateComment(comment);
             return -1;
         }
-        comment.setLikeNum(oldNum+1);
+        comment.setLikeNum(oldNum + 1);
         return commentDao.updateComment(comment);
     }
 
@@ -93,39 +93,39 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Integer rankByUserId(Integer userId) {
-        Map<Integer, Integer> map = new HashMap<>();
-        Integer rank=-1;
+        Map<Integer, Long> map = new HashMap<>();
+        Integer rank = -1;
         List<HashMap<Integer, Object>> list = commentDao.sumByUserIdList();
         if (list != null && !list.isEmpty()) {
             for (HashMap<Integer, Object> map1 : list) {
                 Integer key = null;
-                Integer value = null;
+                Long value = null;
                 for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
                     if ("key".equals(entry.getKey())) {
                         key = (Integer) entry.getValue();
                     } else if ("value".equals(entry.getKey())) {
-                        value = (Integer) entry.getValue();
+                        value = (Long) entry.getValue();
                     }
                 }
                 map.put(key, value);
             }
         }
 
-        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+        List<Map.Entry<Integer, Long>> sortList = new ArrayList<>();
+        for (Map.Entry<Integer, Long> entry : map.entrySet()) {
             sortList.add(entry); //将map中的元素放入list中
         }
 
-        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Long>>() {
             @Override
-            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+            public int compare(Map.Entry<Integer, Long> o1, Map.Entry<Integer, Long> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
 
         for (int i = 0; i < sortList.size(); i++) {
-            if(sortList.get(i).getKey()==userId){
-                rank=i+1;
+            if (sortList.get(i).getKey() == userId) {
+                rank = i + 1;
                 break;
             }
         }
@@ -133,17 +133,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Integer sumByLikeNumLess(int i) {
-        return commentDao.sumByLikeNumLess(i);
+    public Integer sumByLikeNumLess(int i, int userId) {
+        return commentDao.sumByLikeNumLess(i, userId);
     }
 
     @Override
-    public Integer sumByLikeNumBetween(int i, int j) {
-        return commentDao.sumByLikeNumBetween(i,j);
+    public Integer sumByLikeNumBetween(int i, int j, int userId) {
+        return commentDao.sumByLikeNumBetween(i, j, userId);
     }
 
     @Override
-    public Integer sumByLikeNumMore(int i) {
-        return commentDao.sumByLikeNumMore(i);
+    public Integer sumByLikeNumMore(int i, int userId) {
+        return commentDao.sumByLikeNumMore(i, userId);
     }
 }

@@ -19,10 +19,10 @@
     </div>
     <div class="block">
       <div>用户个人中心API</div>
-      <a-button @click="userCollectPic"> 获取用户收藏画像</a-button>
+      <a-button type="primary" @click="userCollectPic"> 获取用户收藏画像</a-button>
       <a-button type="primary" @click="userUpdate">更新个人信息</a-button>
-      <a-button @click="userRecordPic">获取个人收藏画像</a-button>
-      <a-button @click="userCommentPic">获取个人评论画像</a-button>
+      <a-button type="primary" @click="userRecordPic">获取个人浏览记录画像</a-button>
+      <a-button type="primary" @click="userCommentPic">获取个人评论画像</a-button>
     </div>
     <div class="block">
       <div>浏览记录API</div>
@@ -310,12 +310,13 @@ export default {
     userCollectPic(){
       //用户收藏画像
       //请求参数
-      var userId = "1";
+      var userId = "2";
       //返回参数
       var collectPic = {
         collectNum:"",
         rank:"",
-        map:{},
+        brandMap:{},
+        TagMap:{},
       }
       var code = "";
       var msg = "";
@@ -389,7 +390,7 @@ export default {
     userCommentPic(){
       //个人评论画像
       //请求参数
-      var userId = "";
+      var userId = "1";
       //返回参数
       var commentPic={
         commentNum:"",
