@@ -427,7 +427,7 @@ for phone in phones:
     other = '上市时间:%s'%(date)
     #print(other)
 
-    sql = "INSERT INTO phone (brand,product_name,performance,interfaces,front_camera,rear_camera,photo_features,body,communication,endurance,screen,other,price,url,tag1,tag2,tag3,appearance1,appearance2,appearance3,product_type,library,product_analysis) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}')".format(brand,product_name,performance,interface,front_camera,rear_camera,photo_features,body,communicaiton,endurance,screen,other,phone[13],phone[14],phone[15],phone[16],phone[17],phone[18],phone[19],phone[20],phone[21],phone[21],phone[22],phone[23])
+    sql = "INSERT INTO phone (brand,product_name,performance,interfaces,front_camera,rear_camera,photo_features,body,communication,endurance,screen,other,price,url,tag1,tag2,tag3,appearance1,appearance2,appearance3,product_type,library,product_analysis) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}')".format(brand,product_name,performance,interface,front_camera,rear_camera,photo_features,body,communicaiton,endurance,screen,other,phone[13],phone[14],phone[15],phone[16],phone[17],phone[18],phone[19],phone[20],phone[21],phone[21],phone[22])
     cursor.execute(sql)
     db.commit()
     
@@ -720,5 +720,3 @@ for row in results:
 
 #%%
 db.close()
-
-#%%
