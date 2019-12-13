@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @Date: 2019/10/28 0028 15:44
  */
 public class RecordPic implements Serializable {
-    Integer recordNum;
+    Long recordNum;
     Integer computerNum;
     Integer phoneNum;
     HashMap<String,Integer> rocordMap;
@@ -19,7 +19,7 @@ public class RecordPic implements Serializable {
 
     }
 
-    public RecordPic(Integer recordNum, Integer computerNum, Integer phoneNum, HashMap<String, Integer> rocordMap, HashMap<String, Integer> timeMap) {
+    public RecordPic(Long recordNum, Integer computerNum, Integer phoneNum, HashMap<String, Integer> rocordMap, HashMap<String, Integer> timeMap) {
         this.recordNum = recordNum;
         this.computerNum = computerNum;
         this.phoneNum = phoneNum;
@@ -27,11 +27,11 @@ public class RecordPic implements Serializable {
         this.timeMap = timeMap;
     }
 
-    public Integer getRecordNum() {
+    public Long getRecordNum() {
         return recordNum;
     }
 
-    public void setRecordNum(Integer recordNum) {
+    public void setRecordNum(Long recordNum) {
         this.recordNum = recordNum;
     }
 

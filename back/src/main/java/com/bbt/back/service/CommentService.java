@@ -18,6 +18,7 @@ public interface CommentService {
      * create by: Kobe
      * description:添加评论
      * create time: 12:07 2019/5/22
+     *
      * @param comment
      * @return int
      */
@@ -27,6 +28,7 @@ public interface CommentService {
      * create by: Kobe
      * description:删除评论
      * create time: 12:10 2019/5/22
+     *
      * @param commentId
      * @return int
      */
@@ -36,6 +38,7 @@ public interface CommentService {
      * create by: Kobe
      * description:更新评论
      * create time: 12:13 2019/5/22
+     *
      * @param comment
      * @return
      */
@@ -45,6 +48,7 @@ public interface CommentService {
      * create by: Kobe
      * description:根据id找评论接口
      * create time: 14:59 2019/5/22
+     *
      * @param commentId
      * @return
      */
@@ -54,6 +58,7 @@ public interface CommentService {
      * create by: Bin Liu
      * description:获取评论列表
      * create time: 11:24 2019/6/4
+     *
      * @param
      * @param userId
      * @param pageNo
@@ -72,9 +77,9 @@ public interface CommentService {
 
     Integer rankByUserId(Integer userId);
 
-    Integer sumByLikeNumLess(int i);
+    Integer sumByLikeNumLess(int i, int userId);
 
-    Integer sumByLikeNumBetween(int i, int j);
+    Integer sumByLikeNumBetween(int i, int j, int userId);
 
-    Integer sumByLikeNumMore(int i);
+    Integer sumByLikeNumMore(int i, int userId);
 }

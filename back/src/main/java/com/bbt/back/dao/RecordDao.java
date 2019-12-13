@@ -27,7 +27,7 @@ public interface RecordDao {
     //新增
     List<Record> selectByUserId(int userId);
 
-    Integer findRecordNumByUserId(Integer userId);
+    Long findRecordNumByUserId(Integer userId);
 
     Integer findProductNumByUserIdAndType(@Param("userId")Integer userId ,@Param("productType") Integer productType);
 

@@ -2,6 +2,7 @@ package com.bbt.back.service;
 
 import com.bbt.back.entities.Collect;
 import com.github.pagehelper.PageInfo;
+import jnr.ffi.annotations.In;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,5 +20,7 @@ public interface CollectService {
 
     Integer rankByUserId(Integer userId);
 
-    HashMap<String,Long> sumByUserId(Integer userId);
+    HashMap<String,Integer> sumBrandByUserId(Integer userId);
+
+    HashMap<String,Integer> sumTagByUserId(Integer userId);
 }

@@ -11,23 +11,33 @@ import java.util.HashMap;
 public class CollectPic implements Serializable {
     Long collectNum;
     Integer rank;
-    HashMap<String,Long> map;
+    HashMap<String,Integer> brandMap;
+    HashMap<String,Integer> tagMap;
 
     public CollectPic() {
     }
 
-    public CollectPic(Long collectNum, Integer rank, HashMap<String, Long> map) {
+    public CollectPic(Long collectNum, Integer rank, HashMap<String, Integer> brandMap, HashMap<String, Integer> tagMap) {
         this.collectNum = collectNum;
         this.rank = rank;
-        this.map = map;
+        this.brandMap = brandMap;
+        this.tagMap = tagMap;
     }
 
-    public HashMap<String, Long> getMap() {
-        return map;
+    public HashMap<String, Integer> getBrandMap() {
+        return brandMap;
     }
 
-    public void setMap(HashMap<String, Long> map) {
-        this.map = map;
+    public void setBrandMap(HashMap<String, Integer> brandMap) {
+        this.brandMap = brandMap;
+    }
+
+    public HashMap<String, Integer> getTagMap() {
+        return tagMap;
+    }
+
+    public void setTagMap(HashMap<String, Integer> tagMap) {
+        this.tagMap = tagMap;
     }
 
     public Long getCollectNum() {

@@ -37,11 +37,11 @@ public interface CommentDao {
 
     Integer findCommentNumByUserId(Integer userId);
 
-    List<HashMap<Integer,Object>> sumByUserIdList();
+    List<HashMap<Integer, Object>> sumByUserIdList();
 
-    Integer sumByLikeNumLess(Integer i);
+    Integer sumByLikeNumLess(@Param("i")Integer i,@Param("userId") Integer userId);
 
-    Integer sumByLikeNumBetween(@Param("i") Integer i,@Param("j") Integer j);
+    Integer sumByLikeNumBetween(@Param("i") Integer i, @Param("j") Integer j, @Param("userId") Integer userId);
 
-    Integer sumByLikeNumMore(Integer i);
+    Integer sumByLikeNumMore(@Param("i")Integer i, @Param("userId")Integer userId);
 }

@@ -3,15 +3,20 @@ package com.bbt.back.service.impl;
 import com.bbt.back.dao.ComputerDao;
 import com.bbt.back.dao.PhoneDao;
 import com.bbt.back.dao.RecordDao;
+import com.bbt.back.entities.Collect;
 import com.bbt.back.entities.Computer;
 import com.bbt.back.entities.Phone;
 import com.bbt.back.entities.Record;
 import com.bbt.back.service.RecordService;
+import com.bbt.back.utils.MapUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -53,7 +58,7 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public Integer findRecordNumByUserId(Integer userId) {
+    public Long findRecordNumByUserId(Integer userId) {
         return recordDao.findRecordNumByUserId(userId);
     }
 
@@ -69,71 +74,56 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public HashMap<String, Integer> sumByUserId(Integer userId) {
-        Map<Integer, Integer> map = new HashMap<>();
-        HashMap<String, Integer> result = new HashMap<>();
-        List<HashMap<Integer, Object>> list = recordDao.sumByUserIdList();
-        if (list != null && !list.isEmpty()) {
-            for (HashMap<Integer, Object> map1 : list) {
-                Integer key = null;
-                Integer value = null;
-                for (Map.Entry<Integer, Object> entry : map1.entrySet()) {
-                    if ("key".equals(entry.getKey())) {
-                        key = (Integer) entry.getValue();
-                    } else if ("value".equals(entry.getKey())) {
-                        value = (Integer) entry.getValue();
-                    }
-                }
-                map.put(key, value);
+        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+        HashMap<String, Integer> recordMap = new HashMap<>();
+        List<Record> recordList=recordDao.selectByUserId(userId);
+
+        for (Record r:recordList){
+            if (r.getProductType()==0){
+                Phone phone=phoneDao.findPhoneById(r.getProductId());
+                String brand=phone.getBrand();
+                recordMap=MapUtil.addKey(recordMap,brand);
+            }else {
+                Computer computer=computerDao.findComputerById(r.getProductId());
+                String brand=computer.getBrand();
+                recordMap=MapUtil.addKey(recordMap,brand);
             }
         }
 
-        List<Map.Entry<Integer, Integer>> sortList = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+        List<Map.Entry<String, Integer>> sortList = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : recordMap.entrySet()){
             sortList.add(entry); //将map中的元素放入list中
         }
 
-        Collections.sort(sortList, new Comparator<Map.Entry<Integer, Integer>>() {
+        Collections.sort(sortList, new Comparator<Map.Entry<String, Integer>>() {
             @Override
-            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
 
-        for (int i=0;i<5;i++){
-            Integer recordId =sortList.get(i).getKey();
-            Record record=recordDao.findRecordById(recordId);
-            String productName="";
-            if(record.getProductType()==0){
-                Phone phone = phoneDao.findPhoneById(record.getProductId());
-                productName=phone.getProductName();
-            }else {
-                Computer computer = computerDao.findComputerById(record.getProductId());
-                productName=computer.getBrand();
+        if (sortList.size()<5){
+            for (int i=0;i<sortList.size();i++){
+                result.put(sortList.get(i).getKey(),sortList.get(i).getValue());
             }
-            result.put(productName,sortList.get(i).getValue());
+        }else {
+            for (int i=0;i<5;i++){
+                result.put(sortList.get(i).getKey(),sortList.get(i).getValue());
+            }
         }
-
         return result;
     }
 
     @Override
-    public HashMap<String, Integer> sumByTime() {
-        Map<String, Integer> map = new HashMap<>();
-        HashMap<String, Integer> result = new HashMap<>();
-        List<HashMap<String, Object>> list = recordDao.sumByTimeList();
-        if (list != null && !list.isEmpty()) {
-            for (HashMap<String, Object> map1 : list) {
-                String key = null;
-                Integer value = null;
-                for (Map.Entry<String, Object> entry : map1.entrySet()) {
-                    if ("key".equals(entry.getKey())) {
-                        key = (String) entry.getValue();
-                    } else if ("value".equals(entry.getKey())) {
-                        value = (Integer) entry.getValue();
-                    }
-                }
-                map.put(key, value);
-            }
+    public HashMap<String, Integer> sumByTime(Integer userId) {
+        HashMap<String, Integer> map = new HashMap<>();
+        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+        List<Record> recordList=recordDao.selectByUserId(userId);
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        for (Record record:recordList){
+            Date BrowseTime=record.getBrowseTime();
+            String date=ft.format(BrowseTime);
+            map =  MapUtil.addKey(map,date);
         }
 
         List<Map.Entry<String, Integer>> sortList = new ArrayList<>();
@@ -142,14 +132,25 @@ public class RecordServiceImpl implements RecordService {
         }
 
         Collections.sort(sortList, new Comparator<Map.Entry<String, Integer>>() {
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getKey().compareTo(o2.getKey());
+                try {
+                    return f.parse(o2.getKey()).compareTo(f.parse(o1.getKey()));
+                } catch (ParseException e) {
+                    throw new IllegalArgumentException(e);
+                }
             }
         });
 
-        for (int i=0;i<30;i++){
-            result.put(sortList.get(i).getKey(),sortList.get(i).getValue());
+        if (sortList.size()<30){
+            for (int i=0;i<sortList.size();i++){
+                result.put(sortList.get(i).getKey(),sortList.get(i).getValue());
+            }
+        }else {
+            for (int i=0;i<30;i++){
+                result.put(sortList.get(i).getKey(),sortList.get(i).getValue());
+            }
         }
 
         return result;

@@ -17,7 +17,7 @@ public interface RecordService {
 
     Record findById(int recordId);
 
-    Integer findRecordNumByUserId(Integer userId);
+    Long findRecordNumByUserId(Integer userId);
 
     Integer findComputerNumByUserId(Integer userId);
 
@@ -25,5 +25,5 @@ public interface RecordService {
 
     HashMap<String,Integer> sumByUserId(Integer userId);
 
-    HashMap<String,Integer> sumByTime();
+    HashMap<String,Integer> sumByTime(Integer userId);
 }

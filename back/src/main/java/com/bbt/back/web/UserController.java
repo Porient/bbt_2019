@@ -49,7 +49,7 @@ public class UserController {
 
     @PostMapping("/changePassword")
     private Object changePassword(HttpServletRequest request) {
-        ResultEntity resultEntity=new ResultEntity();
+        ResultEntity resultEntity = new ResultEntity();
         //获取user对应的json字符串
         String userStr = HttpServletRequestUtil.getString(request, "user");
         ObjectMapper mapper = new ObjectMapper();
@@ -97,8 +97,8 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    private Object update(HttpServletRequest request) throws Exception{
-        ResultEntity resultEntity=new ResultEntity();
+    private Object update(HttpServletRequest request) throws Exception {
+        ResultEntity resultEntity = new ResultEntity();
         //获取user对应的json字符串
         String userStr = HttpServletRequestUtil.getString(request, "user");
         ObjectMapper mapper = new ObjectMapper();
@@ -116,42 +116,47 @@ public class UserController {
     }
 
     @RequestMapping("/getCommentPic")
-    private Object getCommentPic(HttpServletRequest request) throws Exception{
+    private Object getCommentPic(HttpServletRequest request) throws Exception {
         ResultEntity resultEntity = new ResultEntity();
-        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
-        Integer commentNum=commentService.findCommentNumByUserId(userId);
-        Integer rank=commentService.rankByUserId(userId);
-        Integer likeNum1=commentService.sumByLikeNumLess(50);
-        Integer likeNum2=commentService.sumByLikeNumBetween(50,100);
-        Integer likeNum3=commentService.sumByLikeNumBetween(100,200);
-        Integer likeNum4=commentService.sumByLikeNumMore(200);
-        CommentPic commentPic=new CommentPic(commentNum,rank,likeNum1,likeNum2,likeNum3,likeNum4);
+        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
+        Integer commentNum = commentService.findCommentNumByUserId(userId);
+        Integer rank = commentService.rankByUserId(userId);
+        Integer likeNum1 = commentService.sumByLikeNumLess(50, userId);
+        Integer likeNum2 = commentService.sumByLikeNumBetween(50, 100, userId);
+        Integer likeNum3 = commentService.sumByLikeNumBetween(100, 200, userId);
+        Integer likeNum4 = commentService.sumByLikeNumMore(200, userId);
+        CommentPic commentPic = new CommentPic(commentNum, rank, likeNum1, likeNum2, likeNum3, likeNum4);
         resultEntity.setData(commentPic);
         return resultEntity;
     }
 
     @RequestMapping("/getRecordPic")
-    private Object getRecordPic(HttpServletRequest request) throws Exception{
+    private Object getRecordPic(HttpServletRequest request) throws Exception {
         ResultEntity resultEntity = new ResultEntity();
-        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
-        Integer recordNum=recordService.findRecordNumByUserId(userId);
-        Integer computerNum=recordService.findComputerNumByUserId(userId);
-        Integer phoneNum=recordService.findPhoneNumByUserId(userId);
-        HashMap<String,Integer> recordMap=recordService.sumByUserId(userId);
-        HashMap<String,Integer> timeMap=recordService.sumByTime();
-        RecordPic recordPic=new RecordPic(recordNum,computerNum,phoneNum,recordMap,timeMap);
+        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
+        Long recordNum = recordService.findRecordNumByUserId(userId);
+        Integer computerNum = recordService.findComputerNumByUserId(userId);
+        Integer phoneNum = recordService.findPhoneNumByUserId(userId);
+        HashMap<String, Integer> recordMap = recordService.sumByUserId(userId);
+        HashMap<String, Integer> timeMap = recordService.sumByTime(userId);
+        System.out.println("timeMap:"+timeMap.size());
+        RecordPic recordPic = new RecordPic(recordNum, computerNum, phoneNum, recordMap, timeMap);
         resultEntity.setData(recordPic);
         return resultEntity;
     }
 
     @RequestMapping("/getCollectPic")
-    private Object getCollectPic(HttpServletRequest request) throws Exception{
+    private Object getCollectPic(HttpServletRequest request) throws Exception {
         ResultEntity resultEntity = new ResultEntity();
-        Integer userId = HttpServletRequestUtil.getInt(request,"userId");
-        Long collectNum=collectService.findCollectNumByUserId(userId);
-        Integer rank=collectService.rankByUserId(userId);
-        HashMap<String,Long> map=collectService.sumByUserId(userId);
-        CollectPic collectPic=new CollectPic(collectNum,rank,map);
+        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
+        Long collectNum = collectService.findCollectNumByUserId(userId);
+        Integer rank = collectService.rankByUserId(userId);
+        //收藏的产品的品牌占比
+        HashMap<String, Integer> brandMap = collectService.sumBrandByUserId(userId);
+        //收藏的商品的标签统计
+        HashMap<String, Integer> tagMap = collectService.sumTagByUserId(userId);
+        System.out.println("TagMap:"+tagMap.size());
+        CollectPic collectPic = new CollectPic(collectNum, rank, brandMap,tagMap);
         resultEntity.setData(collectPic);
         return resultEntity;
     }
