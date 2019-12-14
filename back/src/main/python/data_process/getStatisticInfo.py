@@ -68,6 +68,7 @@ def getStatisticInfo(product_id):
             if date not in daily:
                 daily[date]={}
             daily[date]['browse_num'] = daily_browse_num
+    
     #每日点赞次数
     sql = 'SELECT like_time, count(*) AS daily_like_num FROM user_like WHERE product_id=%s and product_type=0 GROUP BY like_time'%(product_id)
     cursor.execute(sql)
@@ -79,6 +80,7 @@ def getStatisticInfo(product_id):
             if date not in daily:
                 daily[date]={}
             daily[date]['like_num'] = daily_like_num
+
     #每日评论次数
     sql = 'SELECT date, count(*) AS daily_review_num FROM comment WHERE product_id=%s and product_type=0 GROUP BY date'%(product_id)
     cursor.execute(sql)
@@ -100,15 +102,15 @@ def getStatisticInfo(product_id):
             daily[date]['review_num'] = 0
     statistic_info['daily'] = daily
 
-    #评论词云图/词频图
-    sql = 'SELECT content FROM comment WHERE product_id=%s and product_type=0'%(product_id)
-    cursor.execute(sql)
-    comment_list = cursor.fetchall()
-    if comment_list == None:
-        statistic_info['comment_wordcloud_path'] = ''
-    else:
-        wordcloud_path = comment_cloud.createCommentWordcloud(product_id,comment_list)
-        statistic_info['comment_wordcloud_path'] = wordcloud_path
+    # #评论词云图/词频图
+    # sql = 'SELECT content FROM comment WHERE product_id=%s and product_type=0'%(product_id)
+    # cursor.execute(sql)
+    # comment_list = cursor.fetchall()
+    # if comment_list == None:
+    #     statistic_info['comment_wordcloud_path'] = ''
+    # else:
+    #     wordcloud_path = comment_cloud.createCommentWordcloud(product_id,comment_list)
+    #     statistic_info['comment_wordcloud_path'] = wordcloud_path
 
     db.close()
     return statistic_info
