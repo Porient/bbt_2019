@@ -38,9 +38,9 @@
     </div>
     <div class="block">
       <div>产品API</div>
-      <a-button @click="getMiningInfo">获取MiningInfo</a-button>
+      <a-button type="primary" @click="getMiningInfo">获取MiningInfo</a-button>
       <a-button type="primary" @click="getCommentInfo">获取CommentInfo</a-button>
-      <a-button @click="getCompareInfo">获取CompareInfo</a-button>
+      <a-button type="primary" @click="getCompareInfo">获取CompareInfo</a-button>
       <a-button type="primary" @click="getStatisticInfo">获取StatisticsInfo</a-button>
       <a-button type="primary" @click="getBasicInfo">获取基本信息</a-button>
       <a-button type="primary" @click="productRecommend">获取推荐产品</a-button>
@@ -769,12 +769,12 @@ export default {
         }
       });
     },
-    productRecommend( ){
+    productRecommend(){
       //获取推荐产品
       //请求参数
       var userId = "1";
       //返回参数
-      products = {
+      var products = {
         top_n_phone_list:{
           like_list:[],
           collection_list:[],
