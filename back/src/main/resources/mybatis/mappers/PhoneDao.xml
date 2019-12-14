@@ -104,5 +104,8 @@
       where product_name LIKE #{searchToken}
             OR brand LIKE #{searchToken}
             OR performance LIKE #{searchToken}
+            OR tag1 LIKE #{searchToken}
+            OR tag2 LIKE #{searchToken}
+            OR tag3 LIKE #{searchToken}
     </select>
 </mapper>

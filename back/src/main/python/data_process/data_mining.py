@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*
+#coding:utf-8
 #%%
+import sys
 import pymysql
 import math
 import comment_cloud

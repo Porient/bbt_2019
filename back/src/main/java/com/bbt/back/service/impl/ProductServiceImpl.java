@@ -11,6 +11,7 @@ import com.bbt.back.entities.UserLike;
 import com.bbt.back.model.ProductLikeObject;
 import com.bbt.back.model.ProductObject;
 import com.bbt.back.model.ProductResult;
+import com.bbt.back.model.SearchProDto;
 import com.bbt.back.service.ProductService;
 import com.bbt.back.utils.DeduplicationUtil;
 import com.github.pagehelper.PageHelper;
@@ -95,7 +96,9 @@ public class ProductServiceImpl implements ProductService {
         pageNum = pageNum == -1 ? 1 : pageNum;
         pageSize = pageSize == -1 ? 10 : pageSize;
         List<Object> list = new ArrayList<>();
+        List<Object> result = new ArrayList<>();
         String[] tokens = searchToken.split("%");
+        Double size=Double.valueOf(tokens.length);
         if (type == 0) {
             for (int i=0;i<tokens.length;i++){
                 list.addAll(phoneDao.selectByToken(searchToken));
@@ -107,7 +110,38 @@ public class ProductServiceImpl implements ProductService {
         }
         PageHelper.startPage(pageNum, pageSize);
         list= DeduplicationUtil.deduplication(list);
-        PageInfo<Object> pageInfo = new PageInfo<>(list);
+        if (type == 0) {
+            for (int j=0;j<list.size();j++){
+                Phone phone= (Phone) list.get(j);
+                String phoneStr=phone.toString();
+                Double num=0.0;
+                for (int i=0;i<tokens.length;i++){
+                    if (phoneStr.contains(tokens[i])){
+                        num++;
+                    }
+                }
+                Double suitability=num/size;
+                SearchProDto searchProDto=new SearchProDto(phone,suitability);
+                result.add(searchProDto);
+            }
+        } else {
+            for (int j=0;j<list.size();j++){
+                Computer computer= (Computer) list.get(j);
+                String phoneStr=computer.toString();
+                Double num=0.0;
+                for (int i=0;i<tokens.length;i++){
+                    if (phoneStr.contains(tokens[i])){
+                        num++;
+                    }
+                }
+                Double suitability=num/size;
+                SearchProDto searchProDto=new SearchProDto(computer,suitability);
+                result.add(searchProDto);
+            }
+        }
+
+
+        PageInfo<Object> pageInfo = new PageInfo<>(result);
         return pageInfo;
     }
 
