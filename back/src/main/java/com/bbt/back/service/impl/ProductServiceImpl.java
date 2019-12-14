@@ -198,69 +198,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String getRecommendProduct(Integer userId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/recommend/recommend_top_n.py ");
-        PyFunction func = (PyFunction) interpreter.get("recommendBoth",
-                PyFunction.class);
-
-        PyObject pyobj = func.__call__(new PyInteger(userId));
-        return pyobj.toString();
-    }
-
-    @Override
-    public PyObject getBasicInfo(int productId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
-        String productAnalysis;
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
-        //basicInfo
-        PyFunction func = (PyFunction) interpreter.get("getBasicInfo",
-                PyFunction.class);
-        PyObject basicInfo = func.__call__(new PyInteger(productId));
-        return basicInfo;
-    }
-
-    @Override
-    public PyObject getStatisticInfo(int productId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
-        String productAnalysis;
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
-        //basicInfo
-        PyFunction func = (PyFunction) interpreter.get("getStatisticInfo",
-                PyFunction.class);
-        PyObject statisticInfo = func.__call__(new PyInteger(productId));
-        return statisticInfo;
-    }
-
-    @Override
-    public PyObject getCompareInfo(int productId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
-        String productAnalysis;
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
-        //basicInfo
-        PyFunction func = (PyFunction) interpreter.get("getCompareInfo",
-                PyFunction.class);
-        PyObject compareInfo = func.__call__(new PyInteger(productId));
-        return compareInfo;
-    }
-
-    @Override
-    public PyObject getCommentInfo(int productId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
-        String productAnalysis;
-        interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
-        //basicInfo
-        PyFunction func = (PyFunction) interpreter.get("getCommentInfo",
-                PyFunction.class);
-        PyObject commentInfo = func.__call__(new PyInteger(productId));
-        return commentInfo;
-    }
-
-    @Override
-    public String getMiningInfo(int productId) {
-        String productAnalysis;
         String result = "";
         try {
-            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getBasicInfo.py"+productId);
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\recommend\\recommend_top_n.py "+userId);
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
             LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
             result = lineNumberReader.readLine();
@@ -271,6 +211,95 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    @Override
+    public String getBasicInfo(int productId) {
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getBasicInfo.py "+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getStatisticInfo(int productId) {
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getStatisticInfo.py "+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getCompareInfo(int productId) {
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getCompareInfo.py "+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getCommentInfo(int productId) {
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getCommentInfo.py "+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getMiningInfo(int productId) {
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getMiningInfo.py "+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }

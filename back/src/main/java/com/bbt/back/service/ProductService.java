@@ -29,13 +29,13 @@ public interface ProductService {
 
     String getRecommendProduct(Integer userId);
 
-    PyObject getBasicInfo(int productId);
+    String getBasicInfo(int productId);
 
-    PyObject getStatisticInfo(int productId);
+    String getStatisticInfo(int productId);
 
-    PyObject getCompareInfo(int productId);
+    String getCompareInfo(int productId);
 
-    PyObject getCommentInfo(int productId);
+    String getCommentInfo(int productId);
 
     String getMiningInfo(int productId);
 }

@@ -1,5 +1,7 @@
 package com.bbt.back.web;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bbt.back.entities.Record;
 import com.bbt.back.model.*;
 import com.bbt.back.service.ProductService;
@@ -96,13 +98,14 @@ public class ProductController {
     private Object getBasicInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        PyObject basicInfo=productService.getBasicInfo(productId);
+        String result=productService.getBasicInfo(productId);
+        JSONObject basicInfo=JSON.parseObject(result);
         if (basicInfo != null){
             resultEntity.setData(basicInfo);
-            resultEntity.setMsg("生成BasicInfo成功");
+            resultEntity.setMsg("生成basicInfo成功");
             resultEntity.setCode(200);
         } else {
-            resultEntity.setMsg("生成BasicInfo失败");
+            resultEntity.setMsg("生成basicInfo失败");
             resultEntity.setCode(500);
         }
         return resultEntity;
@@ -112,7 +115,10 @@ public class ProductController {
     private Object getStatisticInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        PyObject statisticInfo=productService.getStatisticInfo(productId);
+        String result=productService.getStatisticInfo(productId);
+        result = result.substring(0,result.length() - 1);
+        result=result+", 'comment_wordcloud_path': './wordcloud/comment_cloud/"+productId+".png'}";
+        JSONObject statisticInfo=JSON.parseObject(result);
         if (statisticInfo != null){
             resultEntity.setData(statisticInfo);
             resultEntity.setMsg("生成StatisticInfo成功");
@@ -128,7 +134,8 @@ public class ProductController {
     private Object getCompareInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        PyObject compareInfo=productService.getCompareInfo(productId);
+        String result=productService.getCompareInfo(productId);
+        JSONObject compareInfo=JSON.parseObject(result);
         if (compareInfo != null){
             resultEntity.setData(compareInfo);
             resultEntity.setMsg("生成CompareInfo成功");
@@ -144,7 +151,10 @@ public class ProductController {
     private Object getCommentInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        PyObject commentInfo=productService.getCommentInfo(productId);
+        String result=productService.getCommentInfo(productId);
+        result=result.replaceAll("\\[","");
+        result=result.replaceAll("\\]","");
+        JSONObject commentInfo=JSON.parseObject(result);
         if (commentInfo != null){
             resultEntity.setData(commentInfo);
             resultEntity.setMsg("生成CommentInfo成功");
@@ -160,17 +170,16 @@ public class ProductController {
     private Object getMiningInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        String miningInfo=productService.getMiningInfo(productId);
-//        PyObject miningInfo=productService.getMiningInfo(productId);
-//        System.out.println(111111111);
-//        if (miningInfo != null){
-//            resultEntity.setData(miningInfo);
-//            resultEntity.setMsg("生成MiningInfo成功");
-//            resultEntity.setCode(200);
-//        } else {
-//            resultEntity.setMsg("生成MiningInfo失败");
-//            resultEntity.setCode(500);
-//        }
+        String result=productService.getMiningInfo(productId);
+        JSONObject miningInfo=JSON.parseObject(result);
+        if (miningInfo != null){
+            resultEntity.setData(miningInfo);
+            resultEntity.setMsg("生成MiningInfo成功");
+            resultEntity.setCode(200);
+        } else {
+            resultEntity.setMsg("生成MiningInfo失败");
+            resultEntity.setCode(500);
+        }
         return resultEntity;
     }
 
@@ -192,7 +201,8 @@ public class ProductController {
     private Object getRecommendProduct(HttpServletRequest request){
         int userId = HttpServletRequestUtil.getInt(request, "userId");
         ResultEntity resultEntity = new ResultEntity();
-        String products = productService.getRecommendProduct(userId);
+        String result = productService.getRecommendProduct(userId);
+        JSONObject products=JSON.parseObject(result);
         if (products.isEmpty()){
             resultEntity.setMsg("获取推荐产品失败");
             resultEntity.setCode(500);

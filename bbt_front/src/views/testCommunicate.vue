@@ -39,10 +39,10 @@
     <div class="block">
       <div>产品API</div>
       <a-button @click="getMiningInfo">获取MiningInfo</a-button>
-      <a-button @click="getCommentInfo">获取CommentInfo</a-button>
+      <a-button type="primary" @click="getCommentInfo">获取CommentInfo</a-button>
       <a-button @click="getCompareInfo">获取CompareInfo</a-button>
-      <a-button @click="getStatisticInfo">获取StatisticsInfo</a-button>
-      <a-button @click="getBasicInfo">获取基本信息</a-button>
+      <a-button type="primary" @click="getStatisticInfo">获取StatisticsInfo</a-button>
+      <a-button type="primary" @click="getBasicInfo">获取基本信息</a-button>
       <a-button @click="productRecommend">获取推荐产品</a-button>
       <a-button type="primary" @click="productList">获取产品列表</a-button>
       <a-button type="primary" @click="productDelete">删除产品</a-button>
@@ -600,7 +600,7 @@ export default {
     getCommentInfo(){
       //获取评论信息
       //请求参数
-      var productId = "";
+      var productId = "1";
       //返回参数
       var commentInfo = {
         comment_id:"",
@@ -629,7 +629,7 @@ export default {
     getCompareInfo(){
       //获取比较信息
       //请求参数
-      var productId = "";
+      var productId = "1";
       //返回参数
       var compareInfo = {
         collect_rank:"",
@@ -658,7 +658,7 @@ export default {
     getStatisticInfo(){
       //获取统计信息
       //请求参数
-      var productId = "";
+      var productId = "1";
       //返回参数
       var statisticInfo = {
         collect_num : "",
@@ -690,7 +690,7 @@ export default {
     getBasicInfo(){
       //获取基本信息
       //请求参数
-      var productId = "";
+      var productId = "1";
       //返回参数
       var basicInfo = {
         id:"",
