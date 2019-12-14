@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @Description:
@@ -139,7 +140,6 @@ public class ProductServiceImpl implements ProductService {
                 result.add(searchProDto);
             }
         }
-
 
         PageInfo<Object> pageInfo = new PageInfo<>(result);
         return pageInfo;
@@ -255,8 +255,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PyObject getMiningInfo(int productId) {
-        PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
+        Properties props = new Properties();
+        props.put("python.console.encoding", "UTF-8");
+        props.put("python.security.respectJavaAccessibility", "false");
+        props.put("python.import.site", "false");
+
+        Properties preprops = System.getProperties();
+        PythonInterpreter.initialize(preprops, props, new String[0]);
+
+        PythonInterpreter interpreter = new PythonInterpreter();
         interpreter.execfile(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
         //basicInfo
         System.out.println(2222222);

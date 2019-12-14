@@ -72,11 +72,11 @@ export default {
       //注册
       //请求参数
       var user = {
-        userEmail:"496612585@qq.com",
-        nickname:"潘浩霖",
+        userEmail:"1145054472@qq.com",
+        nickname:"刘斌",
         password:"123456",
       };
-      var verifyCode = "904705";
+      var verifyCode = "450601";
       //返回参数
       var code = "";
       var msg = "";
@@ -95,7 +95,7 @@ export default {
     getCode(){
       //获取验证码
       //请求参数
-      var email = "496612585@qq.com";
+      var email = "1145054472@qq.com";
       //返回参数
       var code = "";
       var msg = ""
