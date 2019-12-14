@@ -37,5 +37,5 @@ public interface ProductService {
 
     PyObject getCommentInfo(int productId);
 
-    PyObject getMiningInfo(int productId);
+    String getMiningInfo(int productId);
 }

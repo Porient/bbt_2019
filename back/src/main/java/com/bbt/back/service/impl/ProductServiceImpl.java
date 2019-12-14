@@ -23,10 +23,12 @@ import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * @Description:
@@ -254,23 +256,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PyObject getMiningInfo(int productId) {
+    public String getMiningInfo(int productId) {
         String productAnalysis;
-        Properties props = new Properties();
-        props.put("python.console.encoding", "UTF-8");
-        props.put("python.security.respectJavaAccessibility", "false");
-        props.put("python.import.site", "false");
+        String result = "";
+        try {
+            Process process = Runtime.getRuntime().exec("python "+System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\getBasicInfo.py"+productId);
+            InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(),"GBK");
+            LineNumberReader lineNumberReader = new LineNumberReader(inputStreamReader);
+            result = lineNumberReader.readLine();
+            System.out.println(result);
+            inputStreamReader.close();
+            lineNumberReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Properties preprops = System.getProperties();
-        PythonInterpreter.initialize(preprops, props, new String[0]);
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
-        //basicInfo
-        System.out.println(2222222);
-        PyFunction func = (PyFunction) interpreter.get("getMiningInfo",
-                PyFunction.class);
-        PyObject miningInfo = func.__call__(new PyInteger(productId));
-        return miningInfo;
+        return result;
     }
 }

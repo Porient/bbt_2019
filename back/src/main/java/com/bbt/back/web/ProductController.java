@@ -160,16 +160,17 @@ public class ProductController {
     private Object getMiningInfo(HttpServletRequest request){
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
-        PyObject miningInfo=productService.getMiningInfo(productId);
-        System.out.println(111111111);
-        if (miningInfo != null){
-            resultEntity.setData(miningInfo);
-            resultEntity.setMsg("生成MiningInfo成功");
-            resultEntity.setCode(200);
-        } else {
-            resultEntity.setMsg("生成MiningInfo失败");
-            resultEntity.setCode(500);
-        }
+        String miningInfo=productService.getMiningInfo(productId);
+//        PyObject miningInfo=productService.getMiningInfo(productId);
+//        System.out.println(111111111);
+//        if (miningInfo != null){
+//            resultEntity.setData(miningInfo);
+//            resultEntity.setMsg("生成MiningInfo成功");
+//            resultEntity.setCode(200);
+//        } else {
+//            resultEntity.setMsg("生成MiningInfo失败");
+//            resultEntity.setCode(500);
+//        }
         return resultEntity;
     }
 
