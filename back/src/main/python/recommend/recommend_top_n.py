@@ -1,9 +1,10 @@
 #%%
+import sys
 import pymysql
 import math
 from abc import ABC, abstractmethod
-import contentbased_module
-import deeplearningbased_module
+#import contentbased_module
+#import deeplearningbased_module
 
 #%%
 class DAL:
@@ -576,7 +577,7 @@ class DAL:
 
 #%%
 #Test DAL
-# dal = DAL("root","123456","bbt")
+# dal = DAL("root","7887227","bbt")
 #browse_list = dal.selectBrowseListById(1)
 #print('browse_list:',browse_list)
 # collection_list = dal.selectCollectionListByID(1)
@@ -613,7 +614,7 @@ class Person:
     def __init__(self, id):
         self.id = id
         #查询mysql，获取用户收藏列表/浏览记录列表/态度列表
-        dal = DAL("root","123456","bbt")
+        dal = DAL("root","7887227","bbt")
         #dal.connectDB()
         self.Info = dal.selectUserById(id)
         self.browseList = dal.selectBrowseListById(id)
@@ -640,32 +641,32 @@ class HeatBasedStrategy(Strategy):
         #partition = 0.5 #初始比例
         #统计用户浏览记录+点赞列表+收藏列表的产品类型比例
         
-        dal = DAL("root","123456","bbt")
+        dal = DAL("root","7887227","bbt")
         topNPhoneList = dal.selectTopNPhone(n)
         topNComputerList = dal.selectTopNComputer(n)
 
         top_n_List = {'top_n_phone_list':topNPhoneList,'top_n_computer_list':topNComputerList}
         return top_n_List
 
-class ContentBasedStrategy(Strategy):
-    '''
-    基于内容相似度的策略，调用ContentBasedModule实现
-    '''
-    def getTopN(self, person_id, n):
-        #数据预处理成module需要的数据形式
+# class ContentBasedStrategy(Strategy):
+#     '''
+#     基于内容相似度的策略，调用ContentBasedModule实现
+#     '''
+#     def getTopN(self, person_id, n):
+#         #数据预处理成module需要的数据形式
 
-        input = None
-        topNList = contentbased_module.getTopN(input, n)
-        return topNList
+#         input = None
+#         topNList = contentbased_module.getTopN(input, n)
+#         return topNList
 
-class DeeplearningBasedStrategy(Strategy):
-    '''
-    基于CNN/Word2Vec的策略，调用deeplearningBasedModule实现
-    '''
-    def getTopN(self ,person_id, n):
-        #数据预处理成module需要的数据形式
-        topNList = deeplearningbased_module.getTopN(person_id, n)
-        return topNList
+# class DeeplearningBasedStrategy(Strategy):
+#     '''
+#     基于CNN/Word2Vec的策略，调用deeplearningBasedModule实现
+#     '''
+#     def getTopN(self ,person_id, n):
+#         #数据预处理成module需要的数据形式
+#         topNList = deeplearningbased_module.getTopN(person_id, n)
+#         return topNList
 
 
 
@@ -680,8 +681,8 @@ class RecommendSystem:
         # if strategyName == "ContentBased":
         #     self.strategy = ContentBasedStrategy()
         
-        if strategyName == "DeeplearningBased":
-            self.strategy = DeeplearningBasedStrategy()
+        # if strategyName == "DeeplearningBased":
+        #     self.strategy = DeeplearningBasedStrategy()
 
     def getTopN(self, person_id, n):
         #person = Person(person_id)

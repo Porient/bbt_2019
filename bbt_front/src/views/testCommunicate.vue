@@ -43,7 +43,7 @@
       <a-button @click="getCompareInfo">获取CompareInfo</a-button>
       <a-button type="primary" @click="getStatisticInfo">获取StatisticsInfo</a-button>
       <a-button type="primary" @click="getBasicInfo">获取基本信息</a-button>
-      <a-button @click="productRecommend">获取推荐产品</a-button>
+      <a-button type="primary" @click="productRecommend">获取推荐产品</a-button>
       <a-button type="primary" @click="productList">获取产品列表</a-button>
       <a-button type="primary" @click="productDelete">删除产品</a-button>
       <a-button type="primary" @click="productLike">点赞产品</a-button>
@@ -769,10 +769,10 @@ export default {
         }
       });
     },
-    productRecommend(){
+    productRecommend( ){
       //获取推荐产品
       //请求参数
-      var productId = "";
+      var userId = "1";
       //返回参数
       products = {
         top_n_phone_list:{
@@ -790,7 +790,7 @@ export default {
       var msg = "";
 
       this.$api.productRecommend({
-        productId:productId,
+        userId:userId,
       }).then(response => {
         if(response.code === 200) {
           console.log(response)

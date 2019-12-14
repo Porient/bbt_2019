@@ -125,7 +125,8 @@ def getMiningInfo(product_id):
         
         profession_list = collect_profession_list * 5 + like_profession_list * 3 + browse_profession_list
         #统计词频
-        profession_counts = collections.Counter(dict(profession_list))
+        profession_counts = collections.Counter(profession_list)  #error
+        profession_counts = dict(profession_counts)
         counts = []
         for key,num in profession_counts.items():
             p = {}
@@ -135,8 +136,8 @@ def getMiningInfo(product_id):
         mining_info['profession_counts'] = counts
         #[{name:'医生', num:11}, {name:'老师', num:20}]
 
-        profession_cloud_path = comment_cloud.createProfessionWordcloud(product_id,profession_counts)
-        mining_info['profession_cloud_path'] = profession_cloud_path
+        # profession_cloud_path = comment_cloud.createProfessionWordcloud(product_id,profession_counts)
+        # mining_info['profession_cloud_path'] = profession_cloud_path
 
 
     #关注该商品的用户与我的相似程度：构造用户向量，计算余弦，归一化，总体相似度
