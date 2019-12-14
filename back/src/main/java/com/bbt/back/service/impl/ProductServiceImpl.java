@@ -209,7 +209,6 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getBasicInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone = phoneDao.findPhoneById(productId);
         interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getBasicInfo",
@@ -222,7 +221,6 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getStatisticInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone = phoneDao.findPhoneById(productId);
         interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getStatisticInfo",
@@ -235,7 +233,6 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getCompareInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone = phoneDao.findPhoneById(productId);
         interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getCompareInfo",
@@ -248,7 +245,6 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getCommentInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        Phone phone = phoneDao.findPhoneById(productId);
         interpreter.execfile(System.getProperty("user.dir") + "/src/main/python/data_process/data_mining.py ");
         //basicInfo
         PyFunction func = (PyFunction) interpreter.get("getCommentInfo",
@@ -261,8 +257,6 @@ public class ProductServiceImpl implements ProductService {
     public PyObject getMiningInfo(int productId) {
         PythonInterpreter interpreter = new PythonInterpreter();
         String productAnalysis;
-        System.out.println(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
-
         interpreter.execfile(System.getProperty("user.dir") + "\\src\\main\\python\\data_process\\data_mining.py ");
         //basicInfo
         System.out.println(2222222);

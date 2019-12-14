@@ -896,7 +896,10 @@ export default {
       //返回参数
       var SearchResult = {
         words:["",""],
-        products:{},
+        products:{
+          product:"",
+          suitability:"",
+        },
         total:"",
         pageNum:"",
         pageSize:"",
