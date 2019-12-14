@@ -735,3 +735,7 @@ def recommendBoth(person_id, n=5, strategy_name="HeatBased"):
 
 
 #%%
+
+if __name__ == "__main__":
+    user_id = sys.argv[1]
+    print(recommendBoth(user_id))
