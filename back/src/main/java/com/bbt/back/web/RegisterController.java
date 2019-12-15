@@ -7,6 +7,7 @@ import com.bbt.back.exception.LoginException;
 import com.bbt.back.exception.RegisterException;
 import com.bbt.back.model.Common.Constant;
 import com.bbt.back.model.ResultEntity;
+import com.bbt.back.model.VerifyCode;
 import com.bbt.back.service.RegisterService;
 import com.bbt.back.service.UserService;
 import com.bbt.back.utils.DateUtil;
@@ -101,8 +102,9 @@ public class RegisterController {
         //2.发送验证码
         try {
             String verifyCode = userService.sendVerifyCode(userEmail);
+            VerifyCode code=new VerifyCode(verifyCode);
             if (verifyCode!=null||!verifyCode.equals("")) {
-                resultEntity.setData(verifyCode);
+                resultEntity.setData(code);
                 resultEntity.setMsg( "发送验证码成功");
                 resultEntity.setCode( 200);
             } else {
