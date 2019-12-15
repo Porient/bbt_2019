@@ -46,7 +46,6 @@ public class UserController {
     @Autowired
     private RecordService recordService;
 
-
     @PostMapping("/changePassword")
     private Object changePassword(HttpServletRequest request) {
         ResultEntity resultEntity = new ResultEntity();
