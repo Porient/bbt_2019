@@ -1,6 +1,7 @@
 package com.bbt.back.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bbt.back.entities.Record;
 import com.bbt.back.model.*;
@@ -152,9 +153,7 @@ public class ProductController {
         ResultEntity resultEntity = new ResultEntity();
         int productId = HttpServletRequestUtil.getInt(request, "productId");
         String result=productService.getCommentInfo(productId);
-        result=result.replaceAll("\\[","");
-        result=result.replaceAll("\\]","");
-        JSONObject commentInfo=JSON.parseObject(result);
+        JSONArray commentInfo=JSON.parseArray(result);
         if (commentInfo != null){
             resultEntity.setData(commentInfo);
             resultEntity.setMsg("生成CommentInfo成功");

@@ -804,7 +804,7 @@ export default {
       //获取产品列表
       //请求参数
       var productType="1";
-      var library="1";
+      var library="0";
       var pageNum="1";
       var pageSize="1";
       //返回参数
@@ -890,8 +890,8 @@ export default {
         type:"0",
         searchStr:"华为"
       };
-      var pageNum = "1";
-      var pageSize = "1";
+      var pageNum = "10";
+      var pageSize = "10";
 
       //返回参数
       var SearchResult = {
