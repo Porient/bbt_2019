@@ -4,36 +4,58 @@
       <div class="mainInfo">
         <img
           class="image"
-          src="https://pro-fd.zol-img.com.cn/t_s300x300c5/g4/M01/07/0F/ChMlzF2Dpy6IejY8AAEVvvSQ3WIAAXuRgENve0AARXW047.jpg"
+          :src="'http://' + basicInfo.appearance1"
           alt="商品图片"
         />
         <div class="info">
           <div class="cell">
-            <div class="text">品牌：华为</div>
+            <div class="text">品牌：{{ basicInfo.brand }}</div>
             <div class="extra">知名品牌</div>
           </div>
           <div class="cell">
-            <div class="text">名称：Mate30 Pro</div>
+            <div class="text">名称：{{ basicInfo.name }}</div>
             <div class="extra">高端机型</div>
           </div>
           <div class="cell">
-            <div class="text">CPU：麒麟990</div>
+            <div class="text">
+              CPU：{{
+                basicInfo.performance ? basicInfo.performance.cpu_type : ""
+              }}
+            </div>
             <div class="extra">高性能芯片</div>
           </div>
           <div class="cell">
-            <div class="text">内存：8G</div>
+            <div class="text">
+              内存：{{
+                basicInfo.performance
+                  ? basicInfo.performance.running_memory + "G"
+                  : ""
+              }}
+            </div>
             <div class="extra">大内存</div>
           </div>
           <div class="cell">
-            <div class="text">电池：4500毫安时</div>
+            <div class="text">
+              电池：{{
+                basicInfo.endurance
+                  ? basicInfo.endurance.power_capacity + "毫安时"
+                  : ""
+              }}
+            </div>
             <div class="extra">大电池</div>
           </div>
           <div class="cell">
-            <div class="text">屏幕：6.53英寸</div>
+            <div class="text">
+              屏幕：{{
+                basicInfo.screen ? basicInfo.screen.screen_size + "英寸" : ""
+              }}
+            </div>
             <div class="extra">大屏幕</div>
           </div>
           <div class="cell">
-            <div class="text">分辨率：2400x1176像素</div>
+            <div class="text">
+              分辨率：{{ basicInfo.screen ? basicInfo.screen.dpi : "" }}
+            </div>
             <div class="extra">高清屏幕</div>
           </div>
         </div>
@@ -44,76 +66,120 @@
           <div class="subTitle">基本参数</div>
           <div class="cardItem">
             <div class="key">上市时间</div>
-            <div class="value">2019年</div>
+            <div class="value">{{ basicInfo.date }}</div>
           </div>
           <div class="cardItem">
             <div class="key">价格</div>
-            <div class="value">4999</div>
+            <div class="value">{{ basicInfo.price }}</div>
           </div>
           <div class="cardItem">
             <div class="key">品牌</div>
-            <div class="value">华为</div>
+            <div class="value">{{ basicInfo.brand }}</div>
           </div>
           <div class="cardItem">
             <div class="key">型号</div>
-            <div class="value">Mate30</div>
+            <div class="value">{{ basicInfo.name }}</div>
           </div>
           <div class="cardItem">
             <div class="key">机身颜色</div>
-            <div class="value">红色</div>
+            <div class="value">
+              {{ basicInfo.body ? basicInfo.body.color : "" }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">操作系统类型</div>
-            <div class="value">安卓</div>
+            <div class="value">
+              {{ basicInfo.performance ? basicInfo.performance.os_type : "" }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">操作系统版本</div>
-            <div class="value">Android 10</div>
+            <div class="value">
+              {{
+                basicInfo.performance ? basicInfo.performance.os_version : ""
+              }}
+            </div>
           </div>
         </div>
         <div class="card">
           <div class="subTitle">硬件</div>
           <div class="cardItem">
             <div class="key">CPU型号</div>
-            <div class="value">麒麟 990</div>
+            <div class="value">
+              {{ basicInfo.performance ? basicInfo.performance.cpu_type : "" }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">运行内存</div>
-            <div class="value">8G</div>
+            <div class="value">
+              {{
+                basicInfo.performance
+                  ? basicInfo.performance.running_memory + "G"
+                  : ""
+              }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">机身存储</div>
-            <div class="value">256G</div>
+            <div class="value">
+              {{ basicInfo.body ? basicInfo.body.memory + "G" : "" }}
+            </div>
           </div>
         </div>
         <div class="card">
           <div class="subTitle">屏幕</div>
           <div class="cardItem">
             <div class="key">屏幕尺寸</div>
-            <div class="value">6寸</div>
+            <div class="value">
+              {{
+                basicInfo.screen ? basicInfo.screen.screen_size + "英寸" : ""
+              }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">屏幕比例</div>
-            <div class="value">18.5 : 9</div>
+            <div class="value">
+              {{ basicInfo.screen ? basicInfo.screen.propotion : "" }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">分辨率</div>
-            <div class="value">1080x1920</div>
+            <div class="value">
+              {{ basicInfo.screen ? basicInfo.screen.dpi : "" }}
+            </div>
           </div>
           <div class="cardItem">
             <div class="key">屏幕材质类型</div>
-            <div class="value">LCD</div>
+            <div class="value">
+              {{ basicInfo.screen ? basicInfo.screen.screen_type : "" }}
+            </div>
           </div>
         </div>
         <div class="card">
           <div class="subTitle">摄像头</div>
           <div class="cardItem">
-            <div class="key">前置摄像头</div>
-            <div class="value">xxxx</div>
+            <div class="key">前置摄像头光圈</div>
+            <div class="value">
+              {{ basicInfo.front_camera ? basicInfo.front_camera.circle : "" }}
+            </div>
           </div>
           <div class="cardItem">
-            <div class="key">后置摄像头</div>
-            <div class="value">xxxx</div>
+            <div class="key">前置摄像头像素</div>
+            <div class="value">
+              {{ basicInfo.front_camera ? basicInfo.front_camera.pixel : "" }}
+            </div>
+          </div>
+          <div class="cardItem">
+            <div class="key">后置摄像头光圈</div>
+            <div class="value">
+              {{ basicInfo.rear_camera ? basicInfo.rear_camera.circle : "" }}
+            </div>
+          </div>
+          <div class="cardItem">
+            <div class="key">后置摄像头像素</div>
+            <div class="value">
+              {{ basicInfo.rear_camera ? basicInfo.rear_camera.pixel : "" }}
+            </div>
           </div>
         </div>
       </div>
@@ -121,35 +187,34 @@
         <a-card
           size="small"
           title="热度"
-          :headStyle="{fontWeight: '600', backgroundColor: '#fafafa'}"
-          :style="{marginTop: '20px'}"
+          :headStyle="{ fontWeight: '600', backgroundColor: '#fafafa' }"
+          :style="{ marginTop: '20px' }"
         >
-          <div class="chartItem" id="chart1"></div>
+          <div class="chartItem2In1" id="chart1"></div> </a-card
+        ><a-card
+          size="small"
+          title="排名"
+          :headStyle="{ fontWeight: '600', backgroundColor: '#fafafa' }"
+          :style="{ marginTop: '20px' }"
+        >
+          <div class="chartItem2In1" id="chart3"></div>
         </a-card>
         <a-card
           size="small"
           title="热度增长"
-          :headStyle="{fontWeight: '600', backgroundColor: '#fafafa'}"
-          :style="{marginTop: '20px'}"
+          :headStyle="{ fontWeight: '600', backgroundColor: '#fafafa' }"
+          :style="{ marginTop: '20px' }"
         >
-          <div class="chartItem" id="chart2"></div>
+          <div class="chartItem1In1" id="chart2"></div>
         </a-card>
-        <a-card
+        <!-- <a-card
           size="small"
           title="词云图"
-          :headStyle="{fontWeight: '600', backgroundColor: '#fafafa'}"
-          :style="{marginTop: '20px'}"
+          :headStyle="{ fontWeight: '600', backgroundColor: '#fafafa' }"
+          :style="{ marginTop: '20px' }"
         >
           <div class="chartItem">词云图</div>
-        </a-card>
-        <a-card
-          size="small"
-          title="排名"
-          :headStyle="{fontWeight: '600', backgroundColor: '#fafafa'}"
-          :style="{marginTop: '20px'}"
-        >
-          <div class="chartItem" id="chart3"></div>
-        </a-card>
+        </a-card> -->
       </div>
       <div class="commemtBox">
         <div class="title">评论区</div>
@@ -187,16 +252,39 @@ export default {
         { name: "max", comment: "这台手机很好！！！！！" },
       ],
       chartHeight: 280,
+      basicInfo: {}, // 基本信息
+      statisticInfo: {}, // 统计信息
+      compareInfo: {}, // 比较信息
     };
   },
   methods: {
+    // 计算百分比
+    computePercent(list) {
+      let total = 0;
+      list.forEach(item => {
+        total += item.value;
+      });
+      return list.map(item => {
+        return {
+          item: item.name,
+          count: item.value,
+          percent: item.value / total,
+        };
+      });
+    },
     drawChart1() {
-      const data = [
-        { item: "收藏次数", count: 40, percent: 0.4 },
-        { item: "点赞次数", count: 21, percent: 0.21 },
-        { item: "浏览次数", count: 17, percent: 0.17 },
-        { item: "评论次数", count: 13, percent: 0.13 },
-      ];
+      const data = this.computePercent([
+        {
+          name: "收藏次数",
+          value: this.statisticInfo.collect_num,
+        },
+        {
+          name: "点赞次数",
+          value: this.statisticInfo.like_num,
+        },
+        { name: "浏览次数", value: this.statisticInfo.browse_num },
+        { name: "评论次数", value: this.statisticInfo.review_num },
+      ]);
       const chart = new G2.Chart({
         container: "chart1",
         forceFit: true,
@@ -243,61 +331,26 @@ export default {
     },
     drawChart2() {
       // 此处数据使用了按行组织的模式，所以需要使用 DataSet 的 fold 方法对数据进行加工
-      const data = [
-        {
-          name: "评论次数",
-          "Jan.": 18.9,
-          "Feb.": 28.8,
-          "Mar.": 39.3,
-          "Apr.": 81.4,
-          May: 47,
-          "Jun.": 20.3,
-          "Jul.": 24,
-          "Aug.": 35.6,
-        },
-        {
-          name: "点赞次数",
-          "Jan.": 12.4,
-          "Feb.": 23.2,
-          "Mar.": 34.5,
-          "Apr.": 99.7,
-          May: 52.6,
-          "Jun.": 35.5,
-          "Jul.": 37.4,
-          "Aug.": 42.4,
-        },
-        {
-          name: "浏览次数",
-          "Jan.": 12.4,
-          "Feb.": 23.2,
-          "Mar.": 34.5,
-          "Apr.": 99.7,
-          May: 52.6,
-          "Jun.": 35.5,
-          "Jul.": 37.4,
-          "Aug.": 42.4,
-        },
-        {
-          name: "收藏次数",
-          "Jan.": 12.4,
-          "Feb.": 23.2,
-          "Mar.": 34.5,
-          "Apr.": 99.7,
-          May: 52.6,
-          "Jun.": 35.5,
-          "Jul.": 37.4,
-          "Aug.": 42.4,
-        },
-      ];
+      const fields = this.statisticInfo.daily ? Object.keys(this.statisticInfo.daily): [];
+      let likeObj = {name: "点赞次数"}
+      let browseObj = {name: "浏览次数"}
+      let reviewObj = {name: "评论次数"}
+
+      fields.forEach(item => {
+        likeObj = {...likeObj,[item]:this.statisticInfo.daily[item].like_num}
+        browseObj = {...browseObj,[item]:this.statisticInfo.daily[item].browse_num}
+        reviewObj = {...reviewObj,[item]:this.statisticInfo.daily[item].review_num}
+      })
+
+      const data = [{...likeObj},{...browseObj},{...reviewObj}]
       const ds = new DataSet();
       const dv = ds.createView().source(data);
       dv.transform({
         type: "fold",
-        fields: ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug."], // 展开字段集
-        key: "月份", // key字段
+        fields, // 展开字段集
+        key: "日期", // key字段
         value: "次数", // value字段
       });
-      console.log(dv);
 
       const chart = new G2.Chart({
         container: "chart2",
@@ -306,20 +359,21 @@ export default {
         padding: "auto",
       });
       chart.source(dv);
+      console.log(dv)
       chart
         .intervalStack()
-        .position("月份*次数")
+        .position("日期*次数")
         .color("name");
       chart.render();
     },
     drawChart3() {
       // 注意由于分类轴的顺序是从下往上的，所以数组的数值顺序要从小到大
       const data = [
-        { key: "运行内存排行", value: 18203 },
-        { key: "重量排行", value: 23489 },
-        { key: "机身存储排行", value: 29034 },
-        { key: "长度排行", value: 104970 },
-        { key: "价格排行", value: 131744 },
+        { key: "运行内存排行", value: this.compareInfo.running_memory_rank },
+        { key: "重量排行", value: this.compareInfo.weight_rank },
+        { key: "机身存储排行", value: this.compareInfo.memory_rank },
+        { key: "长度排行", value: this.compareInfo.length_rank },
+        { key: "价格排行", value: this.compareInfo.price_rank },
       ];
       const chart = new G2.Chart({
         container: "chart3",
@@ -337,15 +391,66 @@ export default {
       chart.interval().position("key*value");
       chart.render();
     },
+    // 获取基本信息
+    getBasicInfo(id) {
+      this.$api
+        .getBasicInfo({
+          productId: id,
+        })
+        .then(res => {
+          if (res.code === 200) {
+            this.basicInfo = { ...res.data };
+          }
+        });
+    },
+    // 获取统计信息
+    getStatisticInfo(id) {
+      this.$api
+        .getStatisticInfo({
+          productId: id,
+        })
+        .then(res => {
+          if (res.code === 200) {
+            this.statisticInfo = { ...res.data };
+          }
+          // 画图
+          this.drawChart1();
+          this.drawChart2();
+        });
+    },
+    // 获取对比信息
+    getCompareInfo(id) {
+      this.$api
+        .getCompareInfo({
+          productId: id,
+        })
+        .then(res => {
+          if (res.code === 200) {
+            this.compareInfo = { ...res.data };
+          }
+          // 画图
+          this.drawChart3();
+        });
+    },
+    // 获取评论信息
+    getCommentInfo(id) {
+      this.$api.getCommentInfo({
+        productId:id,
+      }).then(res => {
+        if(res.code === 200) {
+          console.log(res)
+        }
+      })
+    }
   },
   created() {
     // 获取商品的ID，用于查询
-    console.log(this.$route.query);
+    this.getBasicInfo(this.$route.query.id);
+    this.getCommentInfo(this.$route.query.id);
   },
   mounted() {
-    this.drawChart1();
-    this.drawChart2();
-    this.drawChart3();
+    this.getStatisticInfo(this.$route.query.id);
+    this.getCompareInfo(this.$route.query.id);
   },
 };
 </script>
@@ -357,6 +462,7 @@ export default {
 .container {
   display: flex;
   justify-content: center;
+  background-color: white;
   .content {
     width: @containerWidth;
     // background-color: antiquewhite;
@@ -438,8 +544,15 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .chartItem {
-        width: @containerWidth / 2 - 50px;
+      .chartItem2In1 {
+        min-width: @containerWidth / 2 - 50px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .chartItem1In1 {
+        min-width: @containerWidth - 24px;
         height: 300px;
         display: flex;
         justify-content: center;

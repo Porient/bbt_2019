@@ -25,7 +25,6 @@ export default {
     imgSrc: String,
     title: String,
     tags: Array,
-    src: String,
     id: Number,
   },
   methods: {
