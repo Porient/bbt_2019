@@ -11,12 +11,13 @@
       title="推荐商品"
       class="result"
       :bodyStyle="{ padding: '12px 16px'}"
-      :headStyle="{padding: '0', fontWeight: 600}"
+      :headStyle="{padding: '0', fontWeight: 600, backgroundColor: '#fafafa'}"
     >
       <!-- 循环生成推荐列表 -->
       <ProductPreview
         v-for="item in recommendItems"
         :key="item.key"
+        :id="item.key"
         :src="item.src"
         :title="item.title"
         :imgSrc="item.imgSrc"
@@ -29,7 +30,7 @@
         title="搜索建议"
         class="result"
         :bodyStyle="{ padding: '12px 16px'}"
-        :headStyle="{padding: '0', fontWeight: 600}"
+        :headStyle="{padding: '0', fontWeight: 600, backgroundColor: '#fafafa'}"
       >
         <!-- 循环生成搜索建议 -->
         <a-tag
@@ -43,12 +44,13 @@
         title="搜索结果"
         class="result"
         :bodyStyle="{ padding: '12px 16px'}"
-        :headStyle="{padding: '0', fontWeight: 600}"
+        :headStyle="{padding: '0', fontWeight: 600, backgroundColor: '#fafafa'}"
       >
         <!-- 循环生成搜索结果 -->
         <ProductPreview
           v-for="item in recommendItems"
           :key="item.key"
+          :id="item.key"
           :src="item.src"
           :title="item.title"
           :imgSrc="item.imgSrc"

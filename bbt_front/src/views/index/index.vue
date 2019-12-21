@@ -28,7 +28,6 @@
 import Vue from "vue";
 import { Layout, Avatar, Dropdown, Menu, Icon } from "ant-design-vue";
 import { mapGetters } from "vuex";
-import { userInfo } from 'os';
 import { getUserInfo } from "@/commom/js/util.js"
 
 Vue.use(Layout);
