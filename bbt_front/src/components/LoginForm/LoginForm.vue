@@ -3,7 +3,10 @@
     <a-form-item>
       <a-input
         placeholder="邮箱"
-        v-decorator="['email',{ rules:[{required:true, message:'请输入你的邮箱地址' } ] } ]"
+        v-decorator="[
+          'email',
+          { rules: [{ required: true, message: '请输入你的邮箱地址' }] },
+        ]"
       >
         <a-icon type="mail" slot="prefix" />
       </a-input>
@@ -11,7 +14,10 @@
     <a-form-item>
       <a-input-password
         placeholder="密码"
-        v-decorator="['password',{rules:[{required: true, message: '请输入你的密码'}]}]"
+        v-decorator="[
+          'password',
+          { rules: [{ required: true, message: '请输入你的密码' }] },
+        ]"
       >
         <a-icon type="lock" slot="prefix" />
       </a-input-password>
@@ -21,7 +27,13 @@
         <a-form-item>
           <div>
             <a-radio-group
-              v-decorator="['loginType', {initialValue:'user', rules: [{required: true, message: '请选择你登录类型'}]}]"
+              v-decorator="[
+                'loginType',
+                {
+                  initialValue: 'user',
+                  rules: [{ required: true, message: '请选择你登录类型' }],
+                },
+              ]"
             >
               <a-radio value="user">用户</a-radio>
               <a-radio value="admin">管理员</a-radio>
@@ -44,7 +56,6 @@
 <script>
 import Vue from "vue";
 import { Form, Input, Button, Icon, Radio, Col, Row } from "ant-design-vue";
-import { setUserInfo } from "@/commom/js/util.js"
 
 Vue.use(Form);
 Vue.use(Input);
@@ -68,27 +79,46 @@ export default {
         if (!error) {
           if (values.loginType === "user") {
             // 用户登陆
-            this.$api.userLogin({
-              userEmail: values.email, // 请求需要的参数
-              password: values.password,
-            }).then(response => {
-              // response 就是接口返回的东西
-              // 在这处理下一步
-              if(response.code === 200) {
-                // 成功登陆以后
-                setUserInfo(values.email, values.password, "user", response.userId)
-              }
-            });
-          } else if( values.loginType === 'admin') {
+            this.$api
+              .userLogin({
+                userEmail: values.email, // 请求需要的参数
+                password: values.password,
+              })
+              .then(response => {
+                // response 就是接口返回的东西
+                // 在这处理下一步
+                if (response.code === 200) {
+                  // 成功登陆以后
+                  this.$store.commit("login", {
+                    email: values.email,
+                    password: values.password,
+                    type: values.loginType,
+                    id: response.data.userId,
+                  });
+                  //跳转到搜索页面
+                  this.$router.push("/index");
+                }
+              });
+          } else if (values.loginType === "admin") {
             // 管理员登陆
-            this.$api.adminLogin({
-              adminEmail: values.email,
-              password: values.password,
-            }).then(response => {
-              if(response.code === 200) {
-                setUserInfo(values.email, values.password, "admin", response.adminId)
-              }
-            })
+            this.$api
+              .adminLogin({
+                adminEmail: values.email,
+                password: values.password,
+              })
+              .then(response => {
+                if (response.code === 200) {
+                  // 成功登陆以后
+                  this.$store.commit("login", {
+                    email: values.email,
+                    password: values.password,
+                    type: values.loginType,
+                    id: response.data.adminId,
+                  });
+                  //跳转到搜索页面
+                  this.$router.push("/index");
+                }
+              });
           }
         }
       });
@@ -100,5 +130,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

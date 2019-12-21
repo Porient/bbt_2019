@@ -25,11 +25,16 @@ export default {
     imgSrc: String,
     title: String,
     tags: Array,
-    src: String,
+    id: Number,
   },
   methods: {
     showDetail: function() {
-      window.open(this.src, "_blank");
+      this.$router.push({
+        path: "detail",
+        query: {
+          id: this.id
+        }
+      })
     },
   },
 };

@@ -10,7 +10,7 @@ export default new Router({
     {
       path: "/testCommunicate",
       name: "testCommunicate",
-      component: () => import("@/views/testCommunicate.vue")
+      component: () => import("@/views/testCommunicate.vue"),
     },
     {
       path: "/",
@@ -32,6 +32,10 @@ export default new Router({
         {
           path: "userspace",
           component: () => import("@/views/UserSpace/UserSpace.vue"),
+        },
+        {
+          path: "detail",
+          component: () => import("@/views/ProductDetail/ProductDetail.vue"),
         },
       ],
     },
