@@ -114,7 +114,6 @@ export default {
     // 点击搜索按钮
     search() {
       this.initial = false;
-      console.log(this.searchStr, this.searchType);
       if (this.searchStr.trim() !== "") {
         this.searchLoading = true;
         this.$api
@@ -180,7 +179,6 @@ export default {
             browse_list,
           } = res.data.top_n_phone_list;
           const tempList = [...like_list, ...collection_list, ...browse_list];
-          console.log(tempList);
           if (res.code === 200) {
             this.recommendList = tempList.map(item => {
               return {

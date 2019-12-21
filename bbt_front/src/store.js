@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getUserInfo } from "./commom/js/util.js";
-import { removeUserInfo } from "./commom/js/util.js";
+import { getUserInfo, setUserInfo, removeUserInfo } from "./commom/js/util.js";
 
 Vue.use(Vuex);
 
@@ -9,20 +8,27 @@ export default new Vuex.Store({
   state: {
     isLogin: false, // 判断是否登录，只作为判断localStorage的中介
     tagsColor: ["pink", "red", "orange", "green", "cyan", "blue", "purple"],
+    userInfo: {}, // 备份用户信息
   },
   getters: {
     // 返回当前登录的状态
     getLoginState: state => {
       return state.isLogin;
     },
+    getUserInfoState: state => {
+      return state.userInfo;
+    },
   },
   mutations: {
     // 从localStorage检查当前登录的状态
     checkLoginState: state => {
-      if (getUserInfo()) {
+      const info = getUserInfo();
+      if (info) {
         state.isLogin = true;
+        state.userInfo = { ...info };
       } else {
         state.isLogin = false;
+        state.userInfo = {};
       }
     },
     logout: state => {
@@ -30,8 +36,13 @@ export default new Vuex.Store({
       if (state.isLogin) {
         state.isLogin = false;
         //删除userInfo
+        state.userInfo = {};
         removeUserInfo();
       }
+    },
+    login: (state, payload) => {
+      state.userInfo = { ...payload };
+      setUserInfo(payload);
     },
   },
   actions: {},

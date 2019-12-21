@@ -1,15 +1,10 @@
 // 通用的工具函数
 
 // 将登录者的信息存进localStorage
-export function setUserInfo(email, password, type, id) {
+export function setUserInfo(payload) {
   localStorage.setItem(
     "userInfo",
-    JSON.stringify({
-      email,
-      password,
-      type,
-      id,
-    }),
+    JSON.stringify(payload),
   );
 }
 
