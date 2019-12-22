@@ -458,7 +458,7 @@ CREATE TABLE `comment`  (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `product_id` int(11) NOT NULL COMMENT '产品id',
   `product_type` int(11) NOT NULL COMMENT '产品类型',
-  `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
+  `product_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '产品名称',
   `content` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论',
   `like_num` int(11) NOT NULL COMMENT '点赞数',
   `date` datetime(0) NOT NULL COMMENT '评论时间',

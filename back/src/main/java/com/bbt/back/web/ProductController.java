@@ -9,6 +9,7 @@ import com.bbt.back.service.ProductService;
 import com.bbt.back.service.RecordService;
 import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
+import com.bbt.back.utils.ImgBase64;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,6 +173,10 @@ public class ProductController {
         int productId = HttpServletRequestUtil.getInt(request, "productId");
         String result=productService.getMiningInfo(productId);
         JSONObject miningInfo=JSON.parseObject(result);
+       /* String url= System.getProperty("user.dir")+"\\src\\main\\python\\data_process\\wordcloud\\profession_cloud\\"+productId+".png";// 待处理的图片
+        String imgbese = ImgBase64.getImgStr(url);
+        String img_path="data:image/jpeg;base64,"+imgbese ;
+        System.out.println(img_path);*/
         if (miningInfo != null){
             resultEntity.setData(miningInfo);
             resultEntity.setMsg("生成MiningInfo成功");
