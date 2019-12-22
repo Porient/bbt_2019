@@ -159,4 +159,20 @@ public class UserController {
         resultEntity.setData(collectPic);
         return resultEntity;
     }
+
+    @RequestMapping("/getUserDetail")
+    private Object getUserDetail(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
+        User user = userService.getUserById(userId);
+        if (user != null){
+            resultEntity.setCode(200);
+            resultEntity.setData(user);
+            resultEntity.setMsg("获取用户详情成功");
+        } else {
+            resultEntity.setCode(500);
+            resultEntity.setMsg("获取用户详情失败");
+        }
+        return resultEntity;
+    }
 }
