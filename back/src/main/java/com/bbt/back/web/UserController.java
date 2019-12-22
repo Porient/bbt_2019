@@ -1,5 +1,7 @@
 package com.bbt.back.web;
 
+import com.bbt.back.entities.Comment;
+import com.bbt.back.entities.CommentLike;
 import com.bbt.back.entities.Record;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.SystemErrorEnum;
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Description:
@@ -166,12 +169,29 @@ public class UserController {
         Integer userId = HttpServletRequestUtil.getInt(request, "userId");
         User user = userService.getUserById(userId);
         if (user != null){
+            user.setPassword("");
             resultEntity.setCode(200);
             resultEntity.setData(user);
             resultEntity.setMsg("获取用户详情成功");
         } else {
             resultEntity.setCode(500);
             resultEntity.setMsg("获取用户详情失败");
+        }
+        return resultEntity;
+    }
+
+    @RequestMapping("/getUserLikeComment")
+    private Object getUserLikeComment(HttpServletRequest request){
+        ResultEntity resultEntity = new ResultEntity();
+        Integer userId = HttpServletRequestUtil.getInt(request, "userId");
+        List<Comment> commentList = userService.getUserLikeCommentById(userId);
+        if (commentList != null){
+            resultEntity.setCode(200);
+            resultEntity.setData(commentList);
+            resultEntity.setMsg("获取用户点赞评论成功");
+        } else {
+            resultEntity.setCode(500);
+            resultEntity.setMsg("获取用户点赞评论失败");
         }
         return resultEntity;
     }

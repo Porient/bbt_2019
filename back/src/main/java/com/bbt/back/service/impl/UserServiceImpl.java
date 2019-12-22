@@ -1,6 +1,10 @@
 package com.bbt.back.service.impl;
 
+import com.bbt.back.dao.CommentDao;
+import com.bbt.back.dao.CommentLikeDao;
 import com.bbt.back.dao.UserDao;
+import com.bbt.back.entities.Comment;
+import com.bbt.back.entities.CommentLike;
 import com.bbt.back.entities.User;
 import com.bbt.back.enums.SystemErrorEnum;
 import com.bbt.back.enums.UserResultEnum;
@@ -15,6 +19,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +31,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-
+    @Autowired
+    private CommentLikeDao commentLikeDao;
+    @Autowired
+    private CommentDao commentDao;
     @Autowired
     private MailUtil mailUtil;
 
@@ -96,5 +104,16 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("发送邮箱验证码失败");
         }
         return checkCode;
+    }
+
+    @Override
+    public List<Comment> getUserLikeCommentById(Integer userId) {
+        List<CommentLike> commentLikeList=commentLikeDao.findByUserId(userId);
+        List<Comment> commentList=new ArrayList<>();
+        for(CommentLike commentLike:commentLikeList){
+            Comment comment=commentDao.findCommentById(commentLike.getCommentId());
+            commentList.add(comment);
+        }
+        return commentList;
     }
 }

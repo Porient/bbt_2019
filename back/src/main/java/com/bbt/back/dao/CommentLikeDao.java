@@ -4,6 +4,8 @@ import com.bbt.back.entities.CommentLike;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author: Liu Bin
@@ -16,4 +18,6 @@ public interface CommentLikeDao {
     CommentLike findByUserIdAndCommentId(@Param("userId")int userId,@Param("commentId") int commentId);
 
     int deleteCommentLike(@Param("userId")int userId,@Param("commentId") int commentId);
+
+    List<CommentLike> findByUserId(Integer userId);
 }

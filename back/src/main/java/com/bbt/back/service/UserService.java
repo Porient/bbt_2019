@@ -1,8 +1,11 @@
 package com.bbt.back.service;
 
+import com.bbt.back.entities.Comment;
 import com.bbt.back.entities.User;
 import com.bbt.back.model.ResultEntity;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -46,4 +49,6 @@ public interface UserService {
      * @return
      */
     String sendVerifyCode(String email);
+
+    List<Comment> getUserLikeCommentById(Integer userId);
 }

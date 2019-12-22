@@ -46,4 +46,10 @@
       where c.user_id = #{userId} and
       c.comment_id = #{commentId}
     </select>
+
+    <select id="findByUserId" parameterType="java.lang.Integer" resultMap="commentLikeMap">
+      select c.*
+      from `comment_like` c
+      where c.user_id = #{userId}
+    </select>
 </mapper>

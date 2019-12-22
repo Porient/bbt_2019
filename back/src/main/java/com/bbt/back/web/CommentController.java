@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @Description:
@@ -77,6 +78,8 @@ public class CommentController {
         String commentStr = HttpServletRequestUtil.getString(request,"comment");
         ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
+        comment.setLikeNum(0);
+        comment.setDate(new Date());
         if (commentService.addComment(comment) == 1){
             resultEntity.setMsg("添加评论成功");
             resultEntity.setCode(200);
