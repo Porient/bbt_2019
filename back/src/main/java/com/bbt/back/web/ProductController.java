@@ -9,7 +9,7 @@ import com.bbt.back.service.ProductService;
 import com.bbt.back.service.RecordService;
 import com.bbt.back.utils.CutWord;
 import com.bbt.back.utils.HttpServletRequestUtil;
-import com.bbt.back.utils.ImgBase64;
+//import com.bbt.back.utils.ImgBase64;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
