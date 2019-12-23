@@ -89,6 +89,22 @@ export default {
                 // 在这处理下一步
                 if (response.code === 200) {
                   // 成功登陆以后
+
+                  // 获取用户的详细信息
+                  this.$api
+                    .getUserDetail({
+                      userId: response.data.userId,
+                    })
+                    .then(res => {
+                      this.$store.commit("login", {
+                        id: res.data.userId,
+                        type: values.loginType,
+                        email: values.email,
+                        password: values.password,
+                        name: res.data.nickname,
+                      });
+                    });
+                  // 记录用户的信息
                   this.$store.commit("login", {
                     email: values.email,
                     password: values.password,

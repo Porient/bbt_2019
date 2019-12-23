@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import { getUserInfo } from "./commom/js/util.js";
 
 Vue.use(Router);
 
@@ -32,6 +33,14 @@ export default new Router({
         {
           path: "userspace",
           component: () => import("@/views/UserSpace/UserSpace.vue"),
+          beforeEnter: (to, from, next) => {
+            const info = getUserInfo();
+            if (info && info.type === "user") {
+              next();
+            } else {
+              next("/index");
+            }
+          },
         },
         {
           path: "detail",
@@ -43,6 +52,14 @@ export default new Router({
       path: "/admin",
       name: "admin",
       component: () => import("@/views/BackManagement/BackManagement.vue"),
+      beforeEnter: (to, from, next) => {
+        const info = getUserInfo();
+        if (info && info.type === "admin") {
+          next();
+        } else {
+          next("/index");
+        }
+      },
     },
     {
       path: "/login",

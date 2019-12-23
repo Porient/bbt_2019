@@ -48,7 +48,6 @@ export function register(params) {
   });
 }
 
-
 export function registerCode(params) {
   //注册验证码
   return request({
@@ -63,6 +62,15 @@ export function userCollectPic(params) {
   //用户收藏画像
   return request({
     url: "/user/getCollectPic.do",
+    method: "POST",
+    params,
+  });
+}
+
+export function getUserDetail(params) {
+  // 获取用户的详细信息
+  return request({
+    url: "/user/getUserDetail.do",
     method: "POST",
     params,
   });
@@ -110,6 +118,15 @@ export function commentDelete(params) {
   return request({
     url: "/comment/delete.do",
     method: "DELETE",
+    params,
+  });
+}
+
+export function getLikedComment(params) {
+  // 获取已经点赞过的评论
+  return request({
+    url: "/user/getUserLikeComment.do",
+    method: "POST",
     params,
   });
 }
@@ -177,7 +194,7 @@ export function collectDelete(params) {
     method: "DELETE",
     params,
   });
-} 
+}
 
 export function collectAdd(params) {
   //添加收藏
@@ -266,10 +283,10 @@ export function productDelete(params) {
   return request({
     url: "/product/delete.do",
     method: "DELETE",
-    data:params,
-    headers:{
-      "content-type":"application/json"
-    }
+    data: params,
+    headers: {
+      "content-type": "application/json",
+    },
   });
 }
 
@@ -317,4 +334,3 @@ export function productChange(params) {
 //     params,
 //   });
 // }
-
