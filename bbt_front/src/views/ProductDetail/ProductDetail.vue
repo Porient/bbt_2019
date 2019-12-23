@@ -188,7 +188,7 @@
           <div class="chartItem2In1" id="chart4">
             <div class="tags">
               <a-tag
-                v-for="tag in relatedTags"
+                v-for="tag in tagList"
                 :key="tag"
                 class="tag"
                 :color="randomColor()"
@@ -212,7 +212,11 @@
           :style="{ marginTop: '20px' }"
         >
           <div class="chartItem2In1">
-            <img :src="wordcloudUrlList[Math.floor(Math.random()*44)]" alt="词云图" style="width: 100%; height: 100%" />
+            <img
+              :src="wordcloudUrlList[Math.floor(Math.random()*44)]"
+              alt="词云图"
+              style="width: 100%; height: 100%"
+            />
           </div>
         </a-card>
         <a-card
@@ -297,6 +301,7 @@ export default {
       newComment: "", // 准备新增的内容
       productId: null,
       wordcloudUrlList: [],
+      tagList: [],
     };
   },
   methods: {
@@ -481,6 +486,7 @@ export default {
         .then(res => {
           if (res.code === 200) {
             this.basicInfo = { ...res.data };
+            this.tagList.push(res.data.tag1, res.data.tag2, res.data.tag3);
           }
         });
     },
@@ -624,7 +630,12 @@ export default {
     for (let i = 1; i <= 44; i++) {
       this.wordcloudUrlList.push(require(`@/assets/wordcloud/${i}.png`));
     }
-    console.log(this.wordcloudUrlList);
+
+    let list = [...this.relatedTags];
+    for (let i = 0; i < 5; i++) {
+      const index = Math.floor(Math.random() * list.length);
+      this.tagList.push(...list.splice(index, 1));
+    }
   },
   mounted() {
     this.getStatisticInfo(this.productId);
