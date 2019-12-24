@@ -82,6 +82,7 @@ public class CommentController {
         ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
         String productName=productService.getProductName(comment.getProductId(),comment.getProductType());
+        comment.setProductName(productName);
         comment.setLikeNum(0);
         comment.setDate(new Date());
         if (commentService.addComment(comment) == 1){
