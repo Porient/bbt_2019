@@ -15,7 +15,7 @@ if __name__ == "__main__":
     db = pymysql.connect('localhost','root','7887227','bbt')
     cursor = db.cursor()
     
-    for product_id in range(1,223):
+    for product_id in range(213,223):
         #评论词云图/词频图
         sql = 'SELECT content FROM comment WHERE product_id=%s and product_type=0'%(product_id)
         cursor.execute(sql)

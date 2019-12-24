@@ -4,6 +4,7 @@ import com.bbt.back.entities.Comment;
 import com.bbt.back.model.PageInfoResult;
 import com.bbt.back.model.ResultEntity;
 import com.bbt.back.service.CommentService;
+import com.bbt.back.service.ProductService;
 import com.bbt.back.utils.HttpServletRequestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
@@ -27,6 +28,8 @@ import java.util.Date;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping("/list")
     private Object comments(HttpServletRequest request, Integer pageNo, Integer pageSize) throws Exception{
@@ -78,6 +81,7 @@ public class CommentController {
         String commentStr = HttpServletRequestUtil.getString(request,"comment");
         ObjectMapper mapper = new ObjectMapper();
         Comment comment = mapper.readValue(commentStr,Comment.class);
+        String productName=productService.getProductName(comment.getProductId(),comment.getProductType());
         comment.setLikeNum(0);
         comment.setDate(new Date());
         if (commentService.addComment(comment) == 1){

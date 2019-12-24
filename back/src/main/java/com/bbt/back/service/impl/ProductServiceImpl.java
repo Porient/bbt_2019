@@ -303,4 +303,17 @@ public class ProductServiceImpl implements ProductService {
 
         return result;
     }
+
+    @Override
+    public String getProductName(Integer productId, Integer productType) {
+        String productName="";
+        if(productType==0){
+            Phone phone=phoneDao.findPhoneById(productId);
+            productName=phone.getProductName();
+        }else {
+            Computer computer=computerDao.findComputerById(productId);
+            productName=computer.getBrand();
+        }
+        return productName;
+    }
 }

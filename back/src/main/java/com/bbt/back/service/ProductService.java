@@ -38,4 +38,6 @@ public interface ProductService {
     String getCommentInfo(int productId);
 
     String getMiningInfo(int productId);
+
+    String getProductName(Integer productId, Integer productType);
 }
